@@ -1,10 +1,10 @@
-[01;34m.[00m
+.
 ├── C++11编译器安装.md
-├── [01;34mdoc[00m
-│   └── [01;34m核心语言运行时性能强化[00m
+├── doc
+│   └── 核心语言运行时性能强化
 │       └── 右值引用和move构造.md
 ├── README.md
-├── [01;34mtest_code[00m
+├── test_code
 │   ├── hello_cpp11.cpp
 │   └── rvalue_ref_and_move_constructor.cpp
 ├── 树形结构
