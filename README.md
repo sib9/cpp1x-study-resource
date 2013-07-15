@@ -1,4 +1,4 @@
-###Cpp11\_study\_resource###
+###cpp11-study-resource###
 
 期盼已久的C++新标准(C++0x,C++11)于2011年8月份获得一致通过。时隔近两年，主流的C++编译器(GCC,VS2012,Clang)已经支持了很多C++的新特性。[GCC 4.8.1](http://gcc.gnu.org/gcc-4.8/cxx0x_status.html)已实现C++11标准的所有主要语言特性。
 
