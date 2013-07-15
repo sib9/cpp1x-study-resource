@@ -41,3 +41,8 @@ constexpr 指示符(specifier)表示变量或者函数的值可能在编译期�
 + every implicit conversion involved must be a constant expression
 
 ps: 对于 constexpr 我的理解是用编译时间换运行时间的一种做法。没怎么了解过模板元编程，翻译上很多地方拿捏不准，因此就直接把英文拷贝过来的。
+
+#### 扩展资料 ####
++ [Constexpr - Generalized Constant Expressions in C++11](http://www.cprogramming.com/c++11/c++11-compile-time-processing-with-constexpr.html)
++ [constexpr specifier (since C++11)](http://en.cppreference.com/w/cpp/language/constexpr)
+
