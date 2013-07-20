@@ -1,23 +1,26 @@
-[01;34m.[00m
+.
 ├── C++11编译器安装.md
-├── [01;34mdoc[00m
-│   ├── [01;34m核心语言构建期性能加强[00m
+├── doc
+│   ├── 核心语言构建期性能加强
 │   │   └── 外部模板.md
-│   ├── [01;34m核心语言适应性加强[00m
+│   ├── 核心语言适应性加强
 │   │   ├── 初始化列表.md
+│   │   ├── 类型推导.md
 │   │   └── 统一初始化.md
-│   └── [01;34m核心语言运行时性能强化[00m
+│   └── 核心语言运行时性能强化
 │       ├── constexpr-泛化的常量表达式.md
 │       ├── POD.md
 │       └── 右值引用和move构造.md
 ├── README.md
-├── [01;34mtest_code[00m
+├── test_code
 │   ├── constexpr.cpp
 │   ├── hello_cpp11.cpp
 │   ├── initializer_list.cpp
 │   ├── POD.cpp
-│   └── rvalue_ref_and_move_constructor.cpp
+│   ├── rvalue_ref_and_move_constructor.cpp
+│   ├── type_inference.cpp
+│   └── uniform_init.cpp
 ├── 树形结构
 └── 综述.md
 
-5 directories, 15 files
+5 directories, 18 files
