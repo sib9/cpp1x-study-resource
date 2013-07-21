@@ -1,4 +1,4 @@
-###CPP11-STUDY-RESOURCE###
+### CPP11-STUDY-RESOURCE ###
 
 #### 重要声明 ####
 
@@ -14,21 +14,23 @@
 于是，我们建立了名为 `cpp11-study-resource` 的 repo。顾名思义，这是一份“学习资源”，不是“专业”的 C++11 教程。旨在搜集国内外各种 C++11 的学习资源，供大家参考、学习。
 
 repo 主要由一下几部分组成:
+
 1. 文档，搞清新标准有什么；
 2. 深入了解原理，搞清为什么是这样；
 3. 对应的测试代码，验证；
 
 
 #### 组织结构 ####
+
 + [树形结构](https://github.com/sib9/cpp11-study-resource/blob/master/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84) : 整个 repo 的文件组织结构
 + [综述.md](https://github.com/sib9/cpp11-study-resource/blob/master/%E7%BB%BC%E8%BF%B0.md) : 知识点目录
 + [c++11编译器安装](https://github.com/sib9/cpp11-study-resource/blob/master/C%2B%2B11%E7%BC%96%E8%AF%91%E5%99%A8%E5%AE%89%E8%A3%85.md) : 不同编译器安装方式
 + [doc](https://github.com/sib9/cpp11-study-resource/tree/master/doc) : 详细文档目录
-+ [test_code](https://github.com/sib9/cpp11-study-resource/tree/master/test_cod) : 测试代码目录
++ [test\_code](https://github.com/sib9/cpp11-study-resource/tree/master/test_cod) : 测试代码目录
 
 #### 加入 ####
 
-`cpp11-study-resource`是公开的 repo，非常欢迎广大 C++fans 参与进来，和我们一起，建立一个正确，专业，完善的资源库。知识点大小不限，只要是对 repo 有帮助，我们都非常欢迎。大家可以从两个方向下手：
+`cpp11-study-resource`是公开的 repo，非常欢迎广大 C++ fans 参与进来，和我们一起，建立一个正确，专业，完善的资源库。知识点大小不限，只要是对 repo 有帮助，我们都非常欢迎。大家可以从两个方向下手：
 
 1. [综述.md](https://github.com/sib9/cpp11-study-resource/blob/master/%E7%BB%BC%E8%BF%B0.md) 中未写 `done` 的部分，可以选择一项或者几项感兴趣的完全由你来实现；
 2. [综述.md](https://github.com/sib9/cpp11-study-resource/blob/master/%E7%BB%BC%E8%BF%B0.md) 中写了 `done` 的部分，你可以学习、验证、挑错、补充资料。
