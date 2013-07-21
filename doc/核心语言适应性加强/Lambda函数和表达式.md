@@ -81,7 +81,7 @@ lambda 函数是实现依赖于类型的函数对象(function object)；类型�
        return 0;
     }
 
-lambda 如果 `[]` 未空的话，可以隐式转换成一个函数指针和对应的函数指针相同，所以下面是合法的：
+lambda 如果 `[]` 为空的话，可以隐式转换成一个函数指针和对应的函数指针相同，所以下面是合法的：
 
     auto a_lambda_func = [](int x) { /*...*/ };
     void(*func_ptr)(int) = a_lambda_func;
@@ -90,4 +90,4 @@ lambda 如果 `[]` 未空的话，可以隐式转换成一个函数指针和对�
 #### 扩展资料 ####
 
 + [匿名对象 C++](https://en.wikipedia.org/wiki/Anonymous_function#C.2B.2B)
-+ [Function objects (C++)](https://en.wikipedia.org/wiki/Closure_(computer_science)#Function_objects_.28C.2B.2B.29)
++ [Function objects (C++)](https://en.wikipedia.org/wiki/Closure_(computer_science#Function_objects_.28C.2B.2B.29)
