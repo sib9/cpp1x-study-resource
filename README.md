@@ -48,4 +48,4 @@ repo 主要由一下几部分组成:
 
 #### 关于我们 ####
 
-我们是 [sib9](http://www.sib9.us)， 联系方式：us@sib9.us。
+我们是 [sib9](http://sib9.us)， 联系方式：us@sib9.us。
