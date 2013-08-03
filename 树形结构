@@ -3,6 +3,9 @@
 ├── doc
 │   ├── 核心语言功能提升
 │   │   ├── long_long_int类型.md
+│   │   ├── sizeof可以作用于类成员而不需要类显式的类对象.md
+│   │   ├── 静态断言.md
+│   │   ├── 控制和查询对象布局.md
 │   │   ├── 显式使用或者禁用指定的成员函数.md
 │   │   └── 新的字符串字面值.md
 │   ├── 核心语言构建期性能加强
@@ -26,6 +29,7 @@
 │       └── 右值引用和move构造.md
 ├── README.md
 ├── test_code
+│   ├── alignof_and_alignas.cpp
 │   ├── alternative_fuc_syntax.cpp
 │   ├── constexpr.cpp
 │   ├── explicit_overrides.cpp
@@ -33,14 +37,16 @@
 │   ├── initializer_list.cpp
 │   ├── lambda_function.cpp
 │   ├── long_long_int.cpp
+│   ├── new_sizeof.cpp
 │   ├── null_pointer.cpp
 │   ├── POD.cpp
 │   ├── range_based_loop.cpp
 │   ├── rvalue_ref_and_move_constructor.cpp
+│   ├── static_assert.cpp
 │   ├── type_inference.cpp
 │   ├── uniform_init.cpp
 │   └── unrestricted_union.cpp
 ├── 树形结构
 └── 综述.md
 
-6 directories, 37 files
+6 directories, 43 files
