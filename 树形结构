@@ -1,13 +1,18 @@
 .
 ├── C++11编译器安装.md
 ├── doc
+│   ├── 标准库的修改
+│   │   ├── 标准库组件升级.md
+│   │   └── 线程支持.md
 │   ├── 核心语言功能提升
 │   │   ├── long_long_int类型.md
 │   │   ├── sizeof可以作用于类成员而不需要类显式的类对象.md
+│   │   ├── sizeof类成员类型.md
 │   │   ├── 静态断言.md
 │   │   ├── 控制和查询对象布局.md
 │   │   ├── 显式使用或者禁用指定的成员函数.md
-│   │   └── 新的字符串字面值.md
+│   │   ├── 新的字符串字面值.md
+│   │   └── 用户定义字面值.md
 │   ├── 核心语言构建期性能加强
 │   │   └── 外部模板.md
 │   ├── 核心语言适应性加强
@@ -43,10 +48,16 @@
 │   ├── range_based_loop.cpp
 │   ├── rvalue_ref_and_move_constructor.cpp
 │   ├── static_assert.cpp
+│   ├── threads
+│   │   ├── container_thread_safe.cpp
+│   │   ├── threads_exception.cpp
+│   │   ├── threads_mutex.cpp
+│   │   ├── threads_parameters.cpp
+│   │   └── threads_ref_param.cpp
 │   ├── type_inference.cpp
 │   ├── uniform_init.cpp
 │   └── unrestricted_union.cpp
 ├── 树形结构
 └── 综述.md
 
-6 directories, 43 files
+8 directories, 52 files
