@@ -1,0 +1,10 @@
+
+http://username.github.io/index.html
+http://username.github.io/sitemap.txt
+http://username.github.io/rss.xml
+http://username.github.io/pages.html
+http://username.github.io/categories.html
+http://username.github.io/about.html
+http://username.github.io/tags.html
+http://username.github.io/atom.xml
+http://username.github.io/archive.html

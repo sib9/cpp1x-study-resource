@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>CPP11-STUDY-RESOURCE</title>
+ <link href="http://username.github.io/" rel="self"/>
+ <link href="http://username.github.io"/>
+ <updated>2013-10-22T23:41:40+08:00</updated>
+ <id>http://username.github.io</id>
+ <author>
+   <name>Sib9</name>
+   <email>us@sib9.us</email>
+ </author>
+
+ 
+ 
+</feed>
