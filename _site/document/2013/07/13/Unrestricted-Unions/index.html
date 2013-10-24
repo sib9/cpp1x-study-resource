@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>Pages &larr; </title>
+   <title>无限制的 Unions &larr; </title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -39,95 +39,75 @@
   
 <div id="page">
 	
-<h1 class="emphnext">Pages</h1>
+  <h1 class="emphnext">无限制的 Unions</h1>
+  <ul class="tag_box inline">
+  
+  
 
 
-<h2>All Pages</h2>
+  
+    
+  
+
+
+
+  </ul>
+
+  
+<p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Unrestricted unions</a></p>
+
+<p>在 C++03 中 union 的成员不能是一个对象类型。例如， unions 不能包含任何定义了一个 non-trivial 的构造函数。C++11 解除了一些限制：</p>
+
 <ul>
+<li>Unions 可以包含有 non-trivial 对象的成员；</li>
 
+<li>如果这样的话，编译器不再提供隐式的构造函数，需要自己去定义.</li>
+</ul>
 
+<p>下面是一个简单的 C++11 unions 定义：</p>
 
+<pre><code>#include &lt;new&gt; // Required for placement 'new'
 
-  
-    
-      
-      	
-      	<li><a href="/index.html">Contents</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/rss.xml">RSS Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">Pages</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">Categories</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/about.html">About</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">Tags</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/atom.xml">Atom Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">Archive</a></li>
-      	
-      
-    
-  
+struct Point {
+    Point() {}
+    Point(int x, int y) : x_(x), y_(y) {}
+    int x_, y_;
+};
 
+union U {
+    int z;
+    double w;
+    Point p;  // Illegal in C++03; legal in C++11
+    U() {
+        new (&amp;p) Point(); // Due to the Point member, a constructor definition is now required.
+    }
+};</code></pre>
 
+<h2 id="">扩展资料</h2>
 
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Unrestricted unions</a></li>
+
+<li><a href="http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c">What is a non-trivial constructor in C++?</a></li>
 </ul>
 
 
+  <address class="signature">
+    <a class="author" href="/">Sib9</a> 
+    <span class="date">13 July 2013</span>
+    <span class="location"></span>
+  </address>
+  
+  <div class="prev-next">
+  
+  
+    <a href="/document/2013/07/13/Uniform-Initialization" class="prev" title="统一的初始化方式">&larr; Earlier Post</a>
+  
+  </div>
+  
 </div><!-- End Page -->
+
+
 
 
   

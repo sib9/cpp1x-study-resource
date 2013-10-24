@@ -1,9 +1,16 @@
 ---
 layout: page
-title: Posts
+title: Contents
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-Hello, World!
+---
 
+{% for category in site.categories %} 
+  <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
+  <ul>
+    {% assign pages_list = category[1] %}  
+    {% include JB/pages_list %}
+  </ul>
+{% endfor %}

@@ -4,13 +4,1878 @@
  <title>CPP11-STUDY-RESOURCE</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2013-10-22T23:41:40+08:00</updated>
+ <updated>2013-10-24T22:55:17+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Sib9</name>
    <email>us@sib9.us</email>
  </author>
 
+ 
+ <entry>
+   <title>无限制的 Unions</title>
+   <link href="http://username.github.io/document/2013/07/13/Unrestricted-Unions"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Unrestricted-Unions</id>
+   <content type="html">
+&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Unrestricted unions&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;在 C++03 中 union 的成员不能是一个对象类型。例如， unions 不能包含任何定义了一个 non-trivial 的构造函数。C++11 解除了一些限制：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unions 可以包含有 non-trivial 对象的成员；&lt;/li&gt;
+
+&lt;li&gt;如果这样的话，编译器不再提供隐式的构造函数，需要自己去定义.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下面是一个简单的 C++11 unions 定义：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;new&amp;gt; // Required for placement 'new'
+
+struct Point {
+    Point() {}
+    Point(int x, int y) : x_(x), y_(y) {}
+    int x_, y_;
+};
+
+union U {
+    int z;
+    double w;
+    Point p;  // Illegal in C++03; legal in C++11
+    U() {
+        new (&amp;amp;p) Point(); // Due to the Point member, a constructor definition is now required.
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Unrestricted unions&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c&quot;&gt;What is a non-trivial constructor in C++?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>统一的初始化方式</title>
+   <link href="http://username.github.io/document/2013/07/13/Uniform-Initialization"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Uniform-Initialization</id>
+   <content type="html">
+&lt;ol&gt;
+&lt;li&gt;本文来自：&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;暂无测试代码&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;C++03 的类型初始化有多种方式，因此也引来很多问题，如果错用的时候，错误的调试信息会非常模糊。&lt;/p&gt;
+
+&lt;p&gt;比如以下初始化变量的方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    std::string a[] = {&amp;quot;Hello&amp;quot;, &amp;quot;world&amp;quot;}; // 正确：初始化数组变量
+    // 错误：初始化列表引用在非聚合的向量上
+    std::vector&amp;lt;std::string&amp;gt; v = {&amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;};
+    void f(string a[]);
+    f ({&amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;}); // 语法错误，把一个块(block)作为了参数
+    int a = 2;  // &amp;quot;赋值风格&amp;quot;的变化
+    int aa[] = {2, 3}; // 用初始化列表进行的赋值风格的初始化
+    complex z(1, 2); // 函数风格的初始化
+    x = Ptr(y);      // &amp;quot;函数风格&amp;quot; 转换/赋值/构造操作&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所谓统一的初始化方式，就是把之前 C++ 风格的各种初始化对象方式，统一为一种方式(语法):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    X x1 = X{1, 2};
+    X x2 = {1, 2};
+    X x3{1, 2};
+    X * p = new X{1, 2};
+
+    struct D : X {
+        D(int x, int y) : X{x, y} {/* ... */}
+    }
+
+    struct S {
+        int a[3];
+        S(int x, int y, int z) : a{x, y, z} {/* ... */}
+    }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重点在于： X{a}在所有的可执行代码中都创建了同一个相同的值，所以使用”{}”进行的初始化，在合法的使用的时候，在任何地方都产生相同的结果。例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;X x{a};
+X* p = new X{a};
+z = X{a};
+f({a});
+return {a};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>类型自动推导</title>
+   <link href="http://username.github.io/document/2013/07/13/Type-Inference"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Type-Inference</id>
+   <content type="html">
+&lt;p&gt;译自 ［Type inference](https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)，为了更好的理解，没有逐字翻译。&lt;/p&gt;
+
+&lt;p&gt;在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。&lt;/p&gt;
+
+&lt;p&gt;C++11用两种方式来解决这种问题。第一种是使用 auto 关键字来定义直接初始化的变量类型(也就是所谓的类型推导，根据初始化的值来推导类型）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auto some_strange_callable_type = std::bind(&amp;amp;some_function, _2, _1, some_object);
+auto other_variable = 5;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;some_strange_callable_type&lt;/code&gt; 类型比较简单，不用管 &lt;code&gt;std::bind&lt;/code&gt; 的实现细节(参数、返回值，是否重载),它的类型对于编译器来说很容易得到(编译器语义分析的一部分)，而用户判定它的类型不是那么容易。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;other_variable&lt;/code&gt; 是一个 &lt;code&gt;int&lt;/code&gt;, 和整型字面量类似。&lt;/p&gt;
+
+&lt;p&gt;此外，&lt;code&gt;decltype&lt;/code&gt;可以在编译的时候判断出一个表达式的类型(第二种方式)，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int some_int;
+decltype(some_int) other_integer_variable = 5;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;和 &lt;code&gt;auto&lt;/code&gt; 配合使用非常牛逼，auto 变量的具体类型只有编译器知道，而 decltype 对于大量的运算符重载和类型特化的表示非常用用。&lt;/p&gt;
+
+&lt;p&gt;使用 auto 可以减少很多代码冗余，比如说，以前我们是这样写的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for (std::vector&amp;lt;int&amp;gt;::const_iterator itr = myvec.cbegin(); itr != myvec.cend(); ++itr)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在可以这样写：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for (auto itr = myvec.cbegin(); itr != myvec.cend(); ++itr)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;代码更短了(而且假如类型很长的话，我们不用再费劲的去记忆类型的名字，我觉得这个用法太叼了)。尤其是在模板类型嵌套的时候，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::map&amp;lt;std::string, std::list&amp;lt;std::string&amp;gt; &amp;gt;::const_iterator&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，这种情况下使用 &lt;code&gt;typedef&lt;/code&gt; 也是一种好方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;decltype&lt;/code&gt;和&lt;code&gt;auto&lt;/code&gt;可能推导出来的类型不同：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;vector&amp;gt;
+int main() {
+    const std::vector&amp;lt;int&amp;gt; v(1);
+    auto a = v[0];        // a has type int
+    decltype(v[1]) b = 1; // b has type const int&amp;amp;, the return type of
+                          //   std::vector&amp;lt;int&amp;gt;::operator[](size_type) const
+    auto c = 0;           // c has type int
+    auto d = c;           // d has type int
+    decltype(c) e;        // e has type int, the type of the entity named by c
+    decltype((c)) f = c;  // f has type int&amp;amp;, because (c) is an lvalue
+    decltype(0) g;        // g has type int, because 0 is an rvalue
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;个人感觉，站在这个角度来说，decltype 比 auto 功能更强大一些; 反过来，auto 比 decltype 更精巧。&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference&quot;&gt;Type inference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>线程</title>
+   <link href="http://username.github.io/document/2013/07/13/Thread"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Thread</id>
+   <content type="html">
+&lt;p&gt;译自：&lt;a href=&quot;http://www.codeproject.com/Articles/598695/Cplusplus11-threads-locks-and-condition-variables&quot;&gt;C++11 threads, locks and condition variables&lt;/a&gt;。看到如此好文，原谅我的情不自禁，向原作者致谢！&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;threads&quot;&gt;线程(Threads)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/thread&quot;&gt;std::thread&lt;/a&gt; 类代表一个可执行的线程，在 &lt;code&gt;&amp;lt;thread&amp;gt;&lt;/code&gt; 下。&lt;code&gt;std::thread&lt;/code&gt; 可以和普通函数，lambdas 函数，仿函数(实现了 &lt;code&gt;opertor()&lt;/code&gt; 的类)一起工作。此外，它允许你为你的线程函数传入任意数量的参数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;thread&amp;gt;
+
+void func()
+{
+    // do some work
+}
+
+int main()
+{
+    std::thread t(func);
+    t.join();
+    
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;t&lt;/code&gt; 是一个执行 &lt;code&gt;func&lt;/code&gt; 的线程对象，&lt;code&gt;join&lt;/code&gt; 阻塞调用线程(这里是住线程)，直到该线程运行结束。线程函数的返回值将被忽略的，但是，线程函数可以传入任意数量的参数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void func(int i, double d, const std::string&amp;amp; s)
+{
+    std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot;, &amp;quot; &amp;lt;&amp;lt; d &amp;lt;&amp;lt; &amp;quot;, &amp;quot; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; std::endl;
+}
+
+
+int main()
+{
+    std::thread t(func, 1, 12.50, &amp;quot;sample&amp;quot;);
+    t.join();
+    
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;虽然可以给线程函数传递任意多的参数，但是都是以值传递的方式传参的。如果需要引用传参，传递的参数必须使用 &lt;a href=&quot;http://en.cppreference.com/w/cpp/utility/functional/ref&quot;&gt;std::ref 或者std::cref&lt;/a&gt; 进行转换。eg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void func(int&amp;amp; a)
+{
+    a++;
+}
+
+int main()
+{
+    int a = 42;
+    std::thread t(func, std::ref(a));
+    t.join();
+
+    std::cout &amp;lt;&amp;lt; a &amp;lt;&amp;lt; std::endl;
+    
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参数输出为 43， 如果没有 &lt;code&gt;std::ref&lt;/code&gt; 的转换，输出的值应为 42。&lt;/p&gt;
+
+&lt;p&gt;除 &lt;code&gt;join&lt;/code&gt; 之外，线程类也提供了其它的方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/thread/swap&quot;&gt;swap&lt;/a&gt; : 把两个线程的相关操作(underlying handles)互换。&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/thread/detach&quot;&gt;detach&lt;/a&gt; : 允许线程对象继续独立的运行。Detach 的线程不再可连接(你不用等它们了)。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  int main()
+  {
+      std::thread t(funct);
+      t.detach();
+      
+      return 0;
+  }&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;值得注意的是，如果线程函数抛出一个异常，用普通的 &lt;code&gt;try-catch&lt;/code&gt; 块是捕捉不到异常的。换句话说，下面这样是不行的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try
+{
+    std::thread t1(func);
+    std::thread t2(func);
+
+    t1.join();
+    t2.join();
+}
+catch(const std::exception&amp;amp; ex)
+{
+    std::cout &amp;lt;&amp;lt; ex.what() &amp;lt;&amp;lt; std::endl;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;放大异常可以在线程内部捕捉，然后把它存到之后可以访问到的地方。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::mutex g_mutex;
+std::vector&amp;lt;std::exception_ptr&amp;gt; g_exceptions;
+
+void throw_function()
+{
+    throw std::exception(&amp;quot;Something wrong happened&amp;quot;);
+}
+
+void func()
+{
+    try
+    {
+        throw_function();
+    }
+    catch(...)
+    {
+        std::lock_guard&amp;lt;std::mutex&amp;gt; lock(g_mutex);
+        g_exceptions.push_back(std::current_exception());
+    }
+}
+
+int main()
+{
+    g_exceptions.clear();
+
+    std::thread t(func);
+    t.join();
+
+    for(auto &amp;amp; e : g_exceptions)
+    {
+        try
+        {
+            if (e != nullptr)
+            {
+                std::rethrow_exception(e);
+            }
+        }
+        catch(const std::exception &amp;amp; e)
+        {
+            std::cout &amp;lt;&amp;lt; e.what() &amp;lt;&amp;lt; std::endl;
+        }
+    }
+
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关于捕捉和放大异常更多资料可以阅读这里：&lt;a href=&quot;http://binglongx.wordpress.com/2010/01/03/handling-c-exceptions-thrown-from-worker-thread-in-the-main-thread/&quot;&gt;Handling C++ exceptions thrown from worker thread in the main thread&lt;/a&gt; 和 &lt;a href=&quot;http://stackoverflow.com/questions/233127/how-can-i-propagate-exceptions-between-threads&quot;&gt;How can I propagate exceptions between threads?&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;另外，&lt;code&gt;&amp;lt;thread&amp;gt;&lt;/code&gt; 头文件在 &lt;code&gt;std::this_thread&lt;/code&gt; 提供了很多有用的函数：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/get_id&quot;&gt;get_id&lt;/a&gt;: 返回当前线程的 ID；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/yield&quot;&gt;yield&lt;/a&gt;: 告诉调度程序，运行其他线程(在你处于忙等待的时候非常有用)；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppfreference.com/w/cpp/thread/sleep_for&quot;&gt;sleep_for&lt;/a&gt;: 阻塞当前线程直到指定的时段(sleep_duration)；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/sleep_until&quot;&gt;sleep_util&lt;/a&gt;: 阻塞当前线程直到指定的时间(sleep_time)；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;locks&quot;&gt;锁(Locks)&lt;/h2&gt;
+
+&lt;p&gt;在最后一个例子中，访问 &lt;code&gt;g_exceptions&lt;/code&gt; 向量我需要进行同步来确保在同一时间只有一个线程在进行 push 操作。因此，我使用了 mutex 。C++11 在 &lt;code&gt;&amp;lt;mutex&amp;gt;&lt;/code&gt; 头文件中提供了四种 mutex 来做同步操作。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/mutex&quot;&gt;mutex&lt;/a&gt;: 提供了核心函数 &lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/mutex/lock&quot;&gt;lock()&lt;/a&gt;, &lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/mutex/unlock&quot;&gt;unlock()&lt;/a&gt; 和 非阻塞的 &lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/mutex/try_lock&quot;&gt;try_lock()&lt;/a&gt; 函数(判断 mutex 是否可用)；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/recursive_mutex&quot;&gt;recursive_mutex&lt;/a&gt;: 允许相同线程多次获得 mutex；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/timed_mutex&quot;&gt;timed_mutex&lt;/a&gt;: 和 mutex 类相似，但是它有自己的两个核心方法 &lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/timed_mutex/try_lock_for&quot;&gt;try_lock_for()&lt;/a&gt; 和 &lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/timed_mutex/try_lock_until&quot;&gt;ry_lock_until()&lt;/a&gt; 用来尝试在指定的时间段或者时间点获取 mutex ；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/recursive_timed_mutex&quot;&gt;recursive_timed_mutex&lt;/a&gt;: timed_mutex 和 recursive_mutex 的综合体。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下面是使用 &lt;code&gt;std::mutex&lt;/code&gt; 的例子(注意 &lt;code&gt;get_id()&lt;/code&gt; 和 &lt;code&gt;sleep_id()&lt;/code&gt; 的用法)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;thread&amp;gt;
+#include &amp;lt;mutex&amp;gt;
+#include &amp;lt;chrono&amp;gt;
+ 
+std::mutex g_lock;
+ 
+void func()
+{
+    g_lock.lock();
+ 
+    std::cout &amp;lt;&amp;lt; &amp;quot;entered thread &amp;quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(rand() % 10));
+    std::cout &amp;lt;&amp;lt; &amp;quot;leaving thread &amp;quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; std::endl;
+ 
+    g_lock.unlock();
+}
+ 
+int main()
+{
+    srand((unsigned int)time(0));
+ 
+    std::thread t1(func);
+    std::thread t2(func);
+    std::thread t3(func);
+ 
+    t1.join();
+    t2.join();
+    t3.join();
+ 
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出可能是这样：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;entered thread 10144
+leaving thread 10144
+entered thread 4188
+leaving thread 4188
+entered thread 3424
+leaving thread 3424&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;lock()&lt;/code&gt; 和 &lt;code&gt;unlock&lt;/code&gt; 方法简单明了，第一次锁住 mutex, 如果 mutex 不可用的话进行阻塞操作，之后对 mutex 进行解锁。&lt;/p&gt;
+
+&lt;p&gt;下面的例子展示了单个的线程安全容器(内部实际用的是 &lt;code&gt;std::vector&lt;/code&gt;)。这个容器有类似于 &lt;code&gt;add()&lt;/code&gt; 的操作，添加单个元素和 &lt;code&gt;addrange&lt;/code&gt; 添加多个多个元素(其实是多次调用 &lt;code&gt;add()&lt;/code&gt; )。&lt;/p&gt;
+
+&lt;p&gt;标注：下面的例子其实并不是真正线程安全的，有几个原因包括 va_args 的使用。并且，&lt;code&gt;dump()&lt;/code&gt; 方法不应该属于 container。例子的目的仅仅在于讲解关于 mutex 的概念，而不是一个完整的，无错的，线程安全的容器。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class container 
+{
+    std::mutex _lock;
+    std::vector&amp;lt;T&amp;gt; _elements;
+public:
+    void add(T element) 
+    {
+        _lock.lock();
+        _elements.push_back(element);
+        _lock.unlock();
+    }
+ 
+    void addrange(int num, ...)
+    {
+        va_list arguments;
+ 
+        va_start(arguments, num);
+ 
+        for (int i = 0; i &amp;lt; num; i++)
+        {
+            _lock.lock();
+            add(va_arg(arguments, T));
+            _lock.unlock();
+        }
+ 
+        va_end(arguments); 
+    }
+ 
+    void dump()
+    {
+        _lock.lock();
+        for(auto e : _elements)
+            std::cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; std::endl;
+        _lock.unlock();
+    }
+};
+ 
+void func(container&amp;lt;int&amp;gt;&amp;amp; cont)
+{
+    cont.addrange(3, rand(), rand(), rand());
+}
+ 
+int main()
+{
+    srand((unsigned int)time(0));
+ 
+    container&amp;lt;int&amp;gt; cont;
+ 
+    std::thread t1(func, std::ref(cont));
+    std::thread t2(func, std::ref(cont));
+    std::thread t3(func, std::ref(cont));
+ 
+    t1.join();
+    t2.join();
+    t3.join();
+ 
+    cont.dump();
+ 
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当你运行上面程序的时候，会发现会进入死锁。原因是容器在释放 mutex 之前请求了多次。这时候你就需要使用 &lt;code&gt;std::recusive_mutex&lt;/code&gt; 了，它允许线程请求同一个 mutex 多次。可以请求的最大次数没有指定，但是假如到达了请求上限，调用 lock 会抛出一个 &lt;code&gt;std::system_error&lt;/code&gt; 的异常。修改上面的代码比较简单，只需要使用 &lt;code&gt;std::recursive_mutex&lt;/code&gt; 代替 &lt;code&gt;std::mutex&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class container 
+{
+    std::recursive_mutex _lock;
+    // ...
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出类似于：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;6334
+18467
+41
+6334
+18467
+41
+6334
+18467
+41&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;机智的你可能注意到了每一次 &lt;code&gt;func&lt;/code&gt; 每一次调用都生成了相同的数字序列。这是因为种子是局部线程的，调用 &lt;code&gt;srand()&lt;/code&gt; 只能从主线程上初始化种子。其他的工作线程没有被初始化，所以你每次得到的种子都是一样的。&lt;/p&gt;
+
+&lt;p&gt;显式的锁或者解锁可能会导致一些问题，比如忘了解锁或者和请求顺序不同的解锁可能会导致死锁。标准提供了几个类和函数帮助你解决这个问题。包装类(wrapper classes)允许使用 RAII 风格(在代码块中自动加锁和解锁)把 mutexs 一致化。这些包装器有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/lock_guard&quot;&gt;lock_guard&lt;/a&gt; : 当对象构造它的时候尝试去请求自己的 mutex (调用 lock)，当对象析构它的时候会自动释放 mutex (调用 unlock())，这是一个不能拷贝的类；&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/unique_lock&quot;&gt;unique_lock&lt;/a&gt; : 和 lock_guard不同，它是一个通用的 mutex 包装器。提供了延迟锁(defferd locking), 时间锁(time locking), 递归锁(recursive locking), 转移所有权而用条件变量。这个类也是不可拷贝的类，但是他支持 move 操作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用这些包装器重写上面的容器类之后是这样的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class container 
+{
+    std::recursive_mutex _lock;
+    std::vector&amp;lt;T&amp;gt; _elements;
+public:
+    void add(T element) 
+    {
+        std::lock_guard&amp;lt;std::recursive_mutex&amp;gt; locker(_lock);
+        _elements.push_back(element);
+    }
+ 
+    void addrange(int num, ...)
+    {
+        va_list arguments;
+ 
+        va_start(arguments, num);
+ 
+        for (int i = 0; i &amp;lt; num; i++)
+        {
+            std::lock_guard&amp;lt;std::recursive_mutex&amp;gt; locker(_lock);
+            add(va_arg(arguments, T));
+        }
+ 
+        va_end(arguments); 
+    }
+ 
+    void dump()
+    {
+        std::lock_guard&amp;lt;std::recursive_mutex&amp;gt; locker(_lock);
+        for(auto e : _elements)
+            std::cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; std::endl;
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;虽然 &lt;code&gt;dump()&lt;/code&gt; 方法应该声明为 const ， 因为它并没有修改容器的状态。但是如果你声明为 const 以后，编译器会报如下错误：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;‘std::lock_guard&amp;lt;_Mutex&amp;gt;::lock_guard(_Mutex &amp;amp;)' : cannot convert parameter 1 from ‘const std::recursive_mutex' to ‘std::recursive_mutex &amp;amp;'&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一个 mutex(regardless which implement is used) 必须被请求和释放，实现上调用了非常量的函数 &lt;code&gt;lock()&lt;/code&gt; 和 &lt;code&gt;unlock()&lt;/code&gt; 。因此 &lt;code&gt;lock_guard&lt;/code&gt; 的参数逻辑上不应该是常量。解决这个问题的方法是使用 &lt;code&gt;mutable&lt;/code&gt; 声明 mutex 。Mutable 允许在常量方法中使用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class container 
+{
+   mutable std::recursive_mutex _lock;
+   std::vector&amp;lt;T&amp;gt; _elements;
+public:
+   void dump() const
+   {
+      std::lock_guard&amp;lt;std::recursive_mutex&amp;gt; locker(_lock);
+      for(auto e : _elements)
+         std::cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; std::endl;
+   }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些 wrapper guards 的构造函数已经负载(overloads)参数指示锁的策略。可用的策略有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;defer_lock_t&lt;/code&gt; 类型的 &lt;code&gt;defer_lock&lt;/code&gt; : 不请求 mutex ;&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;try_to_lock_t&lt;/code&gt; 类型的 &lt;code&gt;try_to_lock&lt;/code&gt; : 试图请求 mutex ，不阻塞 ;&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;adopt_lock_t&lt;/code&gt; 类型的 &lt;code&gt;adopt_lock&lt;/code&gt; : 用 mutex 唤醒调用线程 ;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这些策略的声明像这样：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct defer_lock_t { };
+struct try_to_lock_t { };
+struct adopt_lock_t { };
+ 
+constexpr std::defer_lock_t defer_lock = std::defer_lock_t();
+constexpr std::try_to_lock_t try_to_lock = std::try_to_lock_t();
+constexpr std::adopt_lock_t adopt_lock = std::adopt_lock_t();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;除了这些 mutex 的包装器之外，标准也提供了几个对一个或者多个 mutex 加锁的方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/lock&quot;&gt;lock&lt;/a&gt;: 使用避免死锁算法对 mutexes 加锁(通过调用 &lt;code&gt;locks()&lt;/code&gt;, &lt;code&gt;try_locks&lt;/code&gt; 和 &lt;code&gt;unlock()&lt;/code&gt; )。&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://en.cppreference.com/w/cpp/thread/try_lock&quot;&gt;try_lock&lt;/a&gt;: 按照指定的 mutexes 顺序调用 &lt;code&gt;try_lock()&lt;/code&gt; 尝试调用 mutex 。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下面是一个死锁的例子：我们有一个元素容器并且有一个从一个容器和另外一个容器交换的方法 &lt;code&gt;exchange&lt;/code&gt;。 为了达到线程安全，在两个容器中同步存取，请求不同容器的 mutex 。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class container 
+{
+public:
+    std::mutex _lock;
+    std::set&amp;lt;T&amp;gt; _elements;
+ 
+    void add(T element) 
+    {
+        _elements.insert(element);
+    }
+ 
+    void remove(T element) 
+    {
+        _elements.erase(element);
+    }
+};
+ 
+void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&amp;gt;&amp;amp; cont2, int value)
+{
+    cont1._lock.lock();
+    std::this_thread::sleep_for(std::chrono::seconds(1)); // &amp;lt;-- forces context switch to simulate the deadlock
+    cont2._lock.lock();    
+ 
+    cont1.remove(value);
+    cont2.add(value);
+ 
+    cont1._lock.unlock();
+    cont2._lock.unlock();
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;假定这个函数被不同的线程访问，从 容器1 中移除一个元素添加到 容器2 中；然后把移除 容器2 中的元素添加到 容器1 中。这样会导致死锁(如果线程上下文仅仅在第一次请求的时候从一个线程到另外一个线程切换)。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int main()
+{
+    srand((unsigned int)time(NULL));
+ 
+    container&amp;lt;int&amp;gt; cont1; 
+    cont1.add(1);
+    cont1.add(2);
+    cont1.add(3);
+ 
+    container&amp;lt;int&amp;gt; cont2; 
+    cont2.add(4);
+    cont2.add(5);
+    cont2.add(6);
+ 
+    std::thread t1(exchange, std::ref(cont1), std::ref(cont2), 3);
+    std::thread t2(exchange, std::ref(cont2), std::ref(cont1), 6);
+ 
+    t1.join();
+    t2.join();
+ 
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为了修正这个问题，你可以使用 &lt;code&gt;std::lock&lt;/code&gt; 保证在 deadlock-free 的方式下请求 mutex ：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&amp;gt;&amp;amp; cont2, int value)
+{
+    std::lock(cont1._lock, cont2._lock); 
+ 
+    cont1.remove(value);
+    cont2.add(value);
+ 
+    cont1._lock.unlock();
+    cont2._lock.unlock();
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;condition_variables&quot;&gt;条件变量(Condition variables)&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.codeproject.com/Articles/598695/Cplusplus11-threads-locks-and-condition-variables&quot;&gt;C++11 threads, locks and condition variables&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/4h2h0ktk.aspx&quot;&gt;mutable Data Members (C++)&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.highprogrammer.com/alan/rants/mutable.html&quot;&gt;C++’s mutable and conceptual constness&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>强类型枚举</title>
+   <link href="http://username.github.io/document/2013/07/13/Strong-Type-Enum"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Strong-Type-Enum</id>
+   <content type="html">
+&lt;p&gt;译自： &lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html&quot;&gt;Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint&lt;/a&gt;;&lt;/p&gt;
+
+&lt;p&gt;C++03 的枚举本质上就是整型，它们可以和整型，和其它的枚举类型做比较。实际上，你并不希望不同枚举之间进行比较，就好像你不希望把钉子的种类和牙刷的种类做比较一样。&lt;/p&gt;
+
+&lt;p&gt;旧式枚举的另外一个限制是枚举的值是没有作用域的，换句话说，你不能两个枚举共享同一个名字，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;enum Color {RED, GREEN, BLUE};
+enum Feeling {EXCITED, MOODY, BLUE}; // error: redeclaration of ‘BLUE’&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C++11 提供了强类型枚举——枚举类(enum classes)，如下方式声明：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;class&lt;/code&gt;意味着每一个枚举类型实际上都是不一样的，不能和其它类型做比较。强类型枚举，枚举类有很好的作用域。每个枚举值作用域被限制在枚举类中。这意味着，想要存取枚举值，你必须要这么用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Color color = Color::GREEN;
+if (Color::RED == color) {
+    // the color is red;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你想用旧式的枚举，仍旧是可用的。很大程度上，是可以和既有的代码相兼容的。教你一招，现在你可以直接在值前面加上枚举名：Color::RED.但是这种情况下，不能解决命名冲突的问题，它只是更清晰了一些。&lt;/p&gt;
+
+&lt;p&gt;枚举类比旧式枚举类型另外一个优势是，你可以使用前向声明一个强枚举类型，意味着你可以这样写代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;enum class Mood;
+void assessMode (Mood m);
+enum class {EXCITED, MOODY, BLUE};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Why would this be useful? Forward declarations are often about the physical layout of code on disk into different files or to provide opaque objects as part of an API. In the first case, where you care about the physical disk layout, using a forward declaration allows you to declare an enum type in the header file while putting specific values into the cpp file. This lets you change the list of possible enum values quite frequently without forcing all dependent files to recompile. In the second case, an enum class can be exposed as a type-safe but otherwise opaque value returned from one API function to be passed into another API function. The code using the API need not know the possible values the type can take on. Since the compiler still knows about the type, it can enforce that variables declared to work with that type are not confused with variables working with another type. (译者注：这段话不太理解，所有没有翻译，欢迎补充翻译。)&lt;/p&gt;
+
+&lt;p&gt;枚举类的最后一个好处是你可以你的枚举的大小，你可以使用任何签名的或者未签名的整型类。默认是 int ，但是你也可以使用 char, unsigned long 等等。这样可以确保跨平台编译器的兼容性。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;enum class Colors : char { RED = 1, GREEN = 2, BLUE = 3 };&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是在在 C++11 中，在指定类型大小上，我们可以用更好的方式，使用 &lt;code&gt;cstdint&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;C++ 在类型方面存在一个问题，比如说，你想要一个 32位 的整型，但是 int 可能在不同体系架构下有不同的大小。在 C++11 中，C99 的头文件 &lt;code&gt;stdint.h&lt;/code&gt; 包含在 &lt;code&gt;cstdint&lt;/code&gt; 中。&lt;code&gt;cstdint&lt;/code&gt; 头文件包含了诸如 &lt;code&gt;std::int8_t&lt;/code&gt;, &lt;code&gt;std::int32_t&lt;/code&gt; 和 &lt;code&gt;int64_t&lt;/code&gt;(对应的 unsigned 版本是从 &lt;code&gt;std::uint8_t&lt;/code&gt; 开始的)的类型。&lt;/p&gt;
+
+&lt;p&gt;下面是使用新类型和枚举类完美配合，告诉跨平台编译器和体系架构你的枚举大小：&lt;/p&gt;
+
+&lt;p&gt;enum class Colors: std::int8_t { RED = 1, GREEN = 2, BLUE = 3};&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html&quot;&gt;Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations&quot;&gt;Strongly typed enumerations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>静态断言</title>
+   <link href="http://username.github.io/document/2013/07/13/Static-Assert"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Static-Assert</id>
+   <content type="html">
+&lt;p&gt;C++03 提供了方法去测试断言：使用宏和预处理指令 &lt;code&gt;#error&lt;/code&gt; 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。&lt;/p&gt;
+
+&lt;p&gt;新功能引入了一种新的测试断言方法，在编译期确定。使用新的关键字 &lt;code&gt;static_assert&lt;/code&gt;。如下声明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static_assert (constant-expression, error-message);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;eg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static_assert((PI &amp;gt; 3.14) &amp;amp;&amp;amp; (PI &amp;lt; 3.15), &amp;quot;PI is inaccurate&amp;quot;);
+
+template &amp;lt;class T&amp;gt;
+struct Check {
+    static_assert(sizeof(int) &amp;lt;= sizeof(T), &amp;quot;T is too big enough!&amp;quot;);
+};
+
+template &amp;lt;class Integral&amp;gt;
+Integral foo(Integral x, Integral y) {
+    static_assert(std::is_integral&amp;lt;Integral&amp;gt;::value, &amp;quot;foo() parameter must be an integral type&amp;quot;);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当常量表达式为 &lt;code&gt;false&lt;/code&gt; 时，编译器会生成一条错误信息。第一个例子有点像预处理宏&lt;code&gt;#error&lt;/code&gt;，尽管与处理器只支持整数类型。对于而言，第二个例子在模板类 &lt;code&gt;Check&lt;/code&gt; 实例化的时候进行检查。&lt;/p&gt;
+
+&lt;p&gt;静态断言在模版之外也同样很有用。比如特殊算法可能依赖于 &lt;code&gt;long long int&lt;/code&gt;，要比 &lt;code&gt;int&lt;/code&gt; 大很多。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>右尖括号</title>
+   <link href="http://username.github.io/document/2013/07/13/Right-Angle-Bracket"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Right-Angle-Bracket</id>
+   <content type="html">
+&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;C++03 的析取符定义为”»“(注，在我的第一本C++书中，”»“被称为析取运算符，而”«“被称为插入运算符，我感觉那样理解挺不错的)。 然而，在模板的嵌套声明中，程序员需要在两个尖括号之间加上一个空格，否则会引发一个编译错误。&lt;/p&gt;
+
+&lt;p&gt;C++11 提供了新的解析规则，多个右尖括号的时候，会优先为模板解析。但是有括号的时候，会先解析括号：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template&amp;lt;bool Test&amp;gt; class SomeType;
+std::vector&amp;lt;SomeType&amp;lt;1&amp;gt;2&amp;gt;&amp;gt; x1; // Interpreted as a std::vector of SomeType&amp;lt;true&amp;gt; 2&amp;gt;,
+// which is not legal syntax. 1 is true.
+std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpreted as a std::vector of SomeType&amp;lt;false&amp;gt;,
+// which is legal C++11 syntax, (1&amp;gt;2) is false.&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>基于范围的 for 循环</title>
+   <link href="http://username.github.io/document/2013/07/13/Range-based-For-Loop"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Range-based-For-Loop</id>
+   <content type="html">
+&lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;C++11 扩展一种新的遍历列表的 for 循环语法(range-base for，基于范围的 for 循环)，使得遍历列表非常简单了。可以遍历 C 式的数组、初始化列表(initializer lists)，和定义了 begin()/end() 函数(返回迭代器)的类型。所有的标准库容器都可以使用 range-base for 来遍历：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; v;
+v.push_back(1);
+v.push_back(2);
+v.push_back(3);
+v.push_back(4);
+v.push_back(5);
+v.push_back(6);
+
+for (int i : v) {
+    std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot; &amp;quot; ;
+}
+std::cout &amp;lt;&amp;lt; std::endl;
+
+for (auto ite : v) {
+    std::cout &amp;lt;&amp;lt; ite &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+}
+std::cout &amp;lt;&amp;lt; std::endl;
+
+
+for (int&amp;amp; i : v) {
+    ++i;
+}
+
+
+for (auto i : v) {
+    std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+}
+std::cout &amp;lt;&amp;lt; std::endl;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-ranged-for-loop.html&quot;&gt;C++11 range-based for loops&lt;/a&gt; 推荐阅读&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Right value reference and move construct</title>
+   <link href="http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct</id>
+   <content type="html">
+&lt;p&gt;这篇文章是我从&lt;a href=&quot;http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html&quot;&gt;Move semantics and rvalue references in C++11&lt;/a&gt;翻译而来的。值得一提的是，不是全文/原文逐字逐句的翻译，加了一些我个人的理解，并进行了一定的精简。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;&quot;&gt;问题&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;vector&amp;lt;int&amp;gt; double_values(const vector&amp;lt;int&amp;gt; &amp;amp; v)
+{
+    vector&amp;lt;int&amp;gt; new_value;
+    for (auto itr = v.begin(); itr != v.end(); ++itr)
+    {
+        new_value.push_back(2 * *itr);
+    }
+    
+    return new_value;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;double\_values&lt;/code&gt; 中 new_value 的构造是必须的，原则上来说，有两次拷贝：一次是返回 new_value 时，会产生一个临时对象，另外一次是在调用 double_value 时产生的，比如 &lt;code&gt;v = double_values(v);&lt;/code&gt;，第一次拷贝由编译器进行一定的优化，而第二次调用 &lt;code&gt;vector&lt;/code&gt; 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。&lt;/p&gt;
+
+&lt;h2 id=&quot;_2&quot;&gt;解决方法&lt;/h2&gt;
+
+&lt;p&gt;接上面的例子。理论上来讲，临时对象，构造-&amp;gt;赋值-&amp;gt;析构，构造时，申请空间；析构时，释放空间(像是句废话，其实不然)。针对这个语句来说: &lt;code&gt;v = double_values(v)&lt;/code&gt;，赋值过程中，释放内存-&amp;gt;申请内存-&amp;gt;赋值。那么有没有一种办法，可以让临时对象和v不要做重复的事情呢？我们假设是这样：把临时对象中的内存直接为v所用，这样就省了很多事情。&lt;/p&gt;
+
+&lt;p&gt;在 C++11 中，提供了 move constructor 和 move assignment 来解决这种问题。move语义可以减少很多不必须要的临时对象拷贝操作，并且保证从临时对象中拿到的资源是安全的。&lt;/p&gt;
+
+&lt;p&gt;move 语义的实现依赖于&lt;code&gt;(右值引用)rvalue-reference&lt;/code&gt;。好吧，我们先来说说右值引用。&lt;/p&gt;
+
+&lt;h3 id=&quot;_3&quot;&gt;右值引用&lt;/h3&gt;
+
+&lt;p&gt;简单来讲，左值：&lt;code&gt;An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues&lt;/code&gt;，右值: &lt;code&gt;An expression is an rvalue if it results in a temporary object&lt;/code&gt;。我看过一些资料，大体上可以去这么去理解。细节部分还是挺多的，如果关心的话可以去看&lt;code&gt;资料&lt;/code&gt;中的&lt;a href=&quot;http://www.caole.net/diary/lvalue.html&quot;&gt;http://www.caole.net/diary/lvalue.html&lt;/a&gt;，讲的挺不错的。&lt;/p&gt;
+
+&lt;p&gt;右值引用会和一个临时对象绑定。比如，在 C++11 之前，如果你有一个临时对象，你可以用&lt;code&gt;regular&lt;/code&gt;或者&lt;code&gt;lvalue reference&lt;/code&gt; 去绑定它，但是仅仅是在&lt;code&gt;const&lt;/code&gt;的情况下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const string &amp;amp; name = get_name(); // ok
+string&amp;amp; name = get_name(); // NOT ok&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是因为临时对象生存周期所限，引用它的地址，一直它本身就消失了，这是很危险的。注意，常量引用一个临时对象，这个对象不会立即析构，但是他仍旧是一个临时对象，所以你不能修改它。&lt;/p&gt;
+
+&lt;p&gt;在 C++11 中，右值引用允许你为右值绑定一个可变引用，但是不能是一个左值。换句话说，右值引用可以检测到一个对象是不是临时对象。右值引用使用&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;语法来声明而不是&lt;code&gt;&amp;amp;&lt;/code&gt;，可以是常量，也可以是非常量。和左值引用一样，尽管你很少见到一个常量右值引用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const string &amp;amp;&amp;amp; name = get_name(); // ok
+string &amp;amp;&amp;amp; name = get_name();  // alse ok - praise be!&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用左值和右值引用重载函数，调用情况是什么样呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void print_ref(const std::string &amp;amp; str) 
+{
+    std::cout &amp;lt;&amp;lt; str &amp;lt;&amp;lt; std::endl;
+}
+
+void print_ref(std::string &amp;amp;&amp;amp; str)
+{
+    std::cout &amp;lt;&amp;lt; str &amp;lt;&amp;lt; std::endl;
+}
+
+std::string name(&amp;quot;jerryzhang&amp;quot;);
+print_ref(name); // calls the first print_ref function, taking an lvalue reference
+print_ref(get_name()); // calls the second print_ref function, taking a mutable rvalue reference&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在，我们有了自己的方式去判定一个引用变量指向的是临时对象还是非临时变量(permanent object)。右值引用版本的方法，像是一个俱乐部的秘密后门入口，只有你可以进入，如果你是一个临时对象的话。&lt;/p&gt;
+
+&lt;p&gt;了解了右值引用，是时候看看它的具体用途了。&lt;/p&gt;
+
+&lt;h3 id=&quot;move_constructr__move_assignment_operator&quot;&gt;move constructr 和 move assignment operator&lt;/h3&gt;
+
+&lt;p&gt;右值引用的最常用用途是创建move构造函数和move赋值运算符（具有相同的规则）。move构造可以避免重新申请内存，因为我们知道它已经提供了一个临时对象，我们不需要从它来复制字段，而是直接从它们上move过来。&lt;/p&gt;
+
+&lt;p&gt;如果字段是一个内置类型(primitive type), 比如&lt;code&gt;int&lt;/code&gt;，我们就直接复制。其实我们关心的是，字段的类型是&lt;code&gt;指针&lt;/code&gt;：这种情况下，不是申请内存/初始化内存，我们可以直接&lt;code&gt;偷取&lt;/code&gt;指针，然后把临时对象的指针指空。我们知道临时对象已经不再用，因此可以使用它指针所指向的内存。&lt;/p&gt;
+
+&lt;p&gt;假如我们有下面这样一个简单的&lt;code&gt;ArrayWrapper&lt;/code&gt;类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class ArrayWrapper
+{
+public:
+    ArrayWrapper(int n)
+        : _p_vals(new int[n])
+        , _size(n)
+        {}
+    // copy constructor
+    ArrayWrapper(const ArrayWrapper &amp;amp; other)
+        : _p_vals(new int[other._size))
+        , _size(other._size)
+        {
+            for (int i = 0; i &amp;lt;_size; ++i)
+            {
+                _p_vals[i] = other._p_vals[i];
+                
+            }
+        }
+    ~ArrayWrapper()
+        {
+            delete [] _p_vals;
+            
+        }
+private:
+    int * _p_vals;
+    int _size;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意，拷贝构造函数既申请了内存又对每个值进行了赋值，这个拷贝操作很耗费时间。下面是使用 move 构造，对效率进行了提升：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class ArrayWrapper
+{
+public:
+    // default constructor produces a moderately size array
+    ArrayWrapper()
+        : _p_vals(new int[64])
+        , _size(64)
+        {}
+
+    ArrayWrapper(int n)
+        : _p_vals(new int[n])
+        , _size(n)
+        {}
+
+    // move constructor
+    ArrayWrapper(ArrayWrapper &amp;amp;&amp;amp; other)
+        : _p_vals(other._p_vals)
+        , size(other._size)
+        {
+            other._p_vals = NULL;
+        }
+
+    // copy constructor
+    ArrayWrapper(const ArrayWrapper&amp;amp; other)
+        : _p_vals(new int[other._p_vals])
+        , _size(other._size)
+        {
+            for (int i = 0; i &amp;lt; _size ; ++i)
+            {
+                _p_vals[i] = other._p_vals[i];
+            }
+        }
+    ~ArrayWrapper()
+        {
+            delete [] _p_vals;   
+        }
+private:
+    int *_p_vals;
+    int _size;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;move constructor&lt;/code&gt; 要比 &lt;code&gt;copy constructor&lt;/code&gt; 简单且高效的多！ 有两点需要注意：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;参数是&lt;code&gt;非常量&lt;/code&gt;右值引用&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;other._p_vals&lt;/code&gt; 要置为 &lt;code&gt;NULL&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;第二点是站在第一点的基础上的，如果传入的是一个&lt;code&gt;常量&lt;/code&gt;的右值引用，&lt;code&gt;_p_vals&lt;/code&gt;也不可能置为&lt;code&gt;NULL&lt;/code&gt;。如果没有进行指针的置空的话，临时对象析构时会把指针所指向的内存进行释放，也就是我们的&lt;code&gt;move&lt;/code&gt;没有真正的&lt;code&gt;move&lt;/code&gt;——当我们使用已经释放了的内存，会引发崩溃。&lt;/p&gt;
+
+&lt;p&gt;再重复一下，只有确定参数是一个临时对象的时候才会去调用 &lt;code&gt;move constructor&lt;/code&gt;——并且只有临时对象才可以被修改。反过来，如果你有一个函数返回的是临时对象，它会去调用 &lt;code&gt;copy constructor&lt;/code&gt;而不是&lt;code&gt;move constructor&lt;/code&gt;，因此你不能这样写代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const ArrayWrapper getArrayWrapper(); // make the move constructor useless, the temporary is const!&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;仍旧有一种情况我们没有考虑到：我们需要赋值的字段是一个对象，例如，想象一下，我们有个媒体数据字段：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class MetaData
+{
+public:
+    MetaData(int size, const std::string &amp;amp; name)
+        : _name(name)
+        , _size(size)
+        {}
+
+    // copy constructor
+    MetaData(const MetaData &amp;amp; other)
+        : _name(other._name)
+        , _size(other._size)
+        {}
+
+    // move constructor
+    MetaData(MetaData&amp;amp;&amp;amp; other)
+        : _name(other.name)
+        , _size(other._size)
+        {}
+
+    std::string getName() const 
+        {
+            return _name;
+        }
+
+    int getSize() const
+        {
+            return _size;
+        }
+private:
+    std::string _name;
+    int _size;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在我们的数据有一个&lt;code&gt;name&lt;/code&gt;字段和&lt;code&gt;size&lt;/code&gt;字段，我们不得不去修改 &lt;code&gt;ArrayWrapper&lt;/code&gt;的定义：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class ArrayWrapper
+{
+public:
+    // default constructor produces a moderately sized array
+    ArrayWrapper()
+        : _p_vals(new int[64])
+        , _metadata(64, &amp;quot;ArrayWrapper&amp;quot;)
+        {}
+    ArrayWrapper(int n)
+        : _p_vals(new int[n])
+        , _metadata(n, &amp;quot;ArrayWrapper&amp;quot;)
+        {}
+
+    // move constructor
+    ArrayWrapper(ArrayWrapper &amp;amp;&amp;amp; other)
+        : _p_vals(other._p_vals)
+        , _metadata(n, &amp;quot;ArrayWrapper&amp;quot;)
+        {}
+
+    // copy constructor
+    ArrayWrapper(const ArrayWrapper &amp;amp; other)
+        : _p_vals(new int[other._metadata.getSize()])
+        , _metadata(other._metadata)
+        {
+            other._p_vals = NULL;
+        }
+
+    // copy constructor
+    ArrayWrapper(const ArrayWrapper &amp;amp; other)
+        : _p_vals(new int[other._metadata.getSize()])
+        , _metadata(other._metadata)
+        {
+            for (int i = 0; i &amp;lt; _metadata.getSize(); ++i)
+            {
+                _p_vals[i] = other._p_vals[i];
+            }
+        }
+
+    ~ArrayWrapper()
+        {
+            delete [] _p_vals;
+        }
+
+private:
+    int *_p_vals;
+    MetaData _metadata;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样可以工作吗？看起来就应该这样实现，不是吗？在 &lt;code&gt;ArrayWrapper&lt;/code&gt; 的 &lt;code&gt;move constructor&lt;/code&gt; 中调用 &lt;code&gt;MetaData&lt;/code&gt; 的 &lt;code&gt;move constructor&lt;/code&gt;，问题是不能这样执行。原因很简单，在&lt;code&gt;move constructor&lt;/code&gt;中的&lt;code&gt;other&lt;/code&gt;值，是一个右值引用？对于&lt;code&gt;MetaData&lt;/code&gt;，它是一个左值，因此调用&lt;code&gt;copy constructor&lt;/code&gt;而不是&lt;code&gt;move constructor&lt;/code&gt;。可以这样去理解，右值是一个即将消失的对象，存活时间有限。我们向&lt;code&gt;move constructor&lt;/code&gt;中传入一个临时对象，它就有个一个新的作用域，在上下文中右值表达式会被评估，临时对象干完它所做的事情，之后就不存在了。但是在我们的构造中，对象有了一个名字，它可以存活到我们整个函数的作用域，换句话说，我们在函数中使用了临时变量不止一次，这种情况下，临时对象会被定义在本地函数中。实际上，它已经上是本地函数中的一个左值，我们可以使用它的本地地址，和正常的变量一样使用。其实，我们在另外一个函数中使用到了它。如果&lt;code&gt;MetaData&lt;/code&gt;中我们调用了&lt;code&gt;move constructor&lt;/code&gt;而不是&lt;code&gt;copy constructor&lt;/code&gt;，我们直接&lt;code&gt;move&lt;/code&gt;对象，这样就危险了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// move constructor
+ArrayWrapper(ArrayWrapper &amp;amp;&amp;amp; other)
+:_p_vals(other._p_vals)
+    , _metadata(other._metadata)
+{
+    // if _metadata(other._metadata) calls the move constructor, using
+    // other._meta here would be extremely dangerous!
+    other._p_vals = NULL;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;总结：左值和右值引用是左值表达式。不同之处在于左值引用一个左值的常量引用，而右值只是一个右值的引用。有点像指针和它所指对象的区别。指向的是右值，但是，我们用右值自身的时候，它就是一个左值。&lt;/p&gt;
+
+&lt;p&gt;ps: 这段的翻译实在是有些揪心，我自己都看不下去了。针对这个问题，我的理解是：“右值生命周期很短，并且对于一个右值我们只能使用一次，如果使用了多次，会拷贝生成一个本地对象，也就是我们实际用的不再是临时对象了。这个时候我们使用的是本地对象，和临时对象扯不上什么关系了，所以调用的是 copy constructor 而不是 move constructor”。可能作者理解的更深一些吧，把我看的都有些凌乱了。&lt;/p&gt;
+
+&lt;h4 id=&quot;stdmove&quot;&gt;std::move&lt;/h4&gt;
+
+&lt;p&gt;解决上面问题的办法就是使用 &lt;code&gt;std::move&lt;/code&gt;，在 &lt;code&gt;&amp;lt;utility&amp;gt;&lt;/code&gt; 中，&lt;code&gt;std::move&lt;/code&gt; 是这样解释的：&lt;code&gt;ok, honest to God I know I have an lvalue, but I want it to be an rvalue.&lt;/code&gt;，&lt;code&gt;std::move&lt;/code&gt; 本身没有做任何移动的操作；它只是把一个左值转换成右值，因此，你可以在我们的 &lt;code&gt;move constructor&lt;/code&gt; 中调用它来实现转换。我们代码可能会这样去实现：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;utility&amp;gt; // for std::move |  ps: 实际上，我没有添加这个头文件上也可以使用 std::move
+
+ArrayWrapper(ArrayWrapper&amp;amp;&amp;amp; other)
+    :_p_vals(other._p_vals)
+    , _metadata(std::move(other._metadata))
+{
+    other._p_vals = NULL;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，我们也应该回到 &lt;code&gt;MetaData&lt;/code&gt; 把它补充完整：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MetaData(MetaData&amp;amp;&amp;amp; other)
+    :_name(std::move(other._name)) // oh, blissful efficiency
+     : _size(other._size)
+{}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;move_&quot;&gt;Move 赋值运算符&lt;/h4&gt;
+
+&lt;p&gt;我们也应该在 &lt;code&gt;move assignment operator&lt;/code&gt; 中使用相同的方法来实现 &lt;code&gt;move construcotr&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;move&quot;&gt;Move构造函数和隐式生成的构造函数&lt;/h4&gt;
+
+&lt;p&gt;我们知道，在C++中，我们声明任何一种构造函数的时候，编译器就不再给你声明默认的构造函数了。这这儿也是这样的，添加一个 &lt;code&gt;move constructor&lt;/code&gt; 之后，需要你自己声明和定义自己的默认构造函数。&lt;/p&gt;
+
+&lt;h4 id=&quot;stdmove_&quot;&gt;std::move 的工作机制&lt;/h4&gt;
+
+&lt;p&gt;你可能想过，怎么样去写一个像 &lt;code&gt;std::move&lt;/code&gt; 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是&lt;a href=&quot;http://www.cprogramming.com/tutorial/lesson11.html&quot;&gt;类型转换&lt;/a&gt;。&lt;code&gt;std::move&lt;/code&gt;做了很多的调用操作，但是它的核心操作仅仅是使用 static_cast 转换成右值引用。也就是说，实际上你不需要使用 &lt;code&gt;move&lt;/code&gt; —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 static_cast 替代 move 是非常危险的。你应该尽可能的使用 std::move 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。&lt;/p&gt;
+
+&lt;h3 id=&quot;_4&quot;&gt;显式的返回一个右值引用&lt;/h3&gt;
+
+&lt;p&gt;任何时候你都应该写返回显式右值引用的函数吗？任何时候返回一个右值引用是什么意思？函数返回的对象不已经是右值了吗？&lt;/p&gt;
+
+&lt;p&gt;先回答第二个问题：返回一个显式的右值引用不同于返回一个对象的值。看下面的例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int x;
+
+int getInt()
+{
+    return x;
+}
+
+int &amp;amp;&amp;amp; getRvalueInt()
+{
+    // notice that it's fine to move a primitive type--remember, std::move is just a cast
+    return std::move(x);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一种情况很清晰，&lt;code&gt;getInt()&lt;/code&gt; 是一个右值， 是 x 的副本。通过写一些帮助函数，让我们看清这一点:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void printAddress(const int &amp;amp; v)
+{
+    cout &amp;lt;&amp;lt; reinterpret_cast&amp;lt;const void*&amp;gt;(&amp;amp;v) &amp;lt;&amp;lt; endl;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;v printAddress(getInt()); printAddress(x);&lt;/p&gt;
+
+&lt;p&gt;当你运行这段代码的时候，你会发现打印了两个不同的值。&lt;/p&gt;
+
+&lt;p&gt;换个方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;printAddress(getRValueInt());
+printAddress(x);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打印出相同的值，因为我们返回的是一个显示的右值。&lt;/p&gt;
+
+&lt;p&gt;因此返回一个右值引用和不返回右值引用是不同的，这个不同在你返回一个已经存在对象，而不是临时对象的时候表现的非常明显。&lt;/p&gt;
+
+&lt;p&gt;现在回到是否必要去做的问题上。答案是，很多情况下不用(probably not)。大多数情况下，它有点像悬挂引用(引用存在，但是临时对象要被析构)。返回左值引用非常危险，可能对象出了作用域就不再存在了。右值引用不能保持一个对象一直存活着。&lt;code&gt; Returning an rvalue reference would primarily make sense in very rare cases where you have a member function and need to return the result of calling std::move on a field of the class from that function--and how often are you going to do that?&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;move_2&quot;&gt;Move语义和标准库&lt;/h3&gt;
+
+&lt;p&gt;回到最原始的例子上——我们使用&lt;code&gt;vector&lt;/code&gt;，我们没有控制 &lt;code&gt;vector&lt;/code&gt; 类是否有 &lt;code&gt;move constructor&lt;/code&gt; 或者 &lt;code&gt;move assignment operator&lt;/code&gt;。幸运的是，标准委员会很明智，move 语义已经被添加到标准库中。也就意味着你现在可以高效的返回 &lt;code&gt;vectors&lt;/code&gt;, &lt;code&gt;maps&lt;/code&gt;, &lt;code&gt;strings&lt;/code&gt;和其他标准库中的对象，好好享受 move 语义吧。&lt;/p&gt;
+
+&lt;h3 id=&quot;stl&quot;&gt;STL容器移动&lt;/h3&gt;
+
+&lt;p&gt;实际上，标准库跟近了一步，如果在你自己实现的类中实现 move 语义，当你使用这些类对象的STL容器的时候，STL会自动使用 &lt;code&gt;std::move&lt;/code&gt;，自动选择最有利的 &lt;code&gt;move-enable&lt;/code&gt; 类和高效的复制操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;_5&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.caole.net/diary/lvalue.html&quot;&gt;C/C++中的左值&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bkbs2cds.aspx&quot;&gt;L-Value and R-Value Expressions&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-an-an-rvalue-references.html&quot;&gt;C++11 FAQ中文版：右值引用&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html&quot;&gt;Move semantics and rvalue references in C++11&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/tutorial/lesson11.html&quot;&gt;typecasting&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/reference/typecasting/staticcast.html&quot;&gt;static_cast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>对象构造能力的提升</title>
+   <link href="http://username.github.io/document/2013/07/13/Object-Construction-Improvement"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Object-Construction-Improvement</id>
+   <content type="html">
+&lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;在 C++03 中，构造一个类不允许用调用这个类的其他构造函数；这样会导致每个构造函数都要构造所有的类成员，或者调用一个公共的成员函数，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; class SomeType {
+    int number;
+public:
+    SomeType(int new_number) : number(new_number) {}
+    SomeType() : number(42) {}
+};
+
+class SomeType {
+    int number;
+private:
+    void Construct(int new_number) {
+        number = new_number;
+    }
+public:
+    SomeType(int new_number) {
+        Construct(new_number);
+    }
+    SomeType() {
+        Construct(42);
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;基类的构造函数不能直接暴露给派生类；每个派生类必须实现构造函数，即便是基类构造函数已经很完善了。类的非常量数据成员不能在声明的地方初始化，且只能在构造函数中初始化。&lt;/p&gt;
+
+&lt;p&gt;C++11 提供了所有这些问题的解决方案。&lt;/p&gt;
+
+&lt;p&gt;C++11 允许构造函数调用其他的同等构造函数(peer constructors)(也就是”委托”)。添加少量的代码就可以实现构造函数去调用其他构造函数。Java, C#, D 等语言都有委托。&lt;/p&gt;
+
+&lt;p&gt;语法如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class SomeType {
+    int number;
+public:
+    SomeType(int new_number) : number(new_number) {}
+    SomeType() : SomeType(42) {}
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意，这种情况下，&lt;code&gt;new_number&lt;/code&gt;成为了默认参数。新的语法允许默认值(42)表现到实现上，而不是一个接口——受益的是库代码的维护者，直接把默认值’烤’到调用站，而构造委托允许修改值但不需要重新编译代码库。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是：C++03 认为对象构造是在构造函数执行完毕进行构造的，但是 C++11 认为对象构造是在任何一个构造函数执行完毕。多个构造函数都允许执行，意味着每个委托构造函数可以构造一个自己拥有类型的对象。派生类构造函数在它们基类的所有委托构造函数执行完毕(基类全部构造结束)再执行的。&lt;/p&gt;
+
+&lt;p&gt;对于基类构造函数，C++11允许类去指定基类的那个构造函数去继承。这意味着：C++11 编译器会生成代码去执行继承操作，把派生类转发给基类。注意，这是一个有或者无的(all-or-nothing)特性；或者所有的基类的构造函数转发或者一个都没有转发。对于多重继承的限制，例如，类的构造函数不能继承有多个签名的两个类。并且不能构造在派生类中已经存在的基类签名。&lt;/p&gt;
+
+&lt;p&gt;语法如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class BaseClass {
+pubic:
+    BaseClass(int value);
+};
+
+class DerivedClass : public BaseClass {
+public:
+    using BaseClass::BaseClass;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于成员初始化，C++11 允许下面的语法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class SomeClass {
+public:
+    SomeClass() {}
+    explicit SomeClass(int new_value) : value(new_value) {}
+private:
+    int value = 5;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果构造函数没有重写它的话，所有类的构造函数都会把值初始化为 5。上面空的构造函数会初始化为5，但是有参的那个构造函数根据参数进行赋值。&lt;/p&gt;
+
+&lt;p&gt;它也能用构造函数或者统一的初始化方法，取代上面的赋值操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>空指针常量</title>
+   <link href="http://username.github.io/document/2013/07/13/Null-Pointer-Const"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Null-Pointer-Const</id>
+   <content type="html">
+&lt;p&gt;早在 1972 年，常量&lt;code&gt;0&lt;/code&gt;就扮演着整型常量和空指针常量的双重身份。为了解决&lt;code&gt;0&lt;/code&gt;的二义性，C 使用预处理宏&lt;code&gt;NULL&lt;/code&gt;表示空指针，一般被定义为&lt;code&gt;((void*)0)&lt;/code&gt;或者&lt;code&gt;0&lt;/code&gt;。 C++ 与 C 不同，只允许 0 作为空指针常量。这样会使函数重载不好交互(interacts poorly):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void foo(char *);
+void foo(int);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果&lt;code&gt;NULL&lt;/code&gt;定义为&lt;code&gt;0&lt;/code&gt;，&lt;code&gt;foo(NULL);&lt;/code&gt;将会调用&lt;code&gt;foo(int)&lt;/code&gt;，这通常不是程序员所期待的行为，也违反了代码的直观性。&lt;/p&gt;
+
+&lt;p&gt;C++11 通过引入一个新的关键字来纠正这个问题，用来标志空指针常量: &lt;code&gt;nullptr&lt;/code&gt;。它的类型是&lt;code&gt;nullptr_t&lt;/code&gt;(用来隐式转换到任何指针或者成员指针(pointer-to-member)类型，不能转换成整型类型，除了 bool)。&lt;/p&gt;
+
+&lt;p&gt;为了向后兼容，&lt;code&gt;0&lt;/code&gt;依旧是一个空的指针常量。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;char *pc = nullptr; // ok
+char *pi = nullptr; // ok
+bool  b = nullptr; // ok, b is false
+int i = nullptr; // error
+
+foo(nullptr);  // call foo(char *), not foo(int);&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>long long int 类型</title>
+   <link href="http://username.github.io/document/2013/07/13/NewType-long-long-int"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/NewType-long-long-int</id>
+   <content type="html">
+&lt;p&gt;在 C++03 中提供的最大整型类型是 &lt;code&gt;long int&lt;/code&gt;，它保证大小至少要等于 &lt;code&gt;int&lt;/code&gt; 的位数。这样导致了 &lt;code&gt;long int&lt;/code&gt; 一些编译器上大小为 64-bit， 一些为 32-bit。C++11添加一个新的类型 &lt;code&gt;long long int&lt;/code&gt;，它保证最小要和&lt;code&gt;long int&lt;/code&gt;一样大，且不能小于 64-bit 。这个类型一开始在 C99 和标准 C 中被引入，很多 C++ 编译器之前已经作为一种扩展来支持它。&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_long_long_int&quot;&gt;Type long long int&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>新的字符串常量</title>
+   <link href="http://username.github.io/document/2013/07/13/New-String-Literals"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/New-String-Literals</id>
+   <content type="html">
+&lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;C++03 提供了两种类型的字符串字面值。第一种，用两个双引号包含， 生成一个&lt;code&gt;const char&lt;/code&gt;类型空终结符的(null-terminated)数组； 第二种，用 &lt;code&gt;L&amp;quot;&amp;quot;&lt;/code&gt; 定义的，生成&lt;code&gt;const wchar_t&lt;/code&gt;的空终结符数组, &lt;code&gt;wchar_t&lt;/code&gt;是一个为定义大小且语义上表示宽字符。字面量类型既不支持 UTF-8, UTF-16 也不支持 Unicode 编码。&lt;/p&gt;
+
+&lt;p&gt;字符类型的定义明确的表达成它至少需要存储 UTF-8 的 8-bit 编码，足够包含任何编译器基本运算的字符集。之前在 C++ 自身标准在中仅仅为字母使用，C 标准保证至少 8 位。&lt;/p&gt;
+
+&lt;p&gt;C++11 支持三种 Unicode 编码，即： UTF-8， UTF-16， UTF-32。除了之前的 &lt;code&gt;char&lt;/code&gt; 类型外，C++11 添加了两种新的字符类型：&lt;code&gt;char_16_t&lt;/code&gt;和&lt;code&gt;char32_t&lt;/code&gt;，专门用来存储&lt;code&gt;UTF-16&lt;/code&gt;和&lt;code&gt;UTF-32&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;先面展示了怎么为每一种编码创建字符串字面量：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;u8&amp;quot;I'am a UTF-8 string.&amp;quot;
+u&amp;quot;This's a UTF-16 string.&amp;quot;
+U&amp;quot;This's a UTF-32 string.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一种类型是 &lt;code&gt;const char[]&lt;/code&gt;, 第二种类型是 &lt;code&gt;char16_t[]&lt;/code&gt;，第三种类型是&lt;code&gt;char32_t[]&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;当构造 Unicode 字符串字面量的时候，它经常直接向字符串中插入 Unicode 代码点。为了实现这一点，C++ 允许下面的代码语法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;u8&amp;quot;This is Unicode Character: \u2018.&amp;quot;
+u&amp;quot;This is a bigger Unicode Character: \u2018.&amp;quot;
+U&amp;quot;This is Unicode Character: \U00002018.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;\u&lt;/code&gt;后面是十六进制数字，不需要 &lt;code&gt;0x&lt;/code&gt; 前缀。&lt;code&gt;\u&lt;/code&gt; 代表 &lt;code&gt;16-bit&lt;/code&gt; 代码点；可以用 &lt;code&gt;\U&lt;/code&gt; 来表示 &lt;code&gt;32-bit&lt;/code&gt; 代码点。必须要输入有效的 Unicode 代码点。例如，在 &lt;code&gt;U+D800~U+DFFF&lt;/code&gt;中间的数字不能使用，它们是为&lt;code&gt;UTF-16&lt;/code&gt;代理对预留的。&lt;/p&gt;
+
+&lt;p&gt;它也在避免使用转义字符串上是非常有用的，尤其是使用 XML 文件字面量，脚本语言，或者正则表达式，C++ 提供了一个原生的字符串字面量：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;R&amp;quot;(The String Data \ Stuff &amp;quot;)&amp;quot;
+R&amp;quot;delimiter(The String Data \ Stuff &amp;quot; )delimiter&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在第一种情况下，&lt;code&gt;&amp;quot;(&lt;/code&gt; 和 &lt;code&gt;)&amp;quot;&lt;/code&gt; 之间的部分是字符串。&lt;code&gt;&amp;quot;&lt;/code&gt; 和 &lt;code&gt;\&lt;/code&gt; 字符不再需要转义。在第二种情况下，以&lt;code&gt;delimiter(&lt;/code&gt;开始，则只能以&lt;code&gt;)delimiter&lt;/code&gt;结束。字符串 &lt;code&gt;delimiter&lt;/code&gt; 可以把任何字符串在长度上改造成 16 个字符，允许用户在原生字符串字面量上使用 “)” 字符。例如，&lt;code&gt;R&amp;quot;delimiter((a-z))delimiter&lt;/code&gt; 等价于 &lt;code&gt;(a-z)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;原生字符串可以使用任何的宽字符常量做前缀：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;u8R&amp;quot;XXX(I'am a &amp;quot;raw UTF-8&amp;quot; string.)XXX&amp;quot;
+uR&amp;quot;*(This is a &amp;quot;raw UTF-16&amp;quot; string.)*&amp;quot;
+UR&amp;quot;(This is a &amp;quot;raw UTF-32&amp;quot; string.)&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Lambda 函数和表达式</title>
+   <link href="http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions</id>
+   <content type="html">
+&lt;p&gt;C++11 支持匿名函数，文档中称为 &lt;code&gt;Lambda函数&lt;/code&gt;，lambda 表达式格式如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[capture](parameters)-&amp;gt;return-type{body}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 &lt;code&gt;parameters&lt;/code&gt;没有值的话，括号可以省略。如果 &lt;code&gt;body&lt;/code&gt; 只有一个返回状态或者返回值为 void ，&lt;code&gt;return-type&lt;/code&gt; 也经常被省略掉。如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[capture](parameters){body}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一些 lambda 函数举例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[](int x, int y) { return x + y; } // implicit return type from 'return' statement
+[](int&amp;amp; x) { ++x; }   // no return statement -&amp;gt; lambda function's return type is 'void'
+[]() { ++global_x; }  // no parameters, just accessing a global variable
+[]{ ++global_x; }     // the same, so () can be omitted&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;return-type&lt;/code&gt; 不指定类型的时候，C++11 使用 decltype 来解析返回值类型(比如 &lt;code&gt;decltype(x+y)&lt;/code&gt;)。&lt;/p&gt;
+
+&lt;p&gt;返回类型可以显式的用如下的方式指定：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[](int x, int y) -&amp;gt; int { int z = x + y; return z; }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;lambda 函数可以使用 lambda 函数外面的标志符。这些变量的集合通常被成为&lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_science&quot;&gt;闭包&lt;/a&gt;#Function_objects_.28C.2B.2B.29)，闭包在 lambda 表达式的 &lt;code&gt;[]&lt;/code&gt; 中定义，允许是值或者引用。如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[]        //no variables defined. Attempting to use any external variables in the lambda is an error.
+[x, &amp;amp;y]   //x is captured by value, y is captured by reference
+[&amp;amp;]       //any external variable is implicitly captured by reference if used
+[=]       //any external variable is implicitly captured by value if used
+[&amp;amp;, x]    //x is explicitly captured by value. Other variables will be captured by reference
+[=, &amp;amp;z]   //z is explicitly captured by reference. Other variables will be captured by value&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面的两个例子演示了 lambda 表达式的用法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; some_list{ 1, 2, 3, 4, 5 };
+int total = 0;
+std::for_each(begin(some_list), end(some_list), [&amp;amp;total](int x) {
+  total += x;
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;计算 &lt;code&gt;some_list&lt;/code&gt; 的加和，存储到 &lt;code&gt;total&lt;/code&gt; 中(引用传递)。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::vector&amp;lt;int&amp;gt; some_list{ 1, 2, 3, 4, 5 };
+int total = 0;
+int value = 5;
+std::for_each(begin(some_list), end(some_list), [&amp;amp;, value, this](int x) {
+  total += x * value * this-&amp;gt;some_func();
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;除 value 和 this 外，引用传递。计算得到 total 的值。只能抓取闭包中的非静态函数，lambda 和创建它的时候具有相同的存取权限,不管是否 protected/private 成员。&lt;/p&gt;
+
+&lt;p&gt;一旦抓取到了，不管是隐式的还是显式(的调用)，闭包中类的成员范围是可测的(If this is captured, either explicitly or implicitly, then the scope of the enclosed class members is also tested.)。使用成员的时候不再需要显式的 &lt;code&gt;this-&amp;gt;&lt;/code&gt;语法。&lt;/p&gt;
+
+&lt;p&gt;如果闭包中引用的局部变量，它创建的更内层块引用之后调用，行为是未定义的。(If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is undefined.)&lt;/p&gt;
+
+&lt;p&gt;lambda 函数是实现依赖于类型的函数对象(function object)；类型的名字只有编译器可用。如果用户向把 lambda 函数作为参数来用的话，类型必须是一个模板类型，或者他们必须创建一个 &lt;code&gt;std::function&lt;/code&gt; 或者一个相似的对象去抓取 lambda 值。 auto 关键可以用来存储 lambda 函数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auto my_lambda_func = [&amp;amp;](int x) { /*...*/ };
+auto my_onheap_lambda_func = new auto([=](int x) { /*...*/ });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面的例子存储匿名函数在变量、vectors，和 arrays 中，然后把他们的名字当参数传递使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include&amp;lt;functional&amp;gt;
+#include&amp;lt;vector&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+double eval(std::function&amp;lt;double(double)&amp;gt; f, double x = 2.0){return f(x);}
+int main(){
+   std::function&amp;lt;double(double)&amp;gt; f0    = [](double x){return 1;};
+   auto                          f1    = [](double x){return x;};
+   decltype(f0)                  fa[3] = {f0,f1,[](double x){return x*x;}};
+   std::vector&amp;lt;decltype(f0)&amp;gt;     fv    = {f0,f1};
+   fv.push_back                  ([](double x){return x*x;});
+   for(int i=0;i&amp;lt;fv.size();i++)  std::cout &amp;lt;&amp;lt; fv[i](2.0) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   for(int i=0;i&amp;lt;3;i++)          std::cout &amp;lt;&amp;lt; fa[i](2.0) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   for(auto &amp;amp;f : fv)             std::cout &amp;lt;&amp;lt; f(2.0) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   for(auto &amp;amp;f : fa)             std::cout &amp;lt;&amp;lt; f(2.0) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   std::cout &amp;lt;&amp;lt; eval(f0) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   std::cout &amp;lt;&amp;lt; eval(f1) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   std::cout &amp;lt;&amp;lt; eval([](double x){return x*x;}) &amp;lt;&amp;lt; &amp;quot;\n&amp;quot;;
+   return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;lambda 如果 &lt;code&gt;[]&lt;/code&gt; 为空的话，可以隐式转换成一个函数指针和对应的函数指针相同，所以下面是合法的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auto a_lambda_func = [](int x) { /*...*/ };
+void(*func_ptr)(int) = a_lambda_func;
+func_ptr(4); //calls the lambda.&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Anonymous_function#C.2B.2B&quot;&gt;匿名对象 C++&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_science#Function_objects_.28C.2B.2B.29&quot;&gt;Function objects (C++)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Install GCC4.8 In Ubuntu 12.04</title>
+   <link href="http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu</id>
+   <content type="html">
+&lt;h2 id=&quot;&quot;&gt;安装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.8
+sudo apt-get install g++-4.8&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;_2&quot;&gt;测试&lt;/h2&gt;
+
+&lt;p&gt;方法一:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gcc-4.8 -v
+g++-4.8 -v&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果安装成功应输出为：gcc version 4.8.1 (Ubuntu 4.8.1-2ubuntu1~12.04)&lt;/p&gt;
+
+&lt;p&gt;方法二：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ls /usr/bin/gcc* -l
+ls /usr/bin/g++* -l&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我的输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-rwxr-xr-x 1 root root 306200  4月 15 08:27 /usr/bin/gcc-4.6
+-rwxr-xr-x 1 root root 527596  4月 22 04:47 /usr/bin/gcc-4.7
+-rwxr-xr-x 1 root root 716296  6月  5 22:00 /usr/bin/gcc-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-ar-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-ar-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-nm-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-nm-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-ranlib-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-ranlib-4.8&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu 默认 GCC 版本是4.6，我之前曾经装过 4.7，现在装了 4.8，所以你可以看到三个版本。&lt;/p&gt;
+
+&lt;h2 id=&quot;_48__gcc_&quot;&gt;将 4.8 设为默认 GCC 版本&lt;/h2&gt;
+
+&lt;p&gt;为了修改默认 GCC 版本，我们需要修改软链接。当然，你也可以不修改，只不过每次使用的时候都需要 gcc-4.8/g++-4.8 带上版本，不方便。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo rm /usr/bin/gcc
+sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
+sudo rm /usr/bin/g++
+sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后， gcc -v 提示的 GCC 版本就是 4.8.1，非常 Happy。&lt;/p&gt;
+
+&lt;h2 id=&quot;_demo&quot;&gt;测试 Demo&lt;/h2&gt;
+
+&lt;p&gt;安装了可能感觉不够爽，是时候用 gcc4.8 编一把 C++11 了，才不枉废了半天劲。我找了一个简单的 demo :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Ubuntu 12.04 GCC4.8
+
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+
+int main()
+{
+    char s[] = &amp;quot;Hello CPP11 World!&amp;quot;;
+    int Uppercase = 0;
+
+    std::for_each(s, s+sizeof(s), [&amp;amp;Uppercase] (char c)
+             {
+                 if (isupper(c))
+                     Uppercase++;
+             });
+
+    std::cout &amp;lt;&amp;lt; Uppercase &amp;lt;&amp;lt; &amp;quot; uppercase letters in: &amp;quot; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; std::endl;
+
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：编译的时候加上&lt;code&gt;-std=c++11&lt;/code&gt;(不加编译器也会很友善的提醒你，^_^)；&lt;/p&gt;
+
+&lt;h2 id=&quot;_3&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://maykiller.com/2012/ubuntu-install-gcc-4-7-with-set-default/1/&quot;&gt;Ubuntu12.04安装GCC4.7并设置C++11&lt;/a&gt;，非常感谢这位博主，在我多方尝试后这是一个有效且简单的做法。&lt;/li&gt;
+
+&lt;li&gt;测试Demo来自:&lt;a href=&quot;http://coolshell.cn/articles/5265.html&quot;&gt;C++11 中值得关注的极大变化(详解)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>初始化列表</title>
+   <link href="http://username.github.io/document/2013/07/13/Initializer-lists"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Initializer-lists</id>
+   <content type="html">
+&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&quot;&gt;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&lt;/a&gt;，非全部翻译，进行了一定调整和扩充。&lt;/p&gt;
+
+&lt;p&gt;C++03 的初始化列表特性是从 C 语言继承过来的，结构体或者数组可以用大括号包含的参数列表来初始化(按照定义的顺序依次初始化)。这种初始化方式递归的，因此结构体数组或者结构体包含其他结构体也可以这么用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct object
+{
+    float first;
+    int second;
+};
+object scalar = {0.43f, 10};
+object an_array[3] = { {13.4f, 3}, {43.28f, 29}, {5.934f, 17} };&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C++03 的初始化列表特性，只能用于结构体或者符合POD的类。C++11 对这个特性进行了扩展，可以用户有所的类包括标准库容器，比如 &lt;code&gt;std::vector&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;C++11 使用模板&lt;code&gt;std::initializer_list&lt;/code&gt;来实现使用列表初始化这一技术，构造函数或者其他函数都可以把它作为参数。比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;typename T&amp;gt;
+class my_list
+{
+public:
+    my_list() {}
+
+    my_list(const std::initializer_list&amp;lt;T&amp;gt; &amp;amp; x) {
+        for (auto ite=x.begin(); ite!=x.end(); ++ite) {
+            items_.push_back(*ite);
+        }
+    }
+    void show_list() {
+        copy(items_.begin(), items_.end(), std::ostream_iterator&amp;lt;T&amp;gt;(std::cout, &amp;quot; &amp;quot;));
+        std::cout &amp;lt;&amp;lt; std::endl;
+    }
+private:
+    std::vector&amp;lt;T&amp;gt; items_;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于一个函数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void print_init_list(const std::initializer_list&amp;lt;int&amp;gt; x) {
+    copy(x.begin(), x.end(), std::ostream_iterator&amp;lt;int&amp;gt;(std::cout, &amp;quot; &amp;quot;));
+    std::cout &amp;lt;&amp;lt; std::endl;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;值得注意的是，需要使用&lt;code&gt;{}&lt;/code&gt;来初始化一个 &lt;code&gt;std::initializer_list&lt;/code&gt; 对象，比如上面的函数调用方式为 &lt;code&gt;print_init_list({5, 4, 3, 2, 1})&lt;/code&gt;。列表只能被构造和复制一次，初始化列表是常量，不要妄图去修改它的值。&lt;/p&gt;
+
+&lt;p&gt;C++11 标准容器也可以用以下的方式去初始化：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    std::list&amp;lt;int&amp;gt; test_list = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    std::vector&amp;lt;std::string&amp;gt; test_string = {&amp;quot;Make&amp;quot;, &amp;quot;One&amp;quot;, &amp;quot;Program&amp;quot;, &amp;quot;Do&amp;quot;, &amp;quot;One&amp;quot;, &amp;quot;Thing&amp;quot;, &amp;quot;Well&amp;quot;};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&quot;&gt;Initializer lists&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://oopscenities.net/2011/05/09/c0x-initializer-lists/&quot;&gt;C++11: Initializer lists&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>外部模板</title>
+   <link href="http://username.github.io/document/2013/07/13/Extern-Template"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Extern-Template</id>
+   <content type="html">
+&lt;p&gt;在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。&lt;/p&gt;
+
+&lt;p&gt;原 C++ 强制编译器在特定位置开始实例化的语法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template class std::vector&amp;lt;MyClass&amp;gt;;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C++11 引入外部模板这一概念，将强制编译器在特定位置开始实例化，使用 extern 来显式组织编译器在某个编译单元内实例化。使用如下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;extern template class std::vector&amp;lt;MyClass&amp;gt;;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样告诉编译器不要在该编译单元内将该模板实例化(因为已经在别的单元实例化了)。&lt;/p&gt;
+
+&lt;p&gt;以上来自&lt;a href=&quot;http://zh.wikipedia.org/wiki/C%2B%2B11#.E5.A4.96.E9.83.A8.E6.A8.A1.E6.9D.BF&quot;&gt;外部模板&lt;/a&gt;，我对语言稍作组织。另，这个概念比较好理解，就不再举例说明了。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>显式使用或禁用特定的成员函数</title>
+   <link href="http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</id>
+   <content type="html">
+&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;在 C++03 中，编译器为类提供了默认的构造函数，拷贝构造函数，赋值运算符(operator=)，析构函数。程序员通过自己定义这些函数来重载他们，C++ 也定义了几个全局运算符(operator=,operator new)可供类来使用，程序员也可以重载它们。&lt;/p&gt;
+
+&lt;p&gt;然而，这种可控性太弱了。让一个类天生就不可复制，我们可以声明一个 &lt;code&gt;private&lt;/code&gt; 的拷贝构造函数和赋值运算符，但是不实现它们。使用它们的时候，会产生一个链接错误。&lt;/p&gt;
+
+&lt;p&gt;在这种情况下，如果类中定义了任何一种构造函数，编译器不再生成默认的构造函数。很多情况下，这样做是很有用的。但是，如果一个类既在指定了构造函数的同时，编译器又可以生成一个默认的构造函数就更好了。 C++ 允许显式的使用或者删除指定的成员函数。例如，下面声明了使用中的默认构造函数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct SomeType {
+    SomeType() = default;
+    SomeType(OtherType value);
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面的类是不可复制的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct NonCopyable {
+    NonCopyable() = default;
+    NonCopyable(const NonCopyable&amp;amp;) = delete;
+    NonCopyable &amp;amp; operator=(const NonCopyable&amp;amp;) = delete;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;= delete&lt;/code&gt; 表示这个函数的不可调用的，也可以用这种方法来禁止函数传入特定的参数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct NoInt {
+    void f(double i);
+    void f(int) = delete;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编译器不允许 &lt;code&gt;NoInt::f&lt;/code&gt; 传入一个 &lt;code&gt;int&lt;/code&gt; 类型的参数，而不是悄悄的把 &lt;code&gt;int&lt;/code&gt; 转成 &lt;code&gt;double&lt;/code&gt;。下面这种方法可以禁掉除 &lt;code&gt;double&lt;/code&gt; 之外的所有参数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct OnlyDouble {
+    void f(double d);
+    template&amp;lt;class T&amp;gt; void f(T) = delete;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>显式重载和 Final 操作符</title>
+   <link href="http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final</id>
+   <content type="html">
+&lt;p&gt;译自: &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;在 C++03 中，重载基类的虚函数，不能达到重载的效果。比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct Base {
+    virtual void some_func(float a)
+        {
+            std::cout &amp;lt;&amp;lt; &amp;quot;Base: &amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; std::endl;
+        }
+};
+
+struct Derived : Base {
+    virtual void some_func(int a)
+        {
+            std::cout &amp;lt;&amp;lt; &amp;quot;Derived: &amp;quot;  &amp;lt;&amp;lt; a &amp;lt;&amp;lt; std::endl;
+        }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当用基类指针指向派生类对象时，调用&lt;code&gt;some_func&lt;/code&gt;并不调用派生类的 &lt;code&gt;some_func&lt;/code&gt;(也就是上面说的不能达到重载的效果，但是编译器并没有报错)。这是因为它们有不同的函数签名(signature)，它们是两个不同的虚函数。常常会因为修改了基类的函数参数，却没有同步派生类的函数参数，引发很多问题(多态)。&lt;/p&gt;
+
+&lt;p&gt;C++11 提供显式重载语法来解决这个问题：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct NewBase {
+    virtual void some_func(float a)
+        {
+            std::cout &amp;lt;&amp;lt; &amp;quot;NewBase: &amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; std::endl;
+        }
+};
+
+struct NewDerived : NewBase {
+    virtual void some_func(int a) override  // ill-formed - doesn't override a base class method
+        {
+            std::cout &amp;lt;&amp;lt; &amp;quot;NewDerived: &amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; std::endl;
+        }
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示的使用&lt;code&gt;override&lt;/code&gt;告诉编译器检查基类(们)去检查是否有虚函数有确定的签名，如果没有的话，编译器会报错。(译者住：这样的话，相当与把问题放大了，让用户明确自己的使用)。&lt;/p&gt;
+
+&lt;p&gt;C++11 也提供了阻止派生类重载基类函数的方法，是用&lt;code&gt;final&lt;/code&gt;来实现的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct Base1 final{};
+
+struct Derived : Base final {};  // ill-formed because the class Base1 has been marked final
+
+struct Base2 {
+    virtual void f() final;
+};
+
+struct Derived2 : Base2 {
+    virtual void f(); // ill-formed because the class Base1 has been marked final
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Base1&lt;/code&gt;是&lt;code&gt;final&lt;/code&gt;类，&lt;code&gt;virtual void f() final&lt;/code&gt;是&lt;code&gt;final&lt;/code&gt;函数，显示告诉编译器该类/虚函数是不能用来派生/重载的，&lt;/p&gt;
+
+&lt;p&gt;注意，不管是&lt;code&gt;override&lt;/code&gt;还是&lt;code&gt;final&lt;/code&gt;都不是语言的关键字，它们是技术上的标志符(&lt;code&gt;technically identifiers&lt;/code&gt;)；只有在指定的上下文中才有特定的含义。在其他情况下，它们都是无意义的标志符。&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>控制和查询对象布局</title>
+   <link href="http://username.github.io/document/2013/07/13/Control-and-query-object-alignment"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Control-and-query-object-alignment</id>
+   <content type="html">
+&lt;ul&gt;
+&lt;li&gt;内容为个人理解，不保证正确。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;C++11 可以显示的控制和查询内存布局方式。&lt;/p&gt;
+
+&lt;p&gt;通过使用 &lt;code&gt;alignof&lt;/code&gt; 可以得到对象的内存布局字节基数，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct char_align {
+    char c1;
+    char c2;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;alignof(char_align)&lt;/code&gt; 得到的值为 &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct short_int_align {
+    short int si1;
+    short int si2;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;alignof(short_int_align)&lt;/code&gt; 得到的值 &lt;code&gt;2&lt;/code&gt; .&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct test_align {
+    int i;
+    char c;
+    float f;
+    double d;
+    long int li;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;alignof(short_int_align)&lt;/code&gt; 得到的值是 &lt;code&gt;4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;如果之前了解过 C/C++ 字节对齐的朋友应该一点就明白了，我这里不解释了，不明白的话，建议去看一下字节对齐这个技术。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;alignas&lt;/code&gt; 与之相反，可以显式的指定字节对其方式，指定的参数必须是 2 的倍数。eg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct alignas(8) test_alignas {
+    int i;
+    char c;
+    float f;
+    double d;
+    long int li;
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这么做指定了 test_alignas 按照 8 字节对齐。再使用 &lt;code&gt;alignof(test_alignas)&lt;/code&gt; 得到的值就是 8 .&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/1647895/what-does-static-assert-do-and-what-would-you-use-it-for&quot;&gt;What does static_assert do, and what would you use it for?&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment&quot;&gt;Control and query object alignment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>新的函数声明语法</title>
+   <link href="http://username.github.io/document/2013/07/13/Alternative-Function-Syntax"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://username.github.io/document/2013/07/13/Alternative-Function-Syntax</id>
+   <content type="html">
+&lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax&quot;&gt;Alternative function syntax&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;标准 C 函数声明语法对于 C 语言的特性来说是非常完美的。C++ 是从 C 语言扩展来而的，它保持了 C 的基本语言并且进行了一些必需的扩展。然后，随着 C++ 的语言复杂化，它有了很多的局限。特别是在模板函数的声明。下面的例子在 C++03 中是不允许的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;class Lhs, class Rhs&amp;gt;
+Ret adding_func(const Lhs &amp;amp; lhs, const Rhs &amp;amp; rhs) { return lhs + rhs; } // Ret must be the type of lhs+rhs&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为 Ret 的类型是由 lhs 和 rhs 共同决定的(比如 lhs 是 char , rhs 是 int，返回的应该是个 int)，尽管 C++11 有了 &lt;code&gt;decltype&lt;/code&gt; 可以进行类型推导，但是下面的使用也是不可以的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;class Lhs, class Rhs&amp;gt;
+decltype(lsh+rhs) adding_func(const Lhs &amp;amp; lhs, const Rhs &amp;amp; rhs) { return lhs + rhs; } // Not legal C++11&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不合法的原因是 lhs 和 rhs 在函数定义之前出现了，知道编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。&lt;/p&gt;
+
+&lt;p&gt;为了解决这个问题，C++11 引入了一种新的函数声明语法，即&lt;code&gt;尾部返回值(trailing-return-type)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;template &amp;lt;class Lhs, class Rhs&amp;gt;
+auto adding_func(const Lhs &amp;amp; lhs, const Rhs &amp;amp; rhs) -&amp;gt; decltype(lhs+rhs) { return lhs + rhs; }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种语法可以应用到很多普通函数的声明和定义:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct SomeStruct  {
+    auto func_name(int x, int y) -&amp;gt; int;
+};
+ 
+auto SomeStruct::func_name(int x, int y) -&amp;gt; int {
+    return x + y;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;auto&lt;/code&gt; 关键字含义和前面所说的自动类型推导含义是不一样的。&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax&quot;&gt;Alternative function syntax&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html&quot;&gt;Improved Type Inference in C++11: auto, decltype, and the new function declaration syntax&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  
 </feed>

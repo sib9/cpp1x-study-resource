@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>Pages &larr; </title>
+   <title>静态断言 &larr; </title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -39,95 +39,64 @@
   
 <div id="page">
 	
-<h1 class="emphnext">Pages</h1>
-
-
-<h2>All Pages</h2>
-<ul>
-
-
+  <h1 class="emphnext">静态断言</h1>
+  <ul class="tag_box inline">
+  
+  
 
 
   
-    
-      
-      	
-      	<li><a href="/index.html">Contents</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/rss.xml">RSS Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">Pages</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">Categories</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/about.html">About</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">Tags</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/atom.xml">Atom Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">Archive</a></li>
-      	
-      
     
   
 
 
 
-</ul>
+  </ul>
+
+  
+<p>C++03 提供了方法去测试断言：使用宏和预处理指令 <code>#error</code> 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。</p>
+
+<p>新功能引入了一种新的测试断言方法，在编译期确定。使用新的关键字 <code>static_assert</code>。如下声明：</p>
+
+<pre><code>static_assert (constant-expression, error-message);</code></pre>
+
+<p>eg:</p>
+
+<pre><code>static_assert((PI &gt; 3.14) &amp;&amp; (PI &lt; 3.15), &quot;PI is inaccurate&quot;);
+
+template &lt;class T&gt;
+struct Check {
+    static_assert(sizeof(int) &lt;= sizeof(T), &quot;T is too big enough!&quot;);
+};
+
+template &lt;class Integral&gt;
+Integral foo(Integral x, Integral y) {
+    static_assert(std::is_integral&lt;Integral&gt;::value, &quot;foo() parameter must be an integral type&quot;);
+}</code></pre>
+
+<p>当常量表达式为 <code>false</code> 时，编译器会生成一条错误信息。第一个例子有点像预处理宏<code>#error</code>，尽管与处理器只支持整数类型。对于而言，第二个例子在模板类 <code>Check</code> 实例化的时候进行检查。</p>
+
+<p>静态断言在模版之外也同样很有用。比如特殊算法可能依赖于 <code>long long int</code>，要比 <code>int</code> 大很多。</p>
 
 
+  <address class="signature">
+    <a class="author" href="/">Sib9</a> 
+    <span class="date">13 July 2013</span>
+    <span class="location"></span>
+  </address>
+  
+  <div class="prev-next">
+  
+    <a href="/document/2013/07/13/Strong-Type-Enum" class="next" title="强类型枚举">Next Post &rarr;</a>
+  
+  
+    <a href="/document/2013/07/13/Right-Angle-Bracket" class="prev" title="右尖括号">&larr; Earlier Post</a>
+  
+  </div>
+  
 </div><!-- End Page -->
+
+
 
 
   

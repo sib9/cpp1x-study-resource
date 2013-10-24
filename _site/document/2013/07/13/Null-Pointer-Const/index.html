@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>Pages &larr; </title>
+   <title>空指针常量 &larr; </title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -39,95 +39,58 @@
   
 <div id="page">
 	
-<h1 class="emphnext">Pages</h1>
-
-
-<h2>All Pages</h2>
-<ul>
-
-
+  <h1 class="emphnext">空指针常量</h1>
+  <ul class="tag_box inline">
+  
+  
 
 
   
-    
-      
-      	
-      	<li><a href="/index.html">Contents</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/rss.xml">RSS Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">Pages</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">Categories</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/about.html">About</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">Tags</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/atom.xml">Atom Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">Archive</a></li>
-      	
-      
     
   
 
 
 
-</ul>
+  </ul>
+
+  
+<p>早在 1972 年，常量<code>0</code>就扮演着整型常量和空指针常量的双重身份。为了解决<code>0</code>的二义性，C 使用预处理宏<code>NULL</code>表示空指针，一般被定义为<code>((void*)0)</code>或者<code>0</code>。 C++ 与 C 不同，只允许 0 作为空指针常量。这样会使函数重载不好交互(interacts poorly):</p>
+
+<pre><code>void foo(char *);
+void foo(int);</code></pre>
+
+<p>如果<code>NULL</code>定义为<code>0</code>，<code>foo(NULL);</code>将会调用<code>foo(int)</code>，这通常不是程序员所期待的行为，也违反了代码的直观性。</p>
+
+<p>C++11 通过引入一个新的关键字来纠正这个问题，用来标志空指针常量: <code>nullptr</code>。它的类型是<code>nullptr_t</code>(用来隐式转换到任何指针或者成员指针(pointer-to-member)类型，不能转换成整型类型，除了 bool)。</p>
+
+<p>为了向后兼容，<code>0</code>依旧是一个空的指针常量。</p>
+
+<pre><code>char *pc = nullptr; // ok
+char *pi = nullptr; // ok
+bool  b = nullptr; // ok, b is false
+int i = nullptr; // error
+
+foo(nullptr);  // call foo(char *), not foo(int);</code></pre>
 
 
+  <address class="signature">
+    <a class="author" href="/">Sib9</a> 
+    <span class="date">13 July 2013</span>
+    <span class="location"></span>
+  </address>
+  
+  <div class="prev-next">
+  
+    <a href="/document/2013/07/13/Object-Construction-Improvement" class="next" title="对象构造能力的提升">Next Post &rarr;</a>
+  
+  
+    <a href="/document/2013/07/13/NewType-long-long-int" class="prev" title="long long int 类型">&larr; Earlier Post</a>
+  
+  </div>
+  
 </div><!-- End Page -->
+
+
 
 
   

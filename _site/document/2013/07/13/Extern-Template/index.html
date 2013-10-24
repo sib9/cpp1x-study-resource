@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>Pages &larr; </title>
+   <title>外部模板 &larr; </title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -39,95 +39,54 @@
   
 <div id="page">
 	
-<h1 class="emphnext">Pages</h1>
-
-
-<h2>All Pages</h2>
-<ul>
-
-
+  <h1 class="emphnext">外部模板</h1>
+  <ul class="tag_box inline">
+  
+  
 
 
   
-    
-      
-      	
-      	<li><a href="/index.html">Contents</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/rss.xml">RSS Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">Pages</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">Categories</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/about.html">About</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">Tags</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/atom.xml">Atom Feed</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">Archive</a></li>
-      	
-      
     
   
 
 
 
-</ul>
+  </ul>
+
+  
+<p>在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。</p>
+
+<p>原 C++ 强制编译器在特定位置开始实例化的语法：</p>
+
+<pre><code>template class std::vector&lt;MyClass&gt;;</code></pre>
+
+<p>C++11 引入外部模板这一概念，将强制编译器在特定位置开始实例化，使用 extern 来显式组织编译器在某个编译单元内实例化。使用如下代码：</p>
+
+<pre><code>extern template class std::vector&lt;MyClass&gt;;</code></pre>
+
+<p>这样告诉编译器不要在该编译单元内将该模板实例化(因为已经在别的单元实例化了)。</p>
+
+<p>以上来自<a href="http://zh.wikipedia.org/wiki/C%2B%2B11#.E5.A4.96.E9.83.A8.E6.A8.A1.E6.9D.BF">外部模板</a>，我对语言稍作组织。另，这个概念比较好理解，就不再举例说明了。</p>
 
 
+  <address class="signature">
+    <a class="author" href="/">Sib9</a> 
+    <span class="date">13 July 2013</span>
+    <span class="location"></span>
+  </address>
+  
+  <div class="prev-next">
+  
+    <a href="/document/2013/07/13/Initializer-lists" class="next" title="初始化列表">Next Post &rarr;</a>
+  
+  
+    <a href="/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions" class="prev" title="显式使用或禁用特定的成员函数">&larr; Earlier Post</a>
+  
+  </div>
+  
 </div><!-- End Page -->
+
+
 
 
   
