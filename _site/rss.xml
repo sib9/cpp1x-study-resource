@@ -5,8 +5,8 @@
         <description>CPP11-STUDY-RESOURCE - Sib9</description>
         <link>http://username.github.io</link>
         <link>http://username.github.io</link>
-        <lastBuildDate>2013-10-24T22:55:17+08:00</lastBuildDate>
-        <pubDate>2013-10-24T22:55:17+08:00</pubDate>
+        <lastBuildDate>2013-10-24T23:03:04+08:00</lastBuildDate>
+        <pubDate>2013-10-24T23:03:04+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -50,8 +50,8 @@ union U {
 &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c&quot;&gt;What is a non-trivial constructor in C++?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Unrestricted-Unions</link>
-                <guid>http://username.github.io/document/2013/07/13/Unrestricted-Unions</guid>
+                <link>http://username.github.io/document/Unrestricted-Unions</link>
+                <guid>http://username.github.io/document/Unrestricted-Unions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -108,8 +108,8 @@ return {a};&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Uniform-Initialization</link>
-                <guid>http://username.github.io/document/2013/07/13/Uniform-Initialization</guid>
+                <link>http://username.github.io/document/Uniform-Initialization</link>
+                <guid>http://username.github.io/document/Uniform-Initialization</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -173,8 +173,8 @@ int main() {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference&quot;&gt;Type inference&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Type-Inference</link>
-                <guid>http://username.github.io/document/2013/07/13/Type-Inference</guid>
+                <link>http://username.github.io/document/Type-Inference</link>
+                <guid>http://username.github.io/document/Type-Inference</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -660,8 +660,8 @@ void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&
 &lt;li&gt;&lt;a href=&quot;http://www.highprogrammer.com/alan/rants/mutable.html&quot;&gt;C++’s mutable and conceptual constness&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Thread</link>
-                <guid>http://username.github.io/document/2013/07/13/Thread</guid>
+                <link>http://username.github.io/document/Thread</link>
+                <guid>http://username.github.io/document/Thread</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -716,8 +716,8 @@ enum class {EXCITED, MOODY, BLUE};&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations&quot;&gt;Strongly typed enumerations&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Strong-Type-Enum</link>
-                <guid>http://username.github.io/document/2013/07/13/Strong-Type-Enum</guid>
+                <link>http://username.github.io/document/Strong-Type-Enum</link>
+                <guid>http://username.github.io/document/Strong-Type-Enum</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -748,8 +748,8 @@ Integral foo(Integral x, Integral y) {
 
 &lt;p&gt;静态断言在模版之外也同样很有用。比如特殊算法可能依赖于 &lt;code&gt;long long int&lt;/code&gt;，要比 &lt;code&gt;int&lt;/code&gt; 大很多。&lt;/p&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Static-Assert</link>
-                <guid>http://username.github.io/document/2013/07/13/Static-Assert</guid>
+                <link>http://username.github.io/document/Static-Assert</link>
+                <guid>http://username.github.io/document/Static-Assert</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -774,8 +774,8 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Right-Angle-Bracket</link>
-                <guid>http://username.github.io/document/2013/07/13/Right-Angle-Bracket</guid>
+                <link>http://username.github.io/document/Right-Angle-Bracket</link>
+                <guid>http://username.github.io/document/Right-Angle-Bracket</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -823,8 +823,8 @@ std::cout &amp;lt;&amp;lt; std::endl;&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Range-based-For-Loop</link>
-                <guid>http://username.github.io/document/2013/07/13/Range-based-For-Loop</guid>
+                <link>http://username.github.io/document/Range-based-For-Loop</link>
+                <guid>http://username.github.io/document/Range-based-For-Loop</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1184,8 +1184,8 @@ printAddress(x);&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/reference/typecasting/staticcast.html&quot;&gt;static_cast&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct</link>
-                <guid>http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct</guid>
+                <link>http://username.github.io/document/R-value-Ref-And-Move-Construct</link>
+                <guid>http://username.github.io/document/R-value-Ref-And-Move-Construct</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1271,8 +1271,8 @@ private:
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Object-Construction-Improvement</link>
-                <guid>http://username.github.io/document/2013/07/13/Object-Construction-Improvement</guid>
+                <link>http://username.github.io/document/Object-Construction-Improvement</link>
+                <guid>http://username.github.io/document/Object-Construction-Improvement</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1297,8 +1297,8 @@ int i = nullptr; // error
 
 foo(nullptr);  // call foo(char *), not foo(int);&lt;/code&gt;&lt;/pre&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Null-Pointer-Const</link>
-                <guid>http://username.github.io/document/2013/07/13/Null-Pointer-Const</guid>
+                <link>http://username.github.io/document/Null-Pointer-Const</link>
+                <guid>http://username.github.io/document/Null-Pointer-Const</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1313,8 +1313,8 @@ foo(nullptr);  // call foo(char *), not foo(int);&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_long_long_int&quot;&gt;Type long long int&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/NewType-long-long-int</link>
-                <guid>http://username.github.io/document/2013/07/13/NewType-long-long-int</guid>
+                <link>http://username.github.io/document/NewType-long-long-int</link>
+                <guid>http://username.github.io/document/NewType-long-long-int</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1364,8 +1364,8 @@ UR&amp;quot;(This is a &amp;quot;raw UTF-32&amp;quot; string.)&amp;quot;&lt;/cod
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/New-String-Literals</link>
-                <guid>http://username.github.io/document/2013/07/13/New-String-Literals</guid>
+                <link>http://username.github.io/document/New-String-Literals</link>
+                <guid>http://username.github.io/document/New-String-Literals</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1466,8 +1466,8 @@ func_ptr(4); //calls the lambda.&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_science#Function_objects_.28C.2B.2B.29&quot;&gt;Function objects (C++)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions</link>
-                <guid>http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions</guid>
+                <link>http://username.github.io/document/Lambda-Function-And-Expressions</link>
+                <guid>http://username.github.io/document/Lambda-Function-And-Expressions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1555,8 +1555,8 @@ int main()
 &lt;li&gt;测试Demo来自:&lt;a href=&quot;http://coolshell.cn/articles/5265.html&quot;&gt;C++11 中值得关注的极大变化(详解)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu</link>
-                <guid>http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu</guid>
+                <link>http://username.github.io/compiler/Install-GCC4.8-Ubuntu</link>
+                <guid>http://username.github.io/compiler/Install-GCC4.8-Ubuntu</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1620,8 +1620,8 @@ private:
 &lt;li&gt;&lt;a href=&quot;http://oopscenities.net/2011/05/09/c0x-initializer-lists/&quot;&gt;C++11: Initializer lists&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Initializer-lists</link>
-                <guid>http://username.github.io/document/2013/07/13/Initializer-lists</guid>
+                <link>http://username.github.io/document/Initializer-lists</link>
+                <guid>http://username.github.io/document/Initializer-lists</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1642,8 +1642,8 @@ private:
 
 &lt;p&gt;以上来自&lt;a href=&quot;http://zh.wikipedia.org/wiki/C%2B%2B11#.E5.A4.96.E9.83.A8.E6.A8.A1.E6.9D.BF&quot;&gt;外部模板&lt;/a&gt;，我对语言稍作组织。另，这个概念比较好理解，就不再举例说明了。&lt;/p&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Extern-Template</link>
-                <guid>http://username.github.io/document/2013/07/13/Extern-Template</guid>
+                <link>http://username.github.io/document/Extern-Template</link>
+                <guid>http://username.github.io/document/Extern-Template</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1691,8 +1691,8 @@ private:
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</link>
-                <guid>http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</guid>
+                <link>http://username.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</link>
+                <guid>http://username.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1761,8 +1761,8 @@ struct Derived2 : Base2 {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final</link>
-                <guid>http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final</guid>
+                <link>http://username.github.io/document/Explicit-Overrides-And-Final</link>
+                <guid>http://username.github.io/document/Explicit-Overrides-And-Final</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1823,8 +1823,8 @@ struct Derived2 : Base2 {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment&quot;&gt;Control and query object alignment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Control-and-query-object-alignment</link>
-                <guid>http://username.github.io/document/2013/07/13/Control-and-query-object-alignment</guid>
+                <link>http://username.github.io/document/Control-and-query-object-alignment</link>
+                <guid>http://username.github.io/document/Control-and-query-object-alignment</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1870,8 +1870,8 @@ auto SomeStruct::func_name(int x, int y) -&amp;gt; int {
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html&quot;&gt;Improved Type Inference in C++11: auto, decltype, and the new function declaration syntax&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://username.github.io/document/2013/07/13/Alternative-Function-Syntax</link>
-                <guid>http://username.github.io/document/2013/07/13/Alternative-Function-Syntax</guid>
+                <link>http://username.github.io/document/Alternative-Function-Syntax</link>
+                <guid>http://username.github.io/document/Alternative-Function-Syntax</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 

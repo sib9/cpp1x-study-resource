@@ -4,7 +4,7 @@
  <title>CPP11-STUDY-RESOURCE</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2013-10-24T22:55:17+08:00</updated>
+ <updated>2013-10-24T23:03:04+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Sib9</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>无限制的 Unions</title>
-   <link href="http://username.github.io/document/2013/07/13/Unrestricted-Unions"/>
+   <link href="http://username.github.io/document/Unrestricted-Unions"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Unrestricted-Unions</id>
+   <id>http://username.github.io/document/Unrestricted-Unions</id>
    <content type="html">
 &lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Unrestricted unions&lt;/a&gt;&lt;/p&gt;
 
@@ -59,9 +59,9 @@ union U {
  
  <entry>
    <title>统一的初始化方式</title>
-   <link href="http://username.github.io/document/2013/07/13/Uniform-Initialization"/>
+   <link href="http://username.github.io/document/Uniform-Initialization"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Uniform-Initialization</id>
+   <id>http://username.github.io/document/Uniform-Initialization</id>
    <content type="html">
 &lt;ol&gt;
 &lt;li&gt;本文来自：&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
@@ -117,9 +117,9 @@ return {a};&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>类型自动推导</title>
-   <link href="http://username.github.io/document/2013/07/13/Type-Inference"/>
+   <link href="http://username.github.io/document/Type-Inference"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Type-Inference</id>
+   <id>http://username.github.io/document/Type-Inference</id>
    <content type="html">
 &lt;p&gt;译自 ［Type inference](https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)，为了更好的理解，没有逐字翻译。&lt;/p&gt;
 
@@ -182,9 +182,9 @@ int main() {
  
  <entry>
    <title>线程</title>
-   <link href="http://username.github.io/document/2013/07/13/Thread"/>
+   <link href="http://username.github.io/document/Thread"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Thread</id>
+   <id>http://username.github.io/document/Thread</id>
    <content type="html">
 &lt;p&gt;译自：&lt;a href=&quot;http://www.codeproject.com/Articles/598695/Cplusplus11-threads-locks-and-condition-variables&quot;&gt;C++11 threads, locks and condition variables&lt;/a&gt;。看到如此好文，原谅我的情不自禁，向原作者致谢！&lt;/p&gt;
 &lt;hr /&gt;
@@ -669,9 +669,9 @@ void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&
  
  <entry>
    <title>强类型枚举</title>
-   <link href="http://username.github.io/document/2013/07/13/Strong-Type-Enum"/>
+   <link href="http://username.github.io/document/Strong-Type-Enum"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Strong-Type-Enum</id>
+   <id>http://username.github.io/document/Strong-Type-Enum</id>
    <content type="html">
 &lt;p&gt;译自： &lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html&quot;&gt;Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint&lt;/a&gt;;&lt;/p&gt;
 
@@ -725,9 +725,9 @@ enum class {EXCITED, MOODY, BLUE};&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>静态断言</title>
-   <link href="http://username.github.io/document/2013/07/13/Static-Assert"/>
+   <link href="http://username.github.io/document/Static-Assert"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Static-Assert</id>
+   <id>http://username.github.io/document/Static-Assert</id>
    <content type="html">
 &lt;p&gt;C++03 提供了方法去测试断言：使用宏和预处理指令 &lt;code&gt;#error&lt;/code&gt; 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。&lt;/p&gt;
 
@@ -757,9 +757,9 @@ Integral foo(Integral x, Integral y) {
  
  <entry>
    <title>右尖括号</title>
-   <link href="http://username.github.io/document/2013/07/13/Right-Angle-Bracket"/>
+   <link href="http://username.github.io/document/Right-Angle-Bracket"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Right-Angle-Bracket</id>
+   <id>http://username.github.io/document/Right-Angle-Bracket</id>
    <content type="html">
 &lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/p&gt;
 
@@ -783,9 +783,9 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
  
  <entry>
    <title>基于范围的 for 循环</title>
-   <link href="http://username.github.io/document/2013/07/13/Range-based-For-Loop"/>
+   <link href="http://username.github.io/document/Range-based-For-Loop"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Range-based-For-Loop</id>
+   <id>http://username.github.io/document/Range-based-For-Loop</id>
    <content type="html">
 &lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/p&gt;
 
@@ -832,9 +832,9 @@ std::cout &amp;lt;&amp;lt; std::endl;&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>Right value reference and move construct</title>
-   <link href="http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct"/>
+   <link href="http://username.github.io/document/R-value-Ref-And-Move-Construct"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/R-value-Ref-And-Move-Construct</id>
+   <id>http://username.github.io/document/R-value-Ref-And-Move-Construct</id>
    <content type="html">
 &lt;p&gt;这篇文章是我从&lt;a href=&quot;http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html&quot;&gt;Move semantics and rvalue references in C++11&lt;/a&gt;翻译而来的。值得一提的是，不是全文/原文逐字逐句的翻译，加了一些我个人的理解，并进行了一定的精简。&lt;/p&gt;
 &lt;hr /&gt;
@@ -1193,9 +1193,9 @@ printAddress(x);&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>对象构造能力的提升</title>
-   <link href="http://username.github.io/document/2013/07/13/Object-Construction-Improvement"/>
+   <link href="http://username.github.io/document/Object-Construction-Improvement"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Object-Construction-Improvement</id>
+   <id>http://username.github.io/document/Object-Construction-Improvement</id>
    <content type="html">
 &lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/p&gt;
 
@@ -1280,9 +1280,9 @@ private:
  
  <entry>
    <title>空指针常量</title>
-   <link href="http://username.github.io/document/2013/07/13/Null-Pointer-Const"/>
+   <link href="http://username.github.io/document/Null-Pointer-Const"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Null-Pointer-Const</id>
+   <id>http://username.github.io/document/Null-Pointer-Const</id>
    <content type="html">
 &lt;p&gt;早在 1972 年，常量&lt;code&gt;0&lt;/code&gt;就扮演着整型常量和空指针常量的双重身份。为了解决&lt;code&gt;0&lt;/code&gt;的二义性，C 使用预处理宏&lt;code&gt;NULL&lt;/code&gt;表示空指针，一般被定义为&lt;code&gt;((void*)0)&lt;/code&gt;或者&lt;code&gt;0&lt;/code&gt;。 C++ 与 C 不同，只允许 0 作为空指针常量。这样会使函数重载不好交互(interacts poorly):&lt;/p&gt;
 
@@ -1306,9 +1306,9 @@ foo(nullptr);  // call foo(char *), not foo(int);&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>long long int 类型</title>
-   <link href="http://username.github.io/document/2013/07/13/NewType-long-long-int"/>
+   <link href="http://username.github.io/document/NewType-long-long-int"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/NewType-long-long-int</id>
+   <id>http://username.github.io/document/NewType-long-long-int</id>
    <content type="html">
 &lt;p&gt;在 C++03 中提供的最大整型类型是 &lt;code&gt;long int&lt;/code&gt;，它保证大小至少要等于 &lt;code&gt;int&lt;/code&gt; 的位数。这样导致了 &lt;code&gt;long int&lt;/code&gt; 一些编译器上大小为 64-bit， 一些为 32-bit。C++11添加一个新的类型 &lt;code&gt;long long int&lt;/code&gt;，它保证最小要和&lt;code&gt;long int&lt;/code&gt;一样大，且不能小于 64-bit 。这个类型一开始在 C99 和标准 C 中被引入，很多 C++ 编译器之前已经作为一种扩展来支持它。&lt;/p&gt;
 
@@ -1322,9 +1322,9 @@ foo(nullptr);  // call foo(char *), not foo(int);&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>新的字符串常量</title>
-   <link href="http://username.github.io/document/2013/07/13/New-String-Literals"/>
+   <link href="http://username.github.io/document/New-String-Literals"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/New-String-Literals</id>
+   <id>http://username.github.io/document/New-String-Literals</id>
    <content type="html">
 &lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/p&gt;
 
@@ -1373,9 +1373,9 @@ UR&amp;quot;(This is a &amp;quot;raw UTF-32&amp;quot; string.)&amp;quot;&lt;/cod
  
  <entry>
    <title>Lambda 函数和表达式</title>
-   <link href="http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions"/>
+   <link href="http://username.github.io/document/Lambda-Function-And-Expressions"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Lambda-Function-And-Expressions</id>
+   <id>http://username.github.io/document/Lambda-Function-And-Expressions</id>
    <content type="html">
 &lt;p&gt;C++11 支持匿名函数，文档中称为 &lt;code&gt;Lambda函数&lt;/code&gt;，lambda 表达式格式如下：&lt;/p&gt;
 
@@ -1475,9 +1475,9 @@ func_ptr(4); //calls the lambda.&lt;/code&gt;&lt;/pre&gt;
  
  <entry>
    <title>Install GCC4.8 In Ubuntu 12.04</title>
-   <link href="http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu"/>
+   <link href="http://username.github.io/compiler/Install-GCC4.8-Ubuntu"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/compiler/2013/07/13/Install-GCC4.8-Ubuntu</id>
+   <id>http://username.github.io/compiler/Install-GCC4.8-Ubuntu</id>
    <content type="html">
 &lt;h2 id=&quot;&quot;&gt;安装&lt;/h2&gt;
 
@@ -1564,9 +1564,9 @@ int main()
  
  <entry>
    <title>初始化列表</title>
-   <link href="http://username.github.io/document/2013/07/13/Initializer-lists"/>
+   <link href="http://username.github.io/document/Initializer-lists"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Initializer-lists</id>
+   <id>http://username.github.io/document/Initializer-lists</id>
    <content type="html">
 &lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&quot;&gt;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&lt;/a&gt;，非全部翻译，进行了一定调整和扩充。&lt;/p&gt;
 
@@ -1629,9 +1629,9 @@ private:
  
  <entry>
    <title>外部模板</title>
-   <link href="http://username.github.io/document/2013/07/13/Extern-Template"/>
+   <link href="http://username.github.io/document/Extern-Template"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Extern-Template</id>
+   <id>http://username.github.io/document/Extern-Template</id>
    <content type="html">
 &lt;p&gt;在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。&lt;/p&gt;
 
@@ -1651,9 +1651,9 @@ private:
  
  <entry>
    <title>显式使用或禁用特定的成员函数</title>
-   <link href="http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions"/>
+   <link href="http://username.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</id>
+   <id>http://username.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</id>
    <content type="html">
 &lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/p&gt;
 
@@ -1700,9 +1700,9 @@ private:
  
  <entry>
    <title>显式重载和 Final 操作符</title>
-   <link href="http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final"/>
+   <link href="http://username.github.io/document/Explicit-Overrides-And-Final"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Explicit-Overrides-And-Final</id>
+   <id>http://username.github.io/document/Explicit-Overrides-And-Final</id>
    <content type="html">
 &lt;p&gt;译自: &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/p&gt;
 
@@ -1770,9 +1770,9 @@ struct Derived2 : Base2 {
  
  <entry>
    <title>控制和查询对象布局</title>
-   <link href="http://username.github.io/document/2013/07/13/Control-and-query-object-alignment"/>
+   <link href="http://username.github.io/document/Control-and-query-object-alignment"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Control-and-query-object-alignment</id>
+   <id>http://username.github.io/document/Control-and-query-object-alignment</id>
    <content type="html">
 &lt;ul&gt;
 &lt;li&gt;内容为个人理解，不保证正确。&lt;/li&gt;
@@ -1832,9 +1832,9 @@ struct Derived2 : Base2 {
  
  <entry>
    <title>新的函数声明语法</title>
-   <link href="http://username.github.io/document/2013/07/13/Alternative-Function-Syntax"/>
+   <link href="http://username.github.io/document/Alternative-Function-Syntax"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://username.github.io/document/2013/07/13/Alternative-Function-Syntax</id>
+   <id>http://username.github.io/document/Alternative-Function-Syntax</id>
    <content type="html">
 &lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax&quot;&gt;Alternative function syntax&lt;/a&gt;&lt;/p&gt;
 

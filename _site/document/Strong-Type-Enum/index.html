@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>强类型枚举 &larr; </title>
+   <meta name="author" content="Sib9" />
+
+   <link rel="start" href="/" />
+
+	
+	
+	
+	
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/assets/themes/mark-reid/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/assets/themes/mark-reid/css/screen.css" type="text/css" />
+
+</head>
+<body id="">
+<div id="site">
+  
+  <div id="header">
+    <h1>
+    	<a href="/" title="CPP11-STUDY-RESOURCE">CPP11-STUDY-RESOURCE</a>
+    	<span class="byline">&larr; <a href="/">Sib9</a></span>
+    </h1>
+    <ul class="nav">
+      <li><a class="home" href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </div>
+
+  
+<div id="page">
+	
+  <h1 class="emphnext">强类型枚举</h1>
+  <ul class="tag_box inline">
+  
+  
+
+
+  
+    
+  
+
+
+
+  </ul>
+
+  
+<p>译自： <a href="http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html">Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint</a>;</p>
+
+<p>C++03 的枚举本质上就是整型，它们可以和整型，和其它的枚举类型做比较。实际上，你并不希望不同枚举之间进行比较，就好像你不希望把钉子的种类和牙刷的种类做比较一样。</p>
+
+<p>旧式枚举的另外一个限制是枚举的值是没有作用域的，换句话说，你不能两个枚举共享同一个名字，比如：</p>
+
+<pre><code>enum Color {RED, GREEN, BLUE};
+enum Feeling {EXCITED, MOODY, BLUE}; // error: redeclaration of ‘BLUE’</code></pre>
+
+<p>C++11 提供了强类型枚举——枚举类(enum classes)，如下方式声明：</p>
+
+<p><code>class</code>意味着每一个枚举类型实际上都是不一样的，不能和其它类型做比较。强类型枚举，枚举类有很好的作用域。每个枚举值作用域被限制在枚举类中。这意味着，想要存取枚举值，你必须要这么用：</p>
+
+<pre><code>Color color = Color::GREEN;
+if (Color::RED == color) {
+    // the color is red;
+}</code></pre>
+
+<p>如果你想用旧式的枚举，仍旧是可用的。很大程度上，是可以和既有的代码相兼容的。教你一招，现在你可以直接在值前面加上枚举名：Color::RED.但是这种情况下，不能解决命名冲突的问题，它只是更清晰了一些。</p>
+
+<p>枚举类比旧式枚举类型另外一个优势是，你可以使用前向声明一个强枚举类型，意味着你可以这样写代码：</p>
+
+<pre><code>enum class Mood;
+void assessMode (Mood m);
+enum class {EXCITED, MOODY, BLUE};</code></pre>
+
+<p>Why would this be useful? Forward declarations are often about the physical layout of code on disk into different files or to provide opaque objects as part of an API. In the first case, where you care about the physical disk layout, using a forward declaration allows you to declare an enum type in the header file while putting specific values into the cpp file. This lets you change the list of possible enum values quite frequently without forcing all dependent files to recompile. In the second case, an enum class can be exposed as a type-safe but otherwise opaque value returned from one API function to be passed into another API function. The code using the API need not know the possible values the type can take on. Since the compiler still knows about the type, it can enforce that variables declared to work with that type are not confused with variables working with another type. (译者注：这段话不太理解，所有没有翻译，欢迎补充翻译。)</p>
+
+<p>枚举类的最后一个好处是你可以你的枚举的大小，你可以使用任何签名的或者未签名的整型类。默认是 int ，但是你也可以使用 char, unsigned long 等等。这样可以确保跨平台编译器的兼容性。</p>
+
+<pre><code>enum class Colors : char { RED = 1, GREEN = 2, BLUE = 3 };</code></pre>
+
+<p>但是在在 C++11 中，在指定类型大小上，我们可以用更好的方式，使用 <code>cstdint</code>。</p>
+
+<p>C++ 在类型方面存在一个问题，比如说，你想要一个 32位 的整型，但是 int 可能在不同体系架构下有不同的大小。在 C++11 中，C99 的头文件 <code>stdint.h</code> 包含在 <code>cstdint</code> 中。<code>cstdint</code> 头文件包含了诸如 <code>std::int8_t</code>, <code>std::int32_t</code> 和 <code>int64_t</code>(对应的 unsigned 版本是从 <code>std::uint8_t</code> 开始的)的类型。</p>
+
+<p>下面是使用新类型和枚举类完美配合，告诉跨平台编译器和体系架构你的枚举大小：</p>
+
+<p>enum class Colors: std::int8_t { RED = 1, GREEN = 2, BLUE = 3};</p>
+
+<h2 id="">扩展资料</h2>
+
+<ul>
+<li><a href="http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html">Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint</a></li>
+
+<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations">Strongly typed enumerations</a></li>
+</ul>
+
+
+  <address class="signature">
+    <a class="author" href="/">Sib9</a> 
+    <span class="date">13 July 2013</span>
+    <span class="location"></span>
+  </address>
+  
+  <div class="prev-next">
+  
+    <a href="/document/Thread" class="next" title="线程">Next Post &rarr;</a>
+  
+  
+    <a href="/document/Static-Assert" class="prev" title="静态断言">&larr; Earlier Post</a>
+  
+  </div>
+  
+</div><!-- End Page -->
+
+
+
+
+  
+  <div id="footer">
+  	<address>
+  		<span class="copyright">
+  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			<a href="http://mark.reid.name/">Mark Reid</a>
+  			<br/>
+  			(<a rel="licence" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Some rights reserved</a>)			
+  		</span>
+  		<span class="engine">
+  			Powered by <a href="http://github.com/mojombo/jekyll/" title="A static, minimalist CMS">Jekyll</a>
+  		</span>
+  	</address>
+  </div>
+  
+</div>
+
+<!--[if IE 6]>
+<script type="text/javascript"> 
+	/*Load jQuery if not already loaded*/ if(typeof jQuery == 'undefined'){ document.write("<script type=\"text/javascript\"   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\"></"+"script>"); var __noconflict = true; } 
+	var IE6UPDATE_OPTIONS = {
+		icons_path: "http://static.ie6update.com/hosted/ie6update/images/"
+	}
+</script>
+<script type="text/javascript" src="http://static.ie6update.com/hosted/ie6update/ie6update.js"></script>
+<![endif]-->
+
+  
+</body>
+</html>
+
