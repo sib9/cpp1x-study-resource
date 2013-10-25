@@ -31,7 +31,7 @@ body {
 img { -ms-interpolation-mode:bicubic; }
 
 /* IE6 ignores this and uses default size of 16pt */
-html>body { font-size:16px; }
+html>body { font-size:14px; }
 p { margin: 0 0 1.5em 0; text-align: justify; }
 
 a { text-decoration: none; color: #339; }
@@ -60,6 +60,7 @@ h1.emphnext {
 h2 {
     font-size: 1.5em;
     margin:0.8em 0 0.8em 0;
+    text-transform:capitalize;
 }
 
 h3 {
@@ -90,9 +91,9 @@ sup { line-height: 1ex; }
 
 #page, #disqus_thread {
 	background: white;
-/*	background-image: url(grid.png); */
-	padding: 3em 3em 1.5em 3em;
-	border: 1px solid #ccc;
+	background-image: url(grid.png); 
+	padding: 1.5em 2.5em 1.5em 2.5em;
+        border: 1px solid #ccc;
 }
 
 /* More experimental CSS3 features */
@@ -179,7 +180,7 @@ caption {
 /* @end */
 
 /* @group Lists */
-ul {
+ul, ol {
 	margin-top: 1.5em;
 	margin-bottom: 1.5em;
 	line-height: 1.5em;
@@ -222,10 +223,9 @@ ul.compact li a {
 	font-variant: small-caps;
 	line-height: 1em;
 	margin-top: .5em;
-	margin-bottom: 0;
+	margin-bottom: .5em;
 }
 #header h1 {
-	font-family: Palatino, georgia, "times new roman", serif;
 	margin-bottom: 0;
 	line-height: 0.9em;
 	display: block;
@@ -363,8 +363,7 @@ pre {
 	background: #fffff0;
 	border: 1px solid #ddc;
 	padding: 0.5em 1em;
-	overflow: hidden;
-
+        overflow: auto;
 	/* Experimental CSS3 stuff */
 	box-shadow: 1px 1px 6px #ccc;
 	-webkit-box-shadow: 1px 1px 6px #ccc;
@@ -372,7 +371,7 @@ pre {
 }
 pre:hover {
 	border-right: none;
-	overflow: visible;
+        overflow: auto;
 }
 code {
 	font-size: 1em;
@@ -564,4 +563,3 @@ img.maruku-png { }
 	border:1px solid #4C964D;
 	color:#FFF;
 }
-

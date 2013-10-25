@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>CPP11-STUDY-RESOURCE</title>
+ <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2013-10-25T10:42:21+08:00</updated>
+ <updated>2013-10-25T23:02:44+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
