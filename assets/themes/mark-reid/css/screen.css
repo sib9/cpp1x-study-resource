@@ -21,10 +21,10 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,t
 /* @end */
 
 body {
-	font-family: Palatino, georgia, "times new roman", serif;
-	background-color: whitesmoke;
-	background-position: center -18em;
-	background-repeat: repeat-x; 
+    font-family: Verdana, "Segoe UI", "Droid Sans Mono", ubuntu, monaco, Sans-Serif
+    background-color: whitesmoke;
+    background-position: center -18em;
+    background-repeat: repeat-x; 
 }
 
 /* Hack via Joel Spolsky to make image rescaling nicer in IE */
@@ -41,19 +41,37 @@ a.pdf:before {
 	content: url(/files/css/icon_pdf.gif); }
 
 h1,h2,h3,h4 { 
-	line-height:1em; 
-	font-size:1.5em; 
-	font-weight: normal; 
-	clear: left; 	
-	font-family: 'lucida grande', sans-serif; 
+        line-height:1em; 
+        font-size:1.5em; 
+        font-weight: normal; 
+        clear: left;
 }
-h1 { margin-bottom: 1em; }
+h1 {
+    margin-bottom: 1em;
+    font-size: 1.7em;
+}
+
+h1.emphnext {
+    border-bottom: 1px solid gray;
+    padding-bottom: 7px;
+    margin-bottom: 0.5em;
+}
+
 h2 {
-	font-size: 100%;
-	line-height: 1.5em;
-	margin:1.5em 0 1.5em 0;
-	font-weight:bold;
+    font-size: 1.5em;
+    margin:0.8em 0 0.8em 0;
 }
+
+h3 {
+    font-size: 1.3em;
+    margin: 0.8em 0 0.8em 0;
+}
+
+h4 {
+    font-size:1.2em;
+    margin: 0.8em 0 0.8em 0;
+}
+
 
 hr { 
 	border-top: 1px solid silver;
