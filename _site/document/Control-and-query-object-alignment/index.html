@@ -52,10 +52,10 @@
 
   </ul>
 
-  
-<ul>
+  <ul>
 <li>内容为个人理解，不保证正确。</li>
 </ul>
+
 
 <p>C++11 可以显示的控制和查询内存布局方式。</p>
 
@@ -64,14 +64,16 @@
 <pre><code>struct char_align {
     char c1;
     char c2;
-};</code></pre>
+};
+</code></pre>
 
 <p><code>alignof(char_align)</code> 得到的值为 <code>1</code>.</p>
 
 <pre><code>struct short_int_align {
     short int si1;
     short int si2;
-};</code></pre>
+};
+</code></pre>
 
 <p><code>alignof(short_int_align)</code> 得到的值 <code>2</code> .</p>
 
@@ -81,7 +83,8 @@
     float f;
     double d;
     long int li;
-};</code></pre>
+};
+</code></pre>
 
 <p><code>alignof(short_int_align)</code> 得到的值是 <code>4</code>.</p>
 
@@ -95,25 +98,26 @@
     float f;
     double d;
     long int li;
-};</code></pre>
+};
+</code></pre>
 
 <p>这么做指定了 test_alignas 按照 8 字节对齐。再使用 <code>alignof(test_alignas)</code> 得到的值就是 8 .</p>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="http://stackoverflow.com/questions/1647895/what-does-static-assert-do-and-what-would-you-use-it-for">What does static_assert do, and what would you use it for?</a></li>
-
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment">Control and query object alignment</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/document/Explicit-Overrides-And-Final" class="next" title="显式重载和 Final 操作符">Next Post &rarr;</a>
+    <a href="/document/Explicit-Overrides-And-Final" class="next" title="显式重载和 Final 操作符"> 显式重载和 Final 操作符 &rarr;</a>
   
   
-    <a href="/document/Alternative-Function-Syntax" class="prev" title="新的函数声明语法">&larr; Earlier Post</a>
+    <a href="/document/Alternative-Function-Syntax" class="prev" title="新的函数声明语法">&larr; 新的函数声明语法</a>
   
   </div>
   

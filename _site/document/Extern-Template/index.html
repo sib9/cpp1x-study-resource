@@ -52,16 +52,17 @@
 
   </ul>
 
-  
-<p>在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。</p>
+  <p>在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。</p>
 
 <p>原 C++ 强制编译器在特定位置开始实例化的语法：</p>
 
-<pre><code>template class std::vector&lt;MyClass&gt;;</code></pre>
+<pre><code>template class std::vector&lt;MyClass&gt;;
+</code></pre>
 
 <p>C++11 引入外部模板这一概念，将强制编译器在特定位置开始实例化，使用 extern 来显式组织编译器在某个编译单元内实例化。使用如下代码：</p>
 
-<pre><code>extern template class std::vector&lt;MyClass&gt;;</code></pre>
+<pre><code>extern template class std::vector&lt;MyClass&gt;;
+</code></pre>
 
 <p>这样告诉编译器不要在该编译单元内将该模板实例化(因为已经在别的单元实例化了)。</p>
 
@@ -70,10 +71,10 @@
 
   <div class="prev-next">
   
-    <a href="/document/Initializer-lists" class="next" title="初始化列表">Next Post &rarr;</a>
+    <a href="/document/Initializer-lists" class="next" title="初始化列表"> 初始化列表 &rarr;</a>
   
   
-    <a href="/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions" class="prev" title="显式使用或禁用特定的成员函数">&larr; Earlier Post</a>
+    <a href="/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions" class="prev" title="显式使用或禁用特定的成员函数">&larr; 显式使用或禁用特定的成员函数</a>
   
   </div>
   

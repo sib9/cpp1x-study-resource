@@ -52,19 +52,20 @@
 
   </ul>
 
-  
-<p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions">Explicitly defaulted and deleted special member functions</a></p>
+  <p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions">Explicitly defaulted and deleted special member functions</a></p>
 
 <p>在 C++03 中，编译器为类提供了默认的构造函数，拷贝构造函数，赋值运算符(operator=)，析构函数。程序员通过自己定义这些函数来重载他们，C++ 也定义了几个全局运算符(operator=,operator new)可供类来使用，程序员也可以重载它们。</p>
 
 <p>然而，这种可控性太弱了。让一个类天生就不可复制，我们可以声明一个 <code>private</code> 的拷贝构造函数和赋值运算符，但是不实现它们。使用它们的时候，会产生一个链接错误。</p>
 
-<p>在这种情况下，如果类中定义了任何一种构造函数，编译器不再生成默认的构造函数。很多情况下，这样做是很有用的。但是，如果一个类既在指定了构造函数的同时，编译器又可以生成一个默认的构造函数就更好了。 C++ 允许显式的使用或者删除指定的成员函数。例如，下面声明了使用中的默认构造函数：</p>
+<p>在这种情况下，如果类中定义了任何一种构造函数，编译器不再生成默认的构造函数。很多情况下，这样做是很有用的。但是，如果一个类既在指定了构造函数的同时，编译器又可以生成一个默认的构造函数就更好了。
+C++ 允许显式的使用或者删除指定的成员函数。例如，下面声明了使用中的默认构造函数：</p>
 
 <pre><code>struct SomeType {
     SomeType() = default;
     SomeType(OtherType value);
-};</code></pre>
+};
+</code></pre>
 
 <p>下面的类是不可复制的：</p>
 
@@ -72,35 +73,39 @@
     NonCopyable() = default;
     NonCopyable(const NonCopyable&amp;) = delete;
     NonCopyable &amp; operator=(const NonCopyable&amp;) = delete;
-};</code></pre>
+};
+</code></pre>
 
 <p><code>= delete</code> 表示这个函数的不可调用的，也可以用这种方法来禁止函数传入特定的参数：</p>
 
 <pre><code>struct NoInt {
     void f(double i);
     void f(int) = delete;
-};</code></pre>
+};
+</code></pre>
 
 <p>编译器不允许 <code>NoInt::f</code> 传入一个 <code>int</code> 类型的参数，而不是悄悄的把 <code>int</code> 转成 <code>double</code>。下面这种方法可以禁掉除 <code>double</code> 之外的所有参数：</p>
 
 <pre><code>struct OnlyDouble {
     void f(double d);
     template&lt;class T&gt; void f(T) = delete;
-};</code></pre>
+};
+</code></pre>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions">Explicitly defaulted and deleted special member functions</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/document/Extern-Template" class="next" title="外部模板">Next Post &rarr;</a>
+    <a href="/document/Extern-Template" class="next" title="外部模板"> 外部模板 &rarr;</a>
   
   
-    <a href="/document/Explicit-Overrides-And-Final" class="prev" title="显式重载和 Final 操作符">&larr; Earlier Post</a>
+    <a href="/document/Explicit-Overrides-And-Final" class="prev" title="显式重载和 Final 操作符">&larr; 显式重载和 Final 操作符</a>
   
   </div>
   

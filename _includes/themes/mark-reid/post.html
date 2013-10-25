@@ -10,10 +10,10 @@
 
   <div class="prev-next">
   {% if page.next %}
-    <a href="{{ page.next.url }}" class="next" title="{{ page.next.title }}">Next Post &rarr;</a>
+    <a href="{{ page.next.url }}" class="next" title="{{ page.next.title }}"> {{ page.next.title }} &rarr;</a>
   {% endif %}
   {% if page.previous %}
-    <a href="{{ page.previous.url }}" class="prev" title="{{ page.previous.title }}">&larr; Earlier Post</a>
+    <a href="{{ page.previous.url }}" class="prev" title="{{ page.previous.title }}">&larr; {{ page.previous.title }}</a>
   {% endif %}
   </div>
   

@@ -52,8 +52,7 @@
 
   </ul>
 
-  
-<p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists">https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists</a>，非全部翻译，进行了一定调整和扩充。</p>
+  <p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists">https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists</a>，非全部翻译，进行了一定调整和扩充。</p>
 
 <p>C++03 的初始化列表特性是从 C 语言继承过来的，结构体或者数组可以用大括号包含的参数列表来初始化(按照定义的顺序依次初始化)。这种初始化方式递归的，因此结构体数组或者结构体包含其他结构体也可以这么用。</p>
 
@@ -63,7 +62,8 @@
     int second;
 };
 object scalar = {0.43f, 10};
-object an_array[3] = { {13.4f, 3}, {43.28f, 29}, {5.934f, 17} };</code></pre>
+object an_array[3] = { {13.4f, 3}, {43.28f, 29}, {5.934f, 17} };
+</code></pre>
 
 <p>C++03 的初始化列表特性，只能用于结构体或者符合POD的类。C++11 对这个特性进行了扩展，可以用户有所的类包括标准库容器，比如 <code>std::vector</code>。</p>
 
@@ -81,42 +81,45 @@ public:
         }
     }
     void show_list() {
-        copy(items_.begin(), items_.end(), std::ostream_iterator&lt;T&gt;(std::cout, &quot; &quot;));
+        copy(items_.begin(), items_.end(), std::ostream_iterator&lt;T&gt;(std::cout, " "));
         std::cout &lt;&lt; std::endl;
     }
 private:
     std::vector&lt;T&gt; items_;
-};</code></pre>
+};
+</code></pre>
 
 <p>对于一个函数：</p>
 
 <pre><code>void print_init_list(const std::initializer_list&lt;int&gt; x) {
-    copy(x.begin(), x.end(), std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot;));
+    copy(x.begin(), x.end(), std::ostream_iterator&lt;int&gt;(std::cout, " "));
     std::cout &lt;&lt; std::endl;
-}</code></pre>
+}
+</code></pre>
 
 <p>值得注意的是，需要使用<code>{}</code>来初始化一个 <code>std::initializer_list</code> 对象，比如上面的函数调用方式为 <code>print_init_list({5, 4, 3, 2, 1})</code>。列表只能被构造和复制一次，初始化列表是常量，不要妄图去修改它的值。</p>
 
 <p>C++11 标准容器也可以用以下的方式去初始化：</p>
 
 <pre><code>    std::list&lt;int&gt; test_list = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    std::vector&lt;std::string&gt; test_string = {&quot;Make&quot;, &quot;One&quot;, &quot;Program&quot;, &quot;Do&quot;, &quot;One&quot;, &quot;Thing&quot;, &quot;Well&quot;};</code></pre>
+    std::vector&lt;std::string&gt; test_string = {"Make", "One", "Program", "Do", "One", "Thing", "Well"};
+</code></pre>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists">Initializer lists</a></li>
-
 <li><a href="http://oopscenities.net/2011/05/09/c0x-initializer-lists/">C++11: Initializer lists</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/compiler/Install-GCC4.8-Ubuntu" class="next" title="Install GCC4.8 In Ubuntu 12.04">Next Post &rarr;</a>
+    <a href="/compiler/Install-GCC4.8-Ubuntu" class="next" title="Install GCC4.8 In Ubuntu 12.04"> Install GCC4.8 In Ubuntu 12.04 &rarr;</a>
   
   
-    <a href="/document/Extern-Template" class="prev" title="外部模板">&larr; Earlier Post</a>
+    <a href="/document/Extern-Template" class="prev" title="外部模板">&larr; 外部模板</a>
   
   </div>
   

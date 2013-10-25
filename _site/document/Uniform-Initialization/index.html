@@ -52,26 +52,26 @@
 
   </ul>
 
-  
-<ol>
+  <ol>
 <li>本文来自：<a href="http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html">C++11 FAQ中文版：统一初始化的语法和语义</a></li>
-
 <li>暂无测试代码</li>
 </ol>
+
 
 <p>C++03 的类型初始化有多种方式，因此也引来很多问题，如果错用的时候，错误的调试信息会非常模糊。</p>
 
 <p>比如以下初始化变量的方式：</p>
 
-<pre><code>    std::string a[] = {&quot;Hello&quot;, &quot;world&quot;}; // 正确：初始化数组变量
+<pre><code>    std::string a[] = {"Hello", "world"}; // 正确：初始化数组变量
     // 错误：初始化列表引用在非聚合的向量上
-    std::vector&lt;std::string&gt; v = {&quot;hello&quot;, &quot;world&quot;};
+    std::vector&lt;std::string&gt; v = {"hello", "world"};
     void f(string a[]);
-    f ({&quot;foo&quot;, &quot;bar&quot;}); // 语法错误，把一个块(block)作为了参数
-    int a = 2;  // &quot;赋值风格&quot;的变化
+    f ({"foo", "bar"}); // 语法错误，把一个块(block)作为了参数
+    int a = 2;  // "赋值风格"的变化
     int aa[] = {2, 3}; // 用初始化列表进行的赋值风格的初始化
     complex z(1, 2); // 函数风格的初始化
-    x = Ptr(y);      // &quot;函数风格&quot; 转换/赋值/构造操作</code></pre>
+    x = Ptr(y);      // "函数风格" 转换/赋值/构造操作
+</code></pre>
 
 <p>所谓统一的初始化方式，就是把之前 C++ 风格的各种初始化对象方式，统一为一种方式(语法):</p>
 
@@ -87,29 +87,32 @@
     struct S {
         int a[3];
         S(int x, int y, int z) : a{x, y, z} {/* ... */}
-    }</code></pre>
+    }
+</code></pre>
 
-<p>重点在于： X{a}在所有的可执行代码中都创建了同一个相同的值，所以使用”{}”进行的初始化，在合法的使用的时候，在任何地方都产生相同的结果。例如：</p>
+<p>重点在于： X{a}在所有的可执行代码中都创建了同一个相同的值，所以使用"{}"进行的初始化，在合法的使用的时候，在任何地方都产生相同的结果。例如：</p>
 
 <pre><code>X x{a};
 X* p = new X{a};
 z = X{a};
 f({a});
-return {a};</code></pre>
+return {a};
+</code></pre>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html">C++11 FAQ中文版：统一初始化的语法和语义</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/document/Unrestricted-Unions" class="next" title="无限制的 Unions">Next Post &rarr;</a>
+    <a href="/document/Unrestricted-Unions" class="next" title="无限制的 Unions"> 无限制的 Unions &rarr;</a>
   
   
-    <a href="/document/Type-Inference" class="prev" title="类型自动推导">&larr; Earlier Post</a>
+    <a href="/document/Type-Inference" class="prev" title="类型自动推导">&larr; 类型自动推导</a>
   
   </div>
   

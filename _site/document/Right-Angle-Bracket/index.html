@@ -52,10 +52,9 @@
 
   </ul>
 
-  
-<p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Right angle bracket</a></p>
+  <p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Right angle bracket</a></p>
 
-<p>C++03 的析取符定义为”»“(注，在我的第一本C++书中，”»“被称为析取运算符，而”«“被称为插入运算符，我感觉那样理解挺不错的)。 然而，在模板的嵌套声明中，程序员需要在两个尖括号之间加上一个空格，否则会引发一个编译错误。</p>
+<p>C++03 的析取符定义为">>"(注，在我的第一本C++书中，">>"被称为析取运算符，而"&lt;&lt;"被称为插入运算符，我感觉那样理解挺不错的)。 然而，在模板的嵌套声明中，程序员需要在两个尖括号之间加上一个空格，否则会引发一个编译错误。</p>
 
 <p>C++11 提供了新的解析规则，多个右尖括号的时候，会优先为模板解析。但是有括号的时候，会先解析括号：</p>
 
@@ -63,21 +62,23 @@
 std::vector&lt;SomeType&lt;1&gt;2&gt;&gt; x1; // Interpreted as a std::vector of SomeType&lt;true&gt; 2&gt;,
 // which is not legal syntax. 1 is true.
 std::vector&lt;SomeType&lt;(1&gt;2)&gt;&gt; x1; // Interpreted as a std::vector of SomeType&lt;false&gt;,
-// which is legal C++11 syntax, (1&gt;2) is false.</code></pre>
+// which is legal C++11 syntax, (1&gt;2) is false.
+</code></pre>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Right angle bracket</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/document/Static-Assert" class="next" title="静态断言">Next Post &rarr;</a>
+    <a href="/document/Static-Assert" class="next" title="静态断言"> 静态断言 &rarr;</a>
   
   
-    <a href="/document/Range-based-For-Loop" class="prev" title="基于范围的 for 循环">&larr; Earlier Post</a>
+    <a href="/document/Range-based-For-Loop" class="prev" title="基于范围的 for 循环">&larr; 基于范围的 for 循环</a>
   
   </div>
   

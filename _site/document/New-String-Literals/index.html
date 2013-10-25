@@ -52,10 +52,9 @@
 
   </ul>
 
-  
-<p>译自： <a href="https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals">New string literals</a></p>
+  <p>译自： <a href="https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals">New string literals</a></p>
 
-<p>C++03 提供了两种类型的字符串字面值。第一种，用两个双引号包含， 生成一个<code>const char</code>类型空终结符的(null-terminated)数组； 第二种，用 <code>L&quot;&quot;</code> 定义的，生成<code>const wchar_t</code>的空终结符数组, <code>wchar_t</code>是一个为定义大小且语义上表示宽字符。字面量类型既不支持 UTF-8, UTF-16 也不支持 Unicode 编码。</p>
+<p>C++03 提供了两种类型的字符串字面值。第一种，用两个双引号包含， 生成一个<code>const char</code>类型空终结符的(null-terminated)数组； 第二种，用 <code>L""</code> 定义的，生成<code>const wchar_t</code>的空终结符数组, <code>wchar_t</code>是一个为定义大小且语义上表示宽字符。字面量类型既不支持 UTF-8, UTF-16 也不支持 Unicode 编码。</p>
 
 <p>字符类型的定义明确的表达成它至少需要存储 UTF-8 的 8-bit 编码，足够包含任何编译器基本运算的字符集。之前在 C++ 自身标准在中仅仅为字母使用，C 标准保证至少 8 位。</p>
 
@@ -63,46 +62,51 @@
 
 <p>先面展示了怎么为每一种编码创建字符串字面量：</p>
 
-<pre><code>u8&quot;I'am a UTF-8 string.&quot;
-u&quot;This's a UTF-16 string.&quot;
-U&quot;This's a UTF-32 string.&quot;</code></pre>
+<pre><code>u8"I'am a UTF-8 string."
+u"This's a UTF-16 string."
+U"This's a UTF-32 string."
+</code></pre>
 
 <p>第一种类型是 <code>const char[]</code>, 第二种类型是 <code>char16_t[]</code>，第三种类型是<code>char32_t[]</code>。</p>
 
 <p>当构造 Unicode 字符串字面量的时候，它经常直接向字符串中插入 Unicode 代码点。为了实现这一点，C++ 允许下面的代码语法：</p>
 
-<pre><code>u8&quot;This is Unicode Character: \u2018.&quot;
-u&quot;This is a bigger Unicode Character: \u2018.&quot;
-U&quot;This is Unicode Character: \U00002018.&quot;</code></pre>
+<pre><code>u8"This is Unicode Character: \u2018."
+u"This is a bigger Unicode Character: \u2018."
+U"This is Unicode Character: \U00002018."
+</code></pre>
 
 <p><code>\u</code>后面是十六进制数字，不需要 <code>0x</code> 前缀。<code>\u</code> 代表 <code>16-bit</code> 代码点；可以用 <code>\U</code> 来表示 <code>32-bit</code> 代码点。必须要输入有效的 Unicode 代码点。例如，在 <code>U+D800~U+DFFF</code>中间的数字不能使用，它们是为<code>UTF-16</code>代理对预留的。</p>
 
 <p>它也在避免使用转义字符串上是非常有用的，尤其是使用 XML 文件字面量，脚本语言，或者正则表达式，C++ 提供了一个原生的字符串字面量：</p>
 
-<pre><code>R&quot;(The String Data \ Stuff &quot;)&quot;
-R&quot;delimiter(The String Data \ Stuff &quot; )delimiter&quot;</code></pre>
+<pre><code>R"(The String Data \ Stuff ")"
+R"delimiter(The String Data \ Stuff " )delimiter"
+</code></pre>
 
-<p>在第一种情况下，<code>&quot;(</code> 和 <code>)&quot;</code> 之间的部分是字符串。<code>&quot;</code> 和 <code>\</code> 字符不再需要转义。在第二种情况下，以<code>delimiter(</code>开始，则只能以<code>)delimiter</code>结束。字符串 <code>delimiter</code> 可以把任何字符串在长度上改造成 16 个字符，允许用户在原生字符串字面量上使用 “)” 字符。例如，<code>R&quot;delimiter((a-z))delimiter</code> 等价于 <code>(a-z)</code>.</p>
+<p>在第一种情况下，<code>"(</code> 和 <code>)"</code> 之间的部分是字符串。<code>"</code> 和 <code>\</code> 字符不再需要转义。在第二种情况下，以<code>delimiter(</code>开始，则只能以<code>)delimiter</code>结束。字符串 <code>delimiter</code> 可以把任何字符串在长度上改造成 16 个字符，允许用户在原生字符串字面量上使用 ")" 字符。例如，<code>R"delimiter((a-z))delimiter</code> 等价于 <code>(a-z)</code>.</p>
 
 <p>原生字符串可以使用任何的宽字符常量做前缀：</p>
 
-<pre><code>u8R&quot;XXX(I'am a &quot;raw UTF-8&quot; string.)XXX&quot;
-uR&quot;*(This is a &quot;raw UTF-16&quot; string.)*&quot;
-UR&quot;(This is a &quot;raw UTF-32&quot; string.)&quot;</code></pre>
+<pre><code>u8R"XXX(I'am a "raw UTF-8" string.)XXX"
+uR"*(This is a "raw UTF-16" string.)*"
+UR"(This is a "raw UTF-32" string.)"
+</code></pre>
 
-<h2 id="">扩展资料</h2>
+<h2>扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals">New string literals</a></li>
 </ul>
 
 
+
   <div class="prev-next">
   
-    <a href="/document/NewType-long-long-int" class="next" title="long long int 类型">Next Post &rarr;</a>
+    <a href="/document/NewType-long-long-int" class="next" title="long long int 类型"> long long int 类型 &rarr;</a>
   
   
-    <a href="/document/Lambda-Function-And-Expressions" class="prev" title="Lambda 函数和表达式">&larr; Earlier Post</a>
+    <a href="/document/Lambda-Function-And-Expressions" class="prev" title="Lambda 函数和表达式">&larr; Lambda 函数和表达式</a>
   
   </div>
   
