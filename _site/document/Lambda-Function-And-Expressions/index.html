@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -53,59 +53,45 @@
   </ul>
 
   <p>C++11 支持匿名函数，文档中称为 <code>Lambda函数</code>，lambda 表达式格式如下：</p>
-
-<pre><code>[capture](parameters)-&gt;return-type{body}
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[capture](parameters)-&gt;return-type{body}
+</code></pre></div>
 <p>如果 <code>parameters</code>没有值的话，括号可以省略。如果 <code>body</code> 只有一个返回状态或者返回值为 void ，<code>return-type</code> 也经常被省略掉。如下：</p>
-
-<pre><code>[capture](parameters){body}
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[capture](parameters){body}
+</code></pre></div>
 <p>一些 lambda 函数举例：</p>
-
-<pre><code>[](int x, int y) { return x + y; } // implicit return type from 'return' statement
-[](int&amp; x) { ++x; }   // no return statement -&gt; lambda function's return type is 'void'
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[](int x, int y) { return x + y; } // implicit return type from &#39;return&#39; statement
+[](int&amp; x) { ++x; }   // no return statement -&gt; lambda function&#39;s return type is &#39;void&#39;
 []() { ++global_x; }  // no parameters, just accessing a global variable
 []{ ++global_x; }     // the same, so () can be omitted
-</code></pre>
-
+</code></pre></div>
 <p><code>return-type</code> 不指定类型的时候，C++11 使用 decltype 来解析返回值类型(比如 <code>decltype(x+y)</code>)。</p>
 
 <p>返回类型可以显式的用如下的方式指定：</p>
-
-<pre><code>[](int x, int y) -&gt; int { int z = x + y; return z; }
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[](int x, int y) -&gt; int { int z = x + y; return z; }
+</code></pre></div>
 <p>lambda 函数可以使用 lambda 函数外面的标志符。这些变量的集合通常被成为<a href="https://en.wikipedia.org/wiki/Closure_(computer_science">闭包</a>#Function_objects_.28C.2B.2B.29)，闭包在 lambda 表达式的 <code>[]</code> 中定义，允许是值或者引用。如下所示：</p>
-
-<pre><code>[]        //no variables defined. Attempting to use any external variables in the lambda is an error.
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[]        //no variables defined. Attempting to use any external variables in the lambda is an error.
 [x, &amp;y]   //x is captured by value, y is captured by reference
 [&amp;]       //any external variable is implicitly captured by reference if used
 [=]       //any external variable is implicitly captured by value if used
 [&amp;, x]    //x is explicitly captured by value. Other variables will be captured by reference
 [=, &amp;z]   //z is explicitly captured by reference. Other variables will be captured by value
-</code></pre>
-
+</code></pre></div>
 <p>下面的两个例子演示了 lambda 表达式的用法：</p>
-
-<pre><code>std::vector&lt;int&gt; some_list{ 1, 2, 3, 4, 5 };
+<div class="highlight"><pre><code class="text language-text" data-lang="text">std::vector&lt;int&gt; some_list{ 1, 2, 3, 4, 5 };
 int total = 0;
 std::for_each(begin(some_list), end(some_list), [&amp;total](int x) {
   total += x;
 });
-</code></pre>
-
+</code></pre></div>
 <p>计算 <code>some_list</code> 的加和，存储到 <code>total</code> 中(引用传递)。</p>
-
-<pre><code>std::vector&lt;int&gt; some_list{ 1, 2, 3, 4, 5 };
+<div class="highlight"><pre><code class="text language-text" data-lang="text">std::vector&lt;int&gt; some_list{ 1, 2, 3, 4, 5 };
 int total = 0;
 int value = 5;
 std::for_each(begin(some_list), end(some_list), [&amp;, value, this](int x) {
   total += x * value * this-&gt;some_func();
 });
-</code></pre>
-
+</code></pre></div>
 <p>除 value 和 this 外，引用传递。计算得到 total 的值。只能抓取闭包中的非静态函数，lambda 和创建它的时候具有相同的存取权限,不管是否 protected/private 成员。</p>
 
 <p>一旦抓取到了，不管是隐式的还是显式(的调用)，闭包中类的成员范围是可测的(If this is captured, either explicitly or implicitly, then the scope of the enclosed class members is also tested.)。使用成员的时候不再需要显式的 <code>this-&gt;</code>语法。</p>
@@ -113,14 +99,11 @@ std::for_each(begin(some_list), end(some_list), [&amp;, value, this](int x) {
 <p>如果闭包中引用的局部变量，它创建的更内层块引用之后调用，行为是未定义的。(If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is undefined.)</p>
 
 <p>lambda 函数是实现依赖于类型的函数对象(function object)；类型的名字只有编译器可用。如果用户向把 lambda 函数作为参数来用的话，类型必须是一个模板类型，或者他们必须创建一个 <code>std::function</code> 或者一个相似的对象去抓取 lambda 值。 auto 关键可以用来存储 lambda 函数。</p>
-
-<pre><code>auto my_lambda_func = [&amp;](int x) { /*...*/ };
+<div class="highlight"><pre><code class="text language-text" data-lang="text">auto my_lambda_func = [&amp;](int x) { /*...*/ };
 auto my_onheap_lambda_func = new auto([=](int x) { /*...*/ });
-</code></pre>
-
+</code></pre></div>
 <p>下面的例子存储匿名函数在变量、vectors，和 arrays 中，然后把他们的名字当参数传递使用：</p>
-
-<pre><code>#include&lt;functional&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#include&lt;functional&gt;
 #include&lt;vector&gt;
 #include&lt;iostream&gt;
 double eval(std::function&lt;double(double)&gt; f, double x = 2.0){return f(x);}
@@ -130,31 +113,27 @@ int main(){
    decltype(f0)                  fa[3] = {f0,f1,[](double x){return x*x;}};
    std::vector&lt;decltype(f0)&gt;     fv    = {f0,f1};
    fv.push_back                  ([](double x){return x*x;});
-   for(int i=0;i&lt;fv.size();i++)  std::cout &lt;&lt; fv[i](2.0) &lt;&lt; "\n";
-   for(int i=0;i&lt;3;i++)          std::cout &lt;&lt; fa[i](2.0) &lt;&lt; "\n";
-   for(auto &amp;f : fv)             std::cout &lt;&lt; f(2.0) &lt;&lt; "\n";
-   for(auto &amp;f : fa)             std::cout &lt;&lt; f(2.0) &lt;&lt; "\n";
-   std::cout &lt;&lt; eval(f0) &lt;&lt; "\n";
-   std::cout &lt;&lt; eval(f1) &lt;&lt; "\n";
-   std::cout &lt;&lt; eval([](double x){return x*x;}) &lt;&lt; "\n";
+   for(int i=0;i&lt;fv.size();i++)  std::cout &lt;&lt; fv[i](2.0) &lt;&lt; &quot;\n&quot;;
+   for(int i=0;i&lt;3;i++)          std::cout &lt;&lt; fa[i](2.0) &lt;&lt; &quot;\n&quot;;
+   for(auto &amp;f : fv)             std::cout &lt;&lt; f(2.0) &lt;&lt; &quot;\n&quot;;
+   for(auto &amp;f : fa)             std::cout &lt;&lt; f(2.0) &lt;&lt; &quot;\n&quot;;
+   std::cout &lt;&lt; eval(f0) &lt;&lt; &quot;\n&quot;;
+   std::cout &lt;&lt; eval(f1) &lt;&lt; &quot;\n&quot;;
+   std::cout &lt;&lt; eval([](double x){return x*x;}) &lt;&lt; &quot;\n&quot;;
    return 0;
 }
-</code></pre>
-
+</code></pre></div>
 <p>lambda 如果 <code>[]</code> 为空的话，可以隐式转换成一个函数指针和对应的函数指针相同，所以下面是合法的：</p>
-
-<pre><code>auto a_lambda_func = [](int x) { /*...*/ };
+<div class="highlight"><pre><code class="text language-text" data-lang="text">auto a_lambda_func = [](int x) { /*...*/ };
 void(*func_ptr)(int) = a_lambda_func;
 func_ptr(4); //calls the lambda.
-</code></pre>
-
-<h2>参考资料</h2>
+</code></pre></div>
+<h2 id="toc_0">参考资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Anonymous_function#C.2B.2B">匿名对象 C++</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Closure_(computer_science#Function_objects_.28C.2B.2B.29">Function objects (C++)</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -175,7 +154,7 @@ func_ptr(4); //calls the lambda.
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

@@ -1,6 +1,7 @@
 
 http://sib9.github.io/index.html
 http://sib9.github.io/sitemap.txt
+http://sib9.github.io/404.html
 http://sib9.github.io/rss.xml
 http://sib9.github.io/pages.html
 http://sib9.github.io/categories.html

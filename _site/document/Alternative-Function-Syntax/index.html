@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -55,45 +55,36 @@
   <p>译自 <a href="https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax">Alternative function syntax</a></p>
 
 <p>标准 C 函数声明语法对于 C 语言的特性来说是非常完美的。C++ 是从 C 语言扩展来而的，它保持了 C 的基本语言并且进行了一些必需的扩展。然后，随着 C++ 的语言复杂化，它有了很多的局限。特别是在模板函数的声明。下面的例子在 C++03 中是不允许的：</p>
-
-<pre><code>template &lt;class Lhs, class Rhs&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">template &lt;class Lhs, class Rhs&gt;
 Ret adding_func(const Lhs &amp; lhs, const Rhs &amp; rhs) { return lhs + rhs; } // Ret must be the type of lhs+rhs
-</code></pre>
-
+</code></pre></div>
 <p>因为 Ret 的类型是由 lhs 和 rhs 共同决定的(比如 lhs 是 char , rhs 是 int，返回的应该是个 int)，尽管 C++11 有了 <code>decltype</code> 可以进行类型推导，但是下面的使用也是不可以的：</p>
-
-<pre><code>template &lt;class Lhs, class Rhs&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">template &lt;class Lhs, class Rhs&gt;
 decltype(lsh+rhs) adding_func(const Lhs &amp; lhs, const Rhs &amp; rhs) { return lhs + rhs; } // Not legal C++11
-</code></pre>
-
+</code></pre></div>
 <p>不合法的原因是 lhs 和 rhs 在函数定义之前出现了，知道编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。</p>
 
 <p>为了解决这个问题，C++11 引入了一种新的函数声明语法，即<code>尾部返回值(trailing-return-type)</code>:</p>
-
-<pre><code>template &lt;class Lhs, class Rhs&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">template &lt;class Lhs, class Rhs&gt;
 auto adding_func(const Lhs &amp; lhs, const Rhs &amp; rhs) -&gt; decltype(lhs+rhs) { return lhs + rhs; }
-</code></pre>
-
+</code></pre></div>
 <p>这种语法可以应用到很多普通函数的声明和定义:</p>
-
-<pre><code>struct SomeStruct  {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct SomeStruct  {
     auto func_name(int x, int y) -&gt; int;
 };
 
 auto SomeStruct::func_name(int x, int y) -&gt; int {
     return x + y;
 }
-</code></pre>
-
+</code></pre></div>
 <p>这里的 <code>auto</code> 关键字含义和前面所说的自动类型推导含义是不一样的。</p>
 
-<h2>扩展资料</h2>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax">Alternative function syntax</a></li>
 <li><a href="http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html">Improved Type Inference in C++11: auto, decltype, and the new function declaration syntax</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -112,7 +103,7 @@ auto SomeStruct::func_name(int x, int y) -&gt; int {
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

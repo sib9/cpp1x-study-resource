@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -55,25 +55,21 @@
   <p>C++03 提供了方法去测试断言：使用宏和预处理指令 <code>#error</code> 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。</p>
 
 <p>新功能引入了一种新的测试断言方法，在编译期确定。使用新的关键字 <code>static_assert</code>。如下声明：</p>
-
-<pre><code>static_assert (constant-expression, error-message);
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">static_assert (constant-expression, error-message);
+</code></pre></div>
 <p>eg:</p>
-
-<pre><code>static_assert((PI &gt; 3.14) &amp;&amp; (PI &lt; 3.15), "PI is inaccurate");
+<div class="highlight"><pre><code class="text language-text" data-lang="text">static_assert((PI &gt; 3.14) &amp;&amp; (PI &lt; 3.15), &quot;PI is inaccurate&quot;);
 
 template &lt;class T&gt;
 struct Check {
-    static_assert(sizeof(int) &lt;= sizeof(T), "T is too big enough!");
+    static_assert(sizeof(int) &lt;= sizeof(T), &quot;T is too big enough!&quot;);
 };
 
 template &lt;class Integral&gt;
 Integral foo(Integral x, Integral y) {
-    static_assert(std::is_integral&lt;Integral&gt;::value, "foo() parameter must be an integral type");
+    static_assert(std::is_integral&lt;Integral&gt;::value, &quot;foo() parameter must be an integral type&quot;);
 }
-</code></pre>
-
+</code></pre></div>
 <p>当常量表达式为 <code>false</code> 时，编译器会生成一条错误信息。第一个例子有点像预处理宏<code>#error</code>，尽管与处理器只支持整数类型。对于而言，第二个例子在模板类 <code>Check</code> 实例化的时候进行检查。</p>
 
 <p>静态断言在模版之外也同样很有用。比如特殊算法可能依赖于 <code>long long int</code>，要比 <code>int</code> 大很多。</p>
@@ -97,7 +93,7 @@ Integral foo(Integral x, Integral y) {
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

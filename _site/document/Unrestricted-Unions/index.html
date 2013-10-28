@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -61,10 +61,8 @@
 <li>如果这样的话，编译器不再提供隐式的构造函数，需要自己去定义.</li>
 </ul>
 
-
 <p>下面是一个简单的 C++11 unions 定义：</p>
-
-<pre><code>#include &lt;new&gt; // Required for placement 'new'
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#include &lt;new&gt; // Required for placement &#39;new&#39;
 
 struct Point {
     Point() {}
@@ -80,15 +78,13 @@ union U {
         new (&amp;p) Point(); // Due to the Point member, a constructor definition is now required.
     }
 };
-</code></pre>
-
-<h2>扩展资料</h2>
+</code></pre></div>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Unrestricted unions</a></li>
 <li><a href="http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c">What is a non-trivial constructor in C++?</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -107,7 +103,7 @@ union U {
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

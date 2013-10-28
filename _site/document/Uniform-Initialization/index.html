@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -57,25 +57,21 @@
 <li>暂无测试代码</li>
 </ol>
 
-
 <p>C++03 的类型初始化有多种方式，因此也引来很多问题，如果错用的时候，错误的调试信息会非常模糊。</p>
 
 <p>比如以下初始化变量的方式：</p>
-
-<pre><code>    std::string a[] = {"Hello", "world"}; // 正确：初始化数组变量
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    std::string a[] = {&quot;Hello&quot;, &quot;world&quot;}; // 正确：初始化数组变量
     // 错误：初始化列表引用在非聚合的向量上
-    std::vector&lt;std::string&gt; v = {"hello", "world"};
+    std::vector&lt;std::string&gt; v = {&quot;hello&quot;, &quot;world&quot;};
     void f(string a[]);
-    f ({"foo", "bar"}); // 语法错误，把一个块(block)作为了参数
-    int a = 2;  // "赋值风格"的变化
+    f ({&quot;foo&quot;, &quot;bar&quot;}); // 语法错误，把一个块(block)作为了参数
+    int a = 2;  // &quot;赋值风格&quot;的变化
     int aa[] = {2, 3}; // 用初始化列表进行的赋值风格的初始化
     complex z(1, 2); // 函数风格的初始化
-    x = Ptr(y);      // "函数风格" 转换/赋值/构造操作
-</code></pre>
-
+    x = Ptr(y);      // &quot;函数风格&quot; 转换/赋值/构造操作
+</code></pre></div>
 <p>所谓统一的初始化方式，就是把之前 C++ 风格的各种初始化对象方式，统一为一种方式(语法):</p>
-
-<pre><code>    X x1 = X{1, 2};
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    X x1 = X{1, 2};
     X x2 = {1, 2};
     X x3{1, 2};
     X * p = new X{1, 2};
@@ -88,23 +84,19 @@
         int a[3];
         S(int x, int y, int z) : a{x, y, z} {/* ... */}
     }
-</code></pre>
-
-<p>重点在于： X{a}在所有的可执行代码中都创建了同一个相同的值，所以使用"{}"进行的初始化，在合法的使用的时候，在任何地方都产生相同的结果。例如：</p>
-
-<pre><code>X x{a};
+</code></pre></div>
+<p>重点在于： X{a}在所有的可执行代码中都创建了同一个相同的值，所以使用&quot;{}&quot;进行的初始化，在合法的使用的时候，在任何地方都产生相同的结果。例如：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">X x{a};
 X* p = new X{a};
 z = X{a};
 f({a});
 return {a};
-</code></pre>
-
-<h2>扩展资料</h2>
+</code></pre></div>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html">C++11 FAQ中文版：统一初始化的语法和语义</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -125,7 +117,7 @@ return {a};
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

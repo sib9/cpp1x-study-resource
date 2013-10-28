@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -57,37 +57,29 @@
 <p>C++03 的枚举本质上就是整型，它们可以和整型，和其它的枚举类型做比较。实际上，你并不希望不同枚举之间进行比较，就好像你不希望把钉子的种类和牙刷的种类做比较一样。</p>
 
 <p>旧式枚举的另外一个限制是枚举的值是没有作用域的，换句话说，你不能两个枚举共享同一个名字，比如：</p>
-
-<pre><code>enum Color {RED, GREEN, BLUE};
+<div class="highlight"><pre><code class="text language-text" data-lang="text">enum Color {RED, GREEN, BLUE};
 enum Feeling {EXCITED, MOODY, BLUE}; // error: redeclaration of ‘BLUE’
-</code></pre>
-
+</code></pre></div>
 <p>C++11 提供了强类型枚举——枚举类(enum classes)，如下方式声明：</p>
 
 <p><code>class</code>意味着每一个枚举类型实际上都是不一样的，不能和其它类型做比较。强类型枚举，枚举类有很好的作用域。每个枚举值作用域被限制在枚举类中。这意味着，想要存取枚举值，你必须要这么用：</p>
-
-<pre><code>Color color = Color::GREEN;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Color color = Color::GREEN;
 if (Color::RED == color) {
     // the color is red;
 }
-</code></pre>
-
+</code></pre></div>
 <p>如果你想用旧式的枚举，仍旧是可用的。很大程度上，是可以和既有的代码相兼容的。教你一招，现在你可以直接在值前面加上枚举名：Color::RED.但是这种情况下，不能解决命名冲突的问题，它只是更清晰了一些。</p>
 
 <p>枚举类比旧式枚举类型另外一个优势是，你可以使用前向声明一个强枚举类型，意味着你可以这样写代码：</p>
-
-<pre><code>enum class Mood;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">enum class Mood;
 void assessMode (Mood m);
 enum class {EXCITED, MOODY, BLUE};
-</code></pre>
-
+</code></pre></div>
 <p>Why would this be useful? Forward declarations are often about the physical layout of code on disk into different files or to provide opaque objects as part of an API. In the first case, where you care about the physical disk layout, using a forward declaration allows you to declare an enum type in the header file while putting specific values into the cpp file. This lets you change the list of possible enum values quite frequently without forcing all dependent files to recompile. In the second case, an enum class can be exposed as a type-safe but otherwise opaque value returned from one API function to be passed into another API function. The code using the API need not know the possible values the type can take on. Since the compiler still knows about the type, it can enforce that variables declared to work with that type are not confused with variables working with another type. (译者注：这段话不太理解，所有没有翻译，欢迎补充翻译。)</p>
 
 <p>枚举类的最后一个好处是你可以你的枚举的大小，你可以使用任何签名的或者未签名的整型类。默认是 int ，但是你也可以使用 char, unsigned long 等等。这样可以确保跨平台编译器的兼容性。</p>
-
-<pre><code>enum class Colors : char { RED = 1, GREEN = 2, BLUE = 3 };
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">enum class Colors : char { RED = 1, GREEN = 2, BLUE = 3 };
+</code></pre></div>
 <p>但是在在 C++11 中，在指定类型大小上，我们可以用更好的方式，使用 <code>cstdint</code>。</p>
 
 <p>C++ 在类型方面存在一个问题，比如说，你想要一个 32位 的整型，但是 int 可能在不同体系架构下有不同的大小。在 C++11 中，C99 的头文件 <code>stdint.h</code> 包含在 <code>cstdint</code> 中。<code>cstdint</code> 头文件包含了诸如 <code>std::int8_t</code>, <code>std::int32_t</code> 和 <code>int64_t</code>(对应的 unsigned 版本是从 <code>std::uint8_t</code> 开始的)的类型。</p>
@@ -96,13 +88,12 @@ enum class {EXCITED, MOODY, BLUE};
 
 <p>enum class Colors: std::int8_t { RED = 1, GREEN = 2, BLUE = 3};</p>
 
-<h2>扩展资料</h2>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html">Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint</a></li>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations">Strongly typed enumerations</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -123,7 +114,7 @@ enum class {EXCITED, MOODY, BLUE};
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

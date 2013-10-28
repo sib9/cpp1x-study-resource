@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -60,44 +60,35 @@
 
 <p>在这种情况下，如果类中定义了任何一种构造函数，编译器不再生成默认的构造函数。很多情况下，这样做是很有用的。但是，如果一个类既在指定了构造函数的同时，编译器又可以生成一个默认的构造函数就更好了。
 C++ 允许显式的使用或者删除指定的成员函数。例如，下面声明了使用中的默认构造函数：</p>
-
-<pre><code>struct SomeType {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct SomeType {
     SomeType() = default;
     SomeType(OtherType value);
 };
-</code></pre>
-
+</code></pre></div>
 <p>下面的类是不可复制的：</p>
-
-<pre><code>struct NonCopyable {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct NonCopyable {
     NonCopyable() = default;
     NonCopyable(const NonCopyable&amp;) = delete;
     NonCopyable &amp; operator=(const NonCopyable&amp;) = delete;
 };
-</code></pre>
-
+</code></pre></div>
 <p><code>= delete</code> 表示这个函数的不可调用的，也可以用这种方法来禁止函数传入特定的参数：</p>
-
-<pre><code>struct NoInt {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct NoInt {
     void f(double i);
     void f(int) = delete;
 };
-</code></pre>
-
+</code></pre></div>
 <p>编译器不允许 <code>NoInt::f</code> 传入一个 <code>int</code> 类型的参数，而不是悄悄的把 <code>int</code> 转成 <code>double</code>。下面这种方法可以禁掉除 <code>double</code> 之外的所有参数：</p>
-
-<pre><code>struct OnlyDouble {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct OnlyDouble {
     void f(double d);
     template&lt;class T&gt; void f(T) = delete;
 };
-</code></pre>
-
-<h2>扩展资料</h2>
+</code></pre></div>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions">Explicitly defaulted and deleted special member functions</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -118,7 +109,7 @@ C++ 允许显式的使用或者删除指定的成员函数。例如，下面声�
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

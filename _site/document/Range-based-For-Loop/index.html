@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -55,8 +55,7 @@
   <p>译自 <a href="https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop">Range-based for loop</a></p>
 
 <p>C++11 扩展一种新的遍历列表的 for 循环语法(range-base for，基于范围的 for 循环)，使得遍历列表非常简单了。可以遍历 C 式的数组、初始化列表(initializer lists)，和定义了 begin()/end() 函数(返回迭代器)的类型。所有的标准库容器都可以使用 range-base for 来遍历：</p>
-
-<pre><code>std::vector&lt;int&gt; v;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">std::vector&lt;int&gt; v;
 v.push_back(1);
 v.push_back(2);
 v.push_back(3);
@@ -65,12 +64,12 @@ v.push_back(5);
 v.push_back(6);
 
 for (int i : v) {
-    std::cout &lt;&lt; i &lt;&lt; " " ;
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot; ;
 }
 std::cout &lt;&lt; std::endl;
 
 for (auto ite : v) {
-    std::cout &lt;&lt; ite &lt;&lt; " ";
+    std::cout &lt;&lt; ite &lt;&lt; &quot; &quot;;
 }
 std::cout &lt;&lt; std::endl;
 
@@ -81,18 +80,16 @@ for (int&amp; i : v) {
 
 
 for (auto i : v) {
-    std::cout &lt;&lt; i &lt;&lt; " ";
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;
 }
 std::cout &lt;&lt; std::endl;
-</code></pre>
-
-<h2>扩展资料</h2>
+</code></pre></div>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="http://www.cprogramming.com/c++11/c++11-ranged-for-loop.html">C++11 range-based for loops</a> 推荐阅读</li>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop">Range-based for loop</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -113,7 +110,7 @@ std::cout &lt;&lt; std::endl;
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">

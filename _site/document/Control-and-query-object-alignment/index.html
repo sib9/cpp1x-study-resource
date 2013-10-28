@@ -24,7 +24,7 @@
 </head>
 <body id="">
 <div id="site">
-  
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   <div id="header">
     <h1>
     	<a href="/" title="CPP1x-STUDY-RESOURCE">CPP1x-STUDY-RESOURCE</a>
@@ -56,60 +56,50 @@
 <li>内容为个人理解，不保证正确。</li>
 </ul>
 
-
 <p>C++11 可以显示的控制和查询内存布局方式。</p>
 
 <p>通过使用 <code>alignof</code> 可以得到对象的内存布局字节基数，比如：</p>
-
-<pre><code>struct char_align {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct char_align {
     char c1;
     char c2;
 };
-</code></pre>
-
+</code></pre></div>
 <p><code>alignof(char_align)</code> 得到的值为 <code>1</code>.</p>
-
-<pre><code>struct short_int_align {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct short_int_align {
     short int si1;
     short int si2;
 };
-</code></pre>
-
+</code></pre></div>
 <p><code>alignof(short_int_align)</code> 得到的值 <code>2</code> .</p>
-
-<pre><code>struct test_align {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct test_align {
     int i;
     char c;
     float f;
     double d;
     long int li;
 };
-</code></pre>
-
+</code></pre></div>
 <p><code>alignof(short_int_align)</code> 得到的值是 <code>4</code>.</p>
 
 <p>如果之前了解过 C/C++ 字节对齐的朋友应该一点就明白了，我这里不解释了，不明白的话，建议去看一下字节对齐这个技术。</p>
 
 <p><code>alignas</code> 与之相反，可以显式的指定字节对其方式，指定的参数必须是 2 的倍数。eg:</p>
-
-<pre><code>struct alignas(8) test_alignas {
+<div class="highlight"><pre><code class="text language-text" data-lang="text">struct alignas(8) test_alignas {
     int i;
     char c;
     float f;
     double d;
     long int li;
 };
-</code></pre>
-
+</code></pre></div>
 <p>这么做指定了 test_alignas 按照 8 字节对齐。再使用 <code>alignof(test_alignas)</code> 得到的值就是 8 .</p>
 
-<h2>扩展资料</h2>
+<h2 id="toc_0">扩展资料</h2>
 
 <ul>
 <li><a href="http://stackoverflow.com/questions/1647895/what-does-static-assert-do-and-what-would-you-use-it-for">What does static_assert do, and what would you use it for?</a></li>
 <li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment">Control and query object alignment</a></li>
 </ul>
-
 
 
   <div class="prev-next">
@@ -130,7 +120,7 @@
   <div id="footer">
   	<address>
   		<span class="copyright">
-  			Content by <a href="/info/site.html">Sib9</a>. Design by 
+  			Content by <a href="http://sib9.us">Sib9</a>. Design by 
   			<a href="http://mark.reid.name/">Mark Reid</a>
   		</span>
   		<span class="engine">
