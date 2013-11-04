@@ -58,9 +58,9 @@
 
 <p>字符类型的定义明确的表达成它至少需要存储 UTF-8 的 8-bit 编码，足够包含任何编译器基本运算的字符集。之前在 C++ 自身标准在中仅仅为字母使用，C 标准保证至少 8 位。</p>
 
-<p>C++11 支持三种 Unicode 编码，即： UTF-8， UTF-16， UTF-32。除了之前的 <code>char</code> 类型外，C++11 添加了两种新的字符类型：<code>char_16_t</code>和<code>char32_t</code>，专门用来存储<code>UTF-16</code>和<code>UTF-32</code>。</p>
+<p>C++11支持三种Unicode编码，即：UTF-8，UTF-16，UTF-32。除了之前的 <code>char</code> 类型外，C++11 添加了两种新的字符类型：<code>char_16_t</code>和<code>char32_t</code>，专门用来存储<code>UTF-16</code>和<code>UTF-32</code>。</p>
 
-<p>先面展示了怎么为每一种编码创建字符串字面量：</p>
+<p>下面展示了怎么为每一种编码创建字符串字面量：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">u8&quot;I&#39;am a UTF-8 string.&quot;
 u&quot;This&#39;s a UTF-16 string.&quot;
 U&quot;This&#39;s a UTF-32 string.&quot;

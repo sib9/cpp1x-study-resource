@@ -10,6 +10,8 @@ http://sib9.github.io/tags.html
 http://sib9.github.io/atom.xml
 http://sib9.github.io/archive.html
 
+http://sib9.github.io/document/type-alias
+http://sib9.github.io/document/constexp-and-const-expression
 http://sib9.github.io/document/Unrestricted-Unions
 http://sib9.github.io/document/Uniform-Initialization
 http://sib9.github.io/document/Type-Inference

@@ -4,13 +4,90 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2013-10-28T23:26:08+08:00</updated>
+ <updated>2013-11-04T23:13:14+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
    <email>us@sib9.us</email>
  </author>
 
+ 
+ <entry>
+   <title>类型别名</title>
+   <link href="http://sib9.github.io/document/type-alias"/>
+   <updated>2013-11-04T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/document/type-alias</id>
+   <content type="html">&lt;p&gt;有两种方法可用于定义类型别名，第一种方法是使用&lt;code&gt;typedef&lt;/code&gt;关键字，这个C++03就已经支持了。第二种方式是使用C++11新的声明方式&lt;code&gt;using&lt;/code&gt;关键字。方法很简单，比如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;using MyUint = unsigned int;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;那么 MyUint 和 unsigned int 等价了。&lt;/p&gt;
+
+&lt;p&gt;随即，你可能想到了一个问题：&lt;code&gt;typedef&lt;/code&gt;和&lt;code&gt;using&lt;/code&gt;的区别在哪里?&lt;/p&gt;
+
+&lt;p&gt;我找了一个sof的帖子:&lt;a href=&quot;http://stackoverflow.com/questions/18287151/difference-between-typedef-and-c11-type-alia&quot;&gt;Difference between typedef and C++11 type alias [duplicate]&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There is absolutely no difference between both.&lt;/p&gt;
+
+&lt;p&gt;If you take a look at the standard :&lt;/p&gt;
+
+&lt;p&gt;7.1.3 The typedef speciﬁer [dcl.typedef ]&lt;/p&gt;
+
+&lt;p&gt;A typedef-name can also be introduced by an alias-declaration. The identifier following the using keyword becomes a typedef-name. It has the same semantics as if it were introduced by the typedef specifier. In particular, it does not define a new type and it shall not appear in the type-id.&lt;/p&gt;
+
+&lt;p&gt;7.3.3 The using declaration [namespace.udecl]&lt;/p&gt;
+
+&lt;p&gt;If a using-declaration uses the keyword typename and specifies a dependent name (14.6.2), the name introduced by the using-declaration is treated as a typedef-name.&lt;/p&gt;
+
+&lt;p&gt;However from this page : &lt;a href=&quot;http://en.cppreference.com/w/cpp/language/type_alias&quot;&gt;http://en.cppreference.com/w/cpp/language/type_alias&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It is said :&lt;/p&gt;
+
+&lt;p&gt;Type aliases are similar to typedefs, however, have the advantage of working with templates.&lt;/p&gt;
+
+&lt;p&gt;It is seems that this :&lt;/p&gt;
+
+&lt;p&gt;// template type alias
+template&lt;class T&gt; using ptr = T*;
+// the name &amp;#39;ptr&lt;T&gt;&amp;#39; is now an alias for pointer to T
+ptr&lt;int&gt; x;
+Is only possible with the using directive.&lt;/p&gt;
+
+&lt;p&gt;And do not forget that this is a C++11 feature. Some compilers do not support it yet.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>constexp和常量表达式</title>
+   <link href="http://sib9.github.io/document/constexp-and-const-expression"/>
+   <updated>2013-11-04T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/document/constexp-and-const-expression</id>
+   <content type="html">&lt;p&gt;常量表达式(const expression) 是指值不会改变并且在编译过程就能得到计算结果的表达式。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;constexpr 变量&lt;/h2&gt;
+
+&lt;p&gt;C++11 新标准规定，允许将变量声明为constexpr类型以便由编译器来验证变量是否是一个常量表达式。声明为constexpr 的变量一定是一个常量，而且必须用常量表达式初始化。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;constexpr int mf = 20; // 20 是常量表达式
+constexpr int limit = mf + 1; // mf + 1 是常量表达式
+constexpr sz = size();  // 只有当size是一个constexpr函数时
+                        // 才是一条正确的语句
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;toc_1&quot;&gt;指针和 constexpr&lt;/h2&gt;
+
+&lt;p&gt;在 constexpr 声明中如果定义了一个指针，constexpr 仅对指针有效，与指针所指的对象无关。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;const int *p = nullptr;    // p 是一个指向整行常量的指针
+constexpr int *q = nullptr; // q 是一个指向整数的常量指针
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;p 是可变的，p指向的对象是不可变的。q是不可变的，q指向的对象是可变的。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_2&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;C++ Primer(第5版)中文版 P59&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>无限制的 Unions</title>
@@ -1242,9 +1319,9 @@ foo(nullptr);  // call foo(char *), not foo(int);
 
 &lt;p&gt;字符类型的定义明确的表达成它至少需要存储 UTF-8 的 8-bit 编码，足够包含任何编译器基本运算的字符集。之前在 C++ 自身标准在中仅仅为字母使用，C 标准保证至少 8 位。&lt;/p&gt;
 
-&lt;p&gt;C++11 支持三种 Unicode 编码，即： UTF-8， UTF-16， UTF-32。除了之前的 &lt;code&gt;char&lt;/code&gt; 类型外，C++11 添加了两种新的字符类型：&lt;code&gt;char_16_t&lt;/code&gt;和&lt;code&gt;char32_t&lt;/code&gt;，专门用来存储&lt;code&gt;UTF-16&lt;/code&gt;和&lt;code&gt;UTF-32&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;C++11支持三种Unicode编码，即：UTF-8，UTF-16，UTF-32。除了之前的 &lt;code&gt;char&lt;/code&gt; 类型外，C++11 添加了两种新的字符类型：&lt;code&gt;char_16_t&lt;/code&gt;和&lt;code&gt;char32_t&lt;/code&gt;，专门用来存储&lt;code&gt;UTF-16&lt;/code&gt;和&lt;code&gt;UTF-32&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;先面展示了怎么为每一种编码创建字符串字面量：&lt;/p&gt;
+&lt;p&gt;下面展示了怎么为每一种编码创建字符串字面量：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;u8&amp;quot;I&amp;#39;am a UTF-8 string.&amp;quot;
 u&amp;quot;This&amp;#39;s a UTF-16 string.&amp;quot;
 U&amp;quot;This&amp;#39;s a UTF-32 string.&amp;quot;

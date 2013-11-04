@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>无限制的 Unions &larr; </title>
+   <title>constexp和常量表达式 &larr; </title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -38,7 +38,7 @@
   
 <div id="page">
 	
-  <h1 class="emphnext">无限制的 Unions</h1>
+  <h1 class="emphnext">constexp和常量表达式</h1>
   <ul class="tag_box inline">
   
   
@@ -52,47 +52,37 @@
 
   </ul>
 
-  <p>译自：<a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Unrestricted unions</a></p>
+  <p>常量表达式(const expression) 是指值不会改变并且在编译过程就能得到计算结果的表达式。</p>
 
-<p>在 C++03 中 union 的成员不能是一个对象类型。例如， unions 不能包含任何定义了一个 non-trivial 的构造函数。C++11 解除了一些限制：</p>
+<h2 id="toc_0">constexpr 变量</h2>
 
-<ul>
-<li>Unions 可以包含有 non-trivial 对象的成员；</li>
-<li>如果这样的话，编译器不再提供隐式的构造函数，需要自己去定义.</li>
-</ul>
-
-<p>下面是一个简单的 C++11 unions 定义：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">#include &lt;new&gt; // Required for placement &#39;new&#39;
-
-struct Point {
-    Point() {}
-    Point(int x, int y) : x_(x), y_(y) {}
-    int x_, y_;
-};
-
-union U {
-    int z;
-    double w;
-    Point p;  // Illegal in C++03; legal in C++11
-    U() {
-        new (&amp;p) Point(); // Due to the Point member, a constructor definition is now required.
-    }
-};
+<p>C++11 新标准规定，允许将变量声明为constexpr类型以便由编译器来验证变量是否是一个常量表达式。声明为constexpr 的变量一定是一个常量，而且必须用常量表达式初始化。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">constexpr int mf = 20; // 20 是常量表达式
+constexpr int limit = mf + 1; // mf + 1 是常量表达式
+constexpr sz = size();  // 只有当size是一个constexpr函数时
+                        // 才是一条正确的语句
 </code></pre></div>
-<h2 id="toc_0">扩展资料</h2>
+<h2 id="toc_1">指针和 constexpr</h2>
+
+<p>在 constexpr 声明中如果定义了一个指针，constexpr 仅对指针有效，与指针所指的对象无关。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">const int *p = nullptr;    // p 是一个指向整行常量的指针
+constexpr int *q = nullptr; // q 是一个指向整数的常量指针
+</code></pre></div>
+<p>p 是可变的，p指向的对象是不可变的。q是不可变的，q指向的对象是可变的。</p>
+
+<h2 id="toc_2">参考资料</h2>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket">Unrestricted unions</a></li>
-<li><a href="http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c">What is a non-trivial constructor in C++?</a></li>
+<li>C++ Primer(第5版)中文版 P59</li>
 </ul>
 
 
   <div class="prev-next">
   
-    <a href="/document/constexp-and-const-expression" class="next" title="constexp和常量表达式"> constexp和常量表达式 &rarr;</a>
+    <a href="/document/type-alias" class="next" title="类型别名"> 类型别名 &rarr;</a>
   
   
-    <a href="/document/Uniform-Initialization" class="prev" title="统一的初始化方式">&larr; 统一的初始化方式</a>
+    <a href="/document/Unrestricted-Unions" class="prev" title="无限制的 Unions">&larr; 无限制的 Unions</a>
   
   </div>
   
