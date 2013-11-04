@@ -5,8 +5,8 @@
         <description>CPP1x-STUDY-RESOURCE - Sib9</description>
         <link>http://sib9.github.io</link>
         <link>http://sib9.github.io</link>
-        <lastBuildDate>2013-11-04T23:13:14+08:00</lastBuildDate>
-        <pubDate>2013-11-04T23:13:14+08:00</pubDate>
+        <lastBuildDate>2013-11-04T23:21:42+08:00</lastBuildDate>
+        <pubDate>2013-11-04T23:21:42+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -50,6 +50,8 @@ Is only possible with the using directive.&lt;/p&gt;
 
 &lt;p&gt;And do not forget that this is a C++11 feature. Some compilers do not support it yet.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;我想，上面的这段回复足够回答你的问题了。&lt;/p&gt;
 </description>
                 <link>http://sib9.github.io/document/type-alias</link>
                 <guid>http://sib9.github.io/document/type-alias</guid>
