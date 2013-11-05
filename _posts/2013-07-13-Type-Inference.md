@@ -5,8 +5,6 @@ category: "Document"
 tags: []
 ---
 
-译自 ［Type inference](https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)，为了更好的理解，没有逐字翻译。
-
 
 在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。
 
@@ -57,7 +55,8 @@ C++11用两种方式来解决这种问题。第一种是使用 auto 关键字来
 
 个人感觉，站在这个角度来说，decltype 比 auto 功能更强大一些; 反过来，auto 比 decltype 更精巧。
 
+`decltype((variable))`的结果永远是引用，而`decltype(variable)`结果只有当 variable 本身就是一个引用时才是引用。
 
-## 扩展资料 ##
+## 参考资料 ##
 
 + [Type inference](https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)
