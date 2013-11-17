@@ -374,6 +374,7 @@ pre:hover {
         overflow: auto;
 }
 code {
+    font-family: consolas;
 	font-size: 1em;
 	background-color: #f7f7ff;
 	line-height: 1.4em;
