@@ -5,8 +5,8 @@
         <description>CPP1x-STUDY-RESOURCE - Sib9</description>
         <link>http://sib9.github.io</link>
         <link>http://sib9.github.io</link>
-        <lastBuildDate>2013-11-04T23:21:42+08:00</lastBuildDate>
-        <pubDate>2013-11-04T23:21:42+08:00</pubDate>
+        <lastBuildDate>2013-11-19T22:19:36+08:00</lastBuildDate>
+        <pubDate>2013-11-19T22:19:36+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -53,8 +53,8 @@ Is only possible with the using directive.&lt;/p&gt;
 
 &lt;p&gt;我想，上面的这段回复足够回答你的问题了。&lt;/p&gt;
 </description>
-                <link>http://sib9.github.io/document/type-alias</link>
-                <guid>http://sib9.github.io/document/type-alias</guid>
+                <link>http://sib9.github.io/type-alias.html</link>
+                <guid>http://sib9.github.io/type-alias</guid>
                 <pubDate>2013-11-04T00:00:00+08:00</pubDate>
         </item>
 
@@ -84,8 +84,8 @@ constexpr int *q = nullptr; // q 是一个指向整数的常量指针
 &lt;li&gt;C++ Primer(第5版)中文版 P59&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/constexp-and-const-expression</link>
-                <guid>http://sib9.github.io/document/constexp-and-const-expression</guid>
+                <link>http://sib9.github.io/constexp-and-const-expression.html</link>
+                <guid>http://sib9.github.io/constexp-and-const-expression</guid>
                 <pubDate>2013-11-04T00:00:00+08:00</pubDate>
         </item>
 
@@ -125,8 +125,8 @@ union U {
 &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c&quot;&gt;What is a non-trivial constructor in C++?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Unrestricted-Unions</link>
-                <guid>http://sib9.github.io/document/Unrestricted-Unions</guid>
+                <link>http://sib9.github.io/Unrestricted-Unions.html</link>
+                <guid>http://sib9.github.io/Unrestricted-Unions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -178,16 +178,14 @@ return {a};
 &lt;li&gt;&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Uniform-Initialization</link>
-                <guid>http://sib9.github.io/document/Uniform-Initialization</guid>
+                <link>http://sib9.github.io/Uniform-Initialization.html</link>
+                <guid>http://sib9.github.io/Uniform-Initialization</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
         <item>
                 <title>类型自动推导</title>
-                <description>&lt;p&gt;译自 ［Type inference](&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)%EF%BC%8C%E4%B8%BA%E4%BA%86%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E9%80%90%E5%AD%97%E7%BF%BB%E8%AF%91%E3%80%82&quot;&gt;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)，为了更好的理解，没有逐字翻译。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。&lt;/p&gt;
+                <description>&lt;p&gt;在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。&lt;/p&gt;
 
 &lt;p&gt;C++11用两种方式来解决这种问题。第一种是使用 auto 关键字来定义直接初始化的变量类型(也就是所谓的类型推导，根据初始化的值来推导类型）。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;auto some_strange_callable_type = std::bind(&amp;amp;some_function, _2, _1, some_object);
@@ -230,14 +228,16 @@ int main() {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;个人感觉，站在这个角度来说，decltype 比 auto 功能更强大一些; 反过来，auto 比 decltype 更精巧。&lt;/p&gt;
 
-&lt;h2 id=&quot;toc_0&quot;&gt;扩展资料&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;decltype((variable))&lt;/code&gt;的结果永远是引用，而&lt;code&gt;decltype(variable)&lt;/code&gt;结果只有当 variable 本身就是一个引用时才是引用。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;参考资料&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference&quot;&gt;Type inference&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Type-Inference</link>
-                <guid>http://sib9.github.io/document/Type-Inference</guid>
+                <link>http://sib9.github.io/Type-Inference.html</link>
+                <guid>http://sib9.github.io/Type-Inference</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -692,8 +692,8 @@ void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&
 &lt;li&gt;&lt;a href=&quot;http://www.highprogrammer.com/alan/rants/mutable.html&quot;&gt;C++&amp;#39;s mutable and conceptual constness&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Thread</link>
-                <guid>http://sib9.github.io/document/Thread</guid>
+                <link>http://sib9.github.io/Thread.html</link>
+                <guid>http://sib9.github.io/Thread</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -742,8 +742,8 @@ enum class {EXCITED, MOODY, BLUE};
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations&quot;&gt;Strongly typed enumerations&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Strong-Type-Enum</link>
-                <guid>http://sib9.github.io/document/Strong-Type-Enum</guid>
+                <link>http://sib9.github.io/Strong-Type-Enum.html</link>
+                <guid>http://sib9.github.io/Strong-Type-Enum</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -771,8 +771,8 @@ Integral foo(Integral x, Integral y) {
 
 &lt;p&gt;静态断言在模版之外也同样很有用。比如特殊算法可能依赖于 &lt;code&gt;long long int&lt;/code&gt;，要比 &lt;code&gt;int&lt;/code&gt; 大很多。&lt;/p&gt;
 </description>
-                <link>http://sib9.github.io/document/Static-Assert</link>
-                <guid>http://sib9.github.io/document/Static-Assert</guid>
+                <link>http://sib9.github.io/Static-Assert.html</link>
+                <guid>http://sib9.github.io/Static-Assert</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -795,8 +795,8 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Right-Angle-Bracket</link>
-                <guid>http://sib9.github.io/document/Right-Angle-Bracket</guid>
+                <link>http://sib9.github.io/Right-Angle-Bracket.html</link>
+                <guid>http://sib9.github.io/Right-Angle-Bracket</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -841,8 +841,8 @@ std::cout &amp;lt;&amp;lt; std::endl;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Range-based-For-Loop</link>
-                <guid>http://sib9.github.io/document/Range-based-For-Loop</guid>
+                <link>http://sib9.github.io/Range-based-For-Loop.html</link>
+                <guid>http://sib9.github.io/Range-based-For-Loop</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1183,8 +1183,8 @@ printAddress(x);
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/reference/typecasting/staticcast.html&quot;&gt;static_cast&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/R-value-Ref-And-Move-Construct</link>
-                <guid>http://sib9.github.io/document/R-value-Ref-And-Move-Construct</guid>
+                <link>http://sib9.github.io/R-value-Ref-And-Move-Construct.html</link>
+                <guid>http://sib9.github.io/R-value-Ref-And-Move-Construct</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1265,8 +1265,8 @@ private:
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Object-Construction-Improvement</link>
-                <guid>http://sib9.github.io/document/Object-Construction-Improvement</guid>
+                <link>http://sib9.github.io/Object-Construction-Improvement.html</link>
+                <guid>http://sib9.github.io/Object-Construction-Improvement</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1288,8 +1288,8 @@ int i = nullptr; // error
 
 foo(nullptr);  // call foo(char *), not foo(int);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-                <link>http://sib9.github.io/document/Null-Pointer-Const</link>
-                <guid>http://sib9.github.io/document/Null-Pointer-Const</guid>
+                <link>http://sib9.github.io/Null-Pointer-Const.html</link>
+                <guid>http://sib9.github.io/Null-Pointer-Const</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1303,8 +1303,8 @@ foo(nullptr);  // call foo(char *), not foo(int);
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_long_long_int&quot;&gt;Type long long int&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/NewType-long-long-int</link>
-                <guid>http://sib9.github.io/document/NewType-long-long-int</guid>
+                <link>http://sib9.github.io/NewType-long-long-int.html</link>
+                <guid>http://sib9.github.io/NewType-long-long-int</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1349,8 +1349,8 @@ UR&amp;quot;(This is a &amp;quot;raw UTF-32&amp;quot; string.)&amp;quot;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/New-String-Literals</link>
-                <guid>http://sib9.github.io/document/New-String-Literals</guid>
+                <link>http://sib9.github.io/New-String-Literals.html</link>
+                <guid>http://sib9.github.io/New-String-Literals</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1439,8 +1439,8 @@ func_ptr(4); //calls the lambda.
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_science#Function_objects_.28C.2B.2B.29&quot;&gt;Function objects (C++)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Lambda-Function-And-Expressions</link>
-                <guid>http://sib9.github.io/document/Lambda-Function-And-Expressions</guid>
+                <link>http://sib9.github.io/Lambda-Function-And-Expressions.html</link>
+                <guid>http://sib9.github.io/Lambda-Function-And-Expressions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1520,8 +1520,8 @@ int main()
 &lt;li&gt;测试Demo来自:&lt;a href=&quot;http://coolshell.cn/articles/5265.html&quot;&gt;C++11 中值得关注的极大变化(详解)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/compiler/Install-GCC4.8-Ubuntu</link>
-                <guid>http://sib9.github.io/compiler/Install-GCC4.8-Ubuntu</guid>
+                <link>http://sib9.github.io/Install-GCC4.8-Ubuntu.html</link>
+                <guid>http://sib9.github.io/Install-GCC4.8-Ubuntu</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1579,8 +1579,8 @@ private:
 &lt;li&gt;&lt;a href=&quot;http://oopscenities.net/2011/05/09/c0x-initializer-lists/&quot;&gt;C++11: Initializer lists&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Initializer-lists</link>
-                <guid>http://sib9.github.io/document/Initializer-lists</guid>
+                <link>http://sib9.github.io/Initializer-lists.html</link>
+                <guid>http://sib9.github.io/Initializer-lists</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1598,8 +1598,8 @@ private:
 
 &lt;p&gt;以上来自&lt;a href=&quot;http://zh.wikipedia.org/wiki/C%2B%2B11#.E5.A4.96.E9.83.A8.E6.A8.A1.E6.9D.BF&quot;&gt;外部模板&lt;/a&gt;，我对语言稍作组织。另，这个概念比较好理解，就不再举例说明了。&lt;/p&gt;
 </description>
-                <link>http://sib9.github.io/document/Extern-Template</link>
-                <guid>http://sib9.github.io/document/Extern-Template</guid>
+                <link>http://sib9.github.io/Extern-Template.html</link>
+                <guid>http://sib9.github.io/Extern-Template</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1643,8 +1643,8 @@ C++ 允许显式的使用或者删除指定的成员函数。例如，下面声�
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</link>
-                <guid>http://sib9.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</guid>
+                <link>http://sib9.github.io/Explicitly-Defaulted-and-Deleted-Special-Member-Functions.html</link>
+                <guid>http://sib9.github.io/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1709,8 +1709,8 @@ struct Derived2 : Base2 {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Explicit-Overrides-And-Final</link>
-                <guid>http://sib9.github.io/document/Explicit-Overrides-And-Final</guid>
+                <link>http://sib9.github.io/Explicit-Overrides-And-Final.html</link>
+                <guid>http://sib9.github.io/Explicit-Overrides-And-Final</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1765,8 +1765,8 @@ struct Derived2 : Base2 {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment&quot;&gt;Control and query object alignment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Control-and-query-object-alignment</link>
-                <guid>http://sib9.github.io/document/Control-and-query-object-alignment</guid>
+                <link>http://sib9.github.io/Control-and-query-object-alignment.html</link>
+                <guid>http://sib9.github.io/Control-and-query-object-alignment</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -1806,8 +1806,8 @@ auto SomeStruct::func_name(int x, int y) -&amp;gt; int {
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html&quot;&gt;Improved Type Inference in C++11: auto, decltype, and the new function declaration syntax&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://sib9.github.io/document/Alternative-Function-Syntax</link>
-                <guid>http://sib9.github.io/document/Alternative-Function-Syntax</guid>
+                <link>http://sib9.github.io/Alternative-Function-Syntax.html</link>
+                <guid>http://sib9.github.io/Alternative-Function-Syntax</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
         </item>
 

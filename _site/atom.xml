@@ -4,7 +4,7 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2013-11-04T23:21:42+08:00</updated>
+ <updated>2013-11-19T22:19:36+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>类型别名</title>
-   <link href="http://sib9.github.io/document/type-alias"/>
+   <link href="http://sib9.github.io/type-alias.html"/>
    <updated>2013-11-04T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/type-alias</id>
+   <id>http://sib9.github.io/type-alias</id>
    <content type="html">&lt;p&gt;有两种方法可用于定义类型别名，第一种方法是使用&lt;code&gt;typedef&lt;/code&gt;关键字，这个C++03就已经支持了。第二种方式是使用C++11新的声明方式&lt;code&gt;using&lt;/code&gt;关键字。方法很简单，比如：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;using MyUint = unsigned int;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -62,9 +62,9 @@ Is only possible with the using directive.&lt;/p&gt;
  
  <entry>
    <title>constexp和常量表达式</title>
-   <link href="http://sib9.github.io/document/constexp-and-const-expression"/>
+   <link href="http://sib9.github.io/constexp-and-const-expression.html"/>
    <updated>2013-11-04T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/constexp-and-const-expression</id>
+   <id>http://sib9.github.io/constexp-and-const-expression</id>
    <content type="html">&lt;p&gt;常量表达式(const expression) 是指值不会改变并且在编译过程就能得到计算结果的表达式。&lt;/p&gt;
 
 &lt;h2 id=&quot;toc_0&quot;&gt;constexpr 变量&lt;/h2&gt;
@@ -93,9 +93,9 @@ constexpr int *q = nullptr; // q 是一个指向整数的常量指针
  
  <entry>
    <title>无限制的 Unions</title>
-   <link href="http://sib9.github.io/document/Unrestricted-Unions"/>
+   <link href="http://sib9.github.io/Unrestricted-Unions.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Unrestricted-Unions</id>
+   <id>http://sib9.github.io/Unrestricted-Unions</id>
    <content type="html">&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Unrestricted unions&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;在 C++03 中 union 的成员不能是一个对象类型。例如， unions 不能包含任何定义了一个 non-trivial 的构造函数。C++11 解除了一些限制：&lt;/p&gt;
@@ -134,9 +134,9 @@ union U {
  
  <entry>
    <title>统一的初始化方式</title>
-   <link href="http://sib9.github.io/document/Uniform-Initialization"/>
+   <link href="http://sib9.github.io/Uniform-Initialization.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Uniform-Initialization</id>
+   <id>http://sib9.github.io/Uniform-Initialization</id>
    <content type="html">&lt;ol&gt;
 &lt;li&gt;本文来自：&lt;a href=&quot;http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html&quot;&gt;C++11 FAQ中文版：统一初始化的语法和语义&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;暂无测试代码&lt;/li&gt;
@@ -187,12 +187,10 @@ return {a};
  
  <entry>
    <title>类型自动推导</title>
-   <link href="http://sib9.github.io/document/Type-Inference"/>
+   <link href="http://sib9.github.io/Type-Inference.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Type-Inference</id>
-   <content type="html">&lt;p&gt;译自 ［Type inference](&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)%EF%BC%8C%E4%B8%BA%E4%BA%86%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E9%80%90%E5%AD%97%E7%BF%BB%E8%AF%91%E3%80%82&quot;&gt;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)，为了更好的理解，没有逐字翻译。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。&lt;/p&gt;
+   <id>http://sib9.github.io/Type-Inference</id>
+   <content type="html">&lt;p&gt;在 C++03 中(包括C)，使用一个变量比如显式的指定它的类型。然而，随着模板类型和模板元编程技术的的引入，对象的类型，详细的定义一个函数的返回值，可能不易表达。因此，临时变量的存储变的很难，可能需要去了解具体模板元库的实现细节。&lt;/p&gt;
 
 &lt;p&gt;C++11用两种方式来解决这种问题。第一种是使用 auto 关键字来定义直接初始化的变量类型(也就是所谓的类型推导，根据初始化的值来推导类型）。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;auto some_strange_callable_type = std::bind(&amp;amp;some_function, _2, _1, some_object);
@@ -235,7 +233,9 @@ int main() {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;个人感觉，站在这个角度来说，decltype 比 auto 功能更强大一些; 反过来，auto 比 decltype 更精巧。&lt;/p&gt;
 
-&lt;h2 id=&quot;toc_0&quot;&gt;扩展资料&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;decltype((variable))&lt;/code&gt;的结果永远是引用，而&lt;code&gt;decltype(variable)&lt;/code&gt;结果只有当 variable 本身就是一个引用时才是引用。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;参考资料&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference&quot;&gt;Type inference&lt;/a&gt;&lt;/li&gt;
@@ -245,9 +245,9 @@ int main() {
  
  <entry>
    <title>线程</title>
-   <link href="http://sib9.github.io/document/Thread"/>
+   <link href="http://sib9.github.io/Thread.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Thread</id>
+   <id>http://sib9.github.io/Thread</id>
    <content type="html">&lt;p&gt;译自：&lt;a href=&quot;http://www.codeproject.com/Articles/598695/Cplusplus11-threads-locks-and-condition-variables&quot;&gt;C++11 threads, locks and condition variables&lt;/a&gt;。看到如此好文，原谅我的情不自禁，向原作者致谢！&lt;/p&gt;
 
 &lt;hr&gt;
@@ -701,9 +701,9 @@ void exchange(container&amp;lt;int&amp;gt;&amp;amp; cont1, container&amp;lt;int&
  
  <entry>
    <title>强类型枚举</title>
-   <link href="http://sib9.github.io/document/Strong-Type-Enum"/>
+   <link href="http://sib9.github.io/Strong-Type-Enum.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Strong-Type-Enum</id>
+   <id>http://sib9.github.io/Strong-Type-Enum</id>
    <content type="html">&lt;p&gt;译自： &lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html&quot;&gt;Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint&lt;/a&gt;;&lt;/p&gt;
 
 &lt;p&gt;C++03 的枚举本质上就是整型，它们可以和整型，和其它的枚举类型做比较。实际上，你并不希望不同枚举之间进行比较，就好像你不希望把钉子的种类和牙刷的种类做比较一样。&lt;/p&gt;
@@ -751,9 +751,9 @@ enum class {EXCITED, MOODY, BLUE};
  
  <entry>
    <title>静态断言</title>
-   <link href="http://sib9.github.io/document/Static-Assert"/>
+   <link href="http://sib9.github.io/Static-Assert.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Static-Assert</id>
+   <id>http://sib9.github.io/Static-Assert</id>
    <content type="html">&lt;p&gt;C++03 提供了方法去测试断言：使用宏和预处理指令 &lt;code&gt;#error&lt;/code&gt; 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。&lt;/p&gt;
 
 &lt;p&gt;新功能引入了一种新的测试断言方法，在编译期确定。使用新的关键字 &lt;code&gt;static_assert&lt;/code&gt;。如下声明：&lt;/p&gt;
@@ -780,9 +780,9 @@ Integral foo(Integral x, Integral y) {
  
  <entry>
    <title>右尖括号</title>
-   <link href="http://sib9.github.io/document/Right-Angle-Bracket"/>
+   <link href="http://sib9.github.io/Right-Angle-Bracket.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Right-Angle-Bracket</id>
+   <id>http://sib9.github.io/Right-Angle-Bracket</id>
    <content type="html">&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;C++03 的析取符定义为&amp;quot;&amp;gt;&amp;gt;&amp;quot;(注，在我的第一本C++书中，&amp;quot;&amp;gt;&amp;gt;&amp;quot;被称为析取运算符，而&amp;quot;&amp;lt;&amp;lt;&amp;quot;被称为插入运算符，我感觉那样理解挺不错的)。 然而，在模板的嵌套声明中，程序员需要在两个尖括号之间加上一个空格，否则会引发一个编译错误。&lt;/p&gt;
@@ -804,9 +804,9 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
  
  <entry>
    <title>基于范围的 for 循环</title>
-   <link href="http://sib9.github.io/document/Range-based-For-Loop"/>
+   <link href="http://sib9.github.io/Range-based-For-Loop.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Range-based-For-Loop</id>
+   <id>http://sib9.github.io/Range-based-For-Loop</id>
    <content type="html">&lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;C++11 扩展一种新的遍历列表的 for 循环语法(range-base for，基于范围的 for 循环)，使得遍历列表非常简单了。可以遍历 C 式的数组、初始化列表(initializer lists)，和定义了 begin()/end() 函数(返回迭代器)的类型。所有的标准库容器都可以使用 range-base for 来遍历：&lt;/p&gt;
@@ -850,9 +850,9 @@ std::cout &amp;lt;&amp;lt; std::endl;
  
  <entry>
    <title>Right value reference and move construct</title>
-   <link href="http://sib9.github.io/document/R-value-Ref-And-Move-Construct"/>
+   <link href="http://sib9.github.io/R-value-Ref-And-Move-Construct.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/R-value-Ref-And-Move-Construct</id>
+   <id>http://sib9.github.io/R-value-Ref-And-Move-Construct</id>
    <content type="html">&lt;p&gt;这篇文章是我从&lt;a href=&quot;http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html&quot;&gt;Move semantics and rvalue references in C++11&lt;/a&gt;翻译而来的。值得一提的是，不是全文/原文逐字逐句的翻译，加了一些我个人的理解，并进行了一定的精简。&lt;/p&gt;
 
 &lt;hr&gt;
@@ -1192,9 +1192,9 @@ printAddress(x);
  
  <entry>
    <title>对象构造能力的提升</title>
-   <link href="http://sib9.github.io/document/Object-Construction-Improvement"/>
+   <link href="http://sib9.github.io/Object-Construction-Improvement.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Object-Construction-Improvement</id>
+   <id>http://sib9.github.io/Object-Construction-Improvement</id>
    <content type="html">&lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement&quot;&gt;Object construction improvement&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;在 C++03 中，构造一个类不允许用调用这个类的其他构造函数；这样会导致每个构造函数都要构造所有的类成员，或者调用一个公共的成员函数，如下：&lt;/p&gt;
@@ -1274,9 +1274,9 @@ private:
  
  <entry>
    <title>空指针常量</title>
-   <link href="http://sib9.github.io/document/Null-Pointer-Const"/>
+   <link href="http://sib9.github.io/Null-Pointer-Const.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Null-Pointer-Const</id>
+   <id>http://sib9.github.io/Null-Pointer-Const</id>
    <content type="html">&lt;p&gt;早在 1972 年，常量&lt;code&gt;0&lt;/code&gt;就扮演着整型常量和空指针常量的双重身份。为了解决&lt;code&gt;0&lt;/code&gt;的二义性，C 使用预处理宏&lt;code&gt;NULL&lt;/code&gt;表示空指针，一般被定义为&lt;code&gt;((void*)0)&lt;/code&gt;或者&lt;code&gt;0&lt;/code&gt;。 C++ 与 C 不同，只允许 0 作为空指针常量。这样会使函数重载不好交互(interacts poorly):&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;void foo(char *);
 void foo(int);
@@ -1297,9 +1297,9 @@ foo(nullptr);  // call foo(char *), not foo(int);
  
  <entry>
    <title>long long int 类型</title>
-   <link href="http://sib9.github.io/document/NewType-long-long-int"/>
+   <link href="http://sib9.github.io/NewType-long-long-int.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/NewType-long-long-int</id>
+   <id>http://sib9.github.io/NewType-long-long-int</id>
    <content type="html">&lt;p&gt;在 C++03 中提供的最大整型类型是 &lt;code&gt;long int&lt;/code&gt;，它保证大小至少要等于 &lt;code&gt;int&lt;/code&gt; 的位数。这样导致了 &lt;code&gt;long int&lt;/code&gt; 一些编译器上大小为 64-bit， 一些为 32-bit。C++11添加一个新的类型 &lt;code&gt;long long int&lt;/code&gt;，它保证最小要和&lt;code&gt;long int&lt;/code&gt;一样大，且不能小于 64-bit 。这个类型一开始在 C99 和标准 C 中被引入，很多 C++ 编译器之前已经作为一种扩展来支持它。&lt;/p&gt;
 
 &lt;h2 id=&quot;toc_0&quot;&gt;参考资料&lt;/h2&gt;
@@ -1312,9 +1312,9 @@ foo(nullptr);  // call foo(char *), not foo(int);
  
  <entry>
    <title>新的字符串常量</title>
-   <link href="http://sib9.github.io/document/New-String-Literals"/>
+   <link href="http://sib9.github.io/New-String-Literals.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/New-String-Literals</id>
+   <id>http://sib9.github.io/New-String-Literals</id>
    <content type="html">&lt;p&gt;译自： &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals&quot;&gt;New string literals&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;C++03 提供了两种类型的字符串字面值。第一种，用两个双引号包含， 生成一个&lt;code&gt;const char&lt;/code&gt;类型空终结符的(null-terminated)数组； 第二种，用 &lt;code&gt;L&amp;quot;&amp;quot;&lt;/code&gt; 定义的，生成&lt;code&gt;const wchar_t&lt;/code&gt;的空终结符数组, &lt;code&gt;wchar_t&lt;/code&gt;是一个为定义大小且语义上表示宽字符。字面量类型既不支持 UTF-8, UTF-16 也不支持 Unicode 编码。&lt;/p&gt;
@@ -1358,9 +1358,9 @@ UR&amp;quot;(This is a &amp;quot;raw UTF-32&amp;quot; string.)&amp;quot;
  
  <entry>
    <title>Lambda 函数和表达式</title>
-   <link href="http://sib9.github.io/document/Lambda-Function-And-Expressions"/>
+   <link href="http://sib9.github.io/Lambda-Function-And-Expressions.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Lambda-Function-And-Expressions</id>
+   <id>http://sib9.github.io/Lambda-Function-And-Expressions</id>
    <content type="html">&lt;p&gt;C++11 支持匿名函数，文档中称为 &lt;code&gt;Lambda函数&lt;/code&gt;，lambda 表达式格式如下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;[capture](parameters)-&amp;gt;return-type{body}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1448,9 +1448,9 @@ func_ptr(4); //calls the lambda.
  
  <entry>
    <title>Install GCC4.8 In Ubuntu 12.04</title>
-   <link href="http://sib9.github.io/compiler/Install-GCC4.8-Ubuntu"/>
+   <link href="http://sib9.github.io/Install-GCC4.8-Ubuntu.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/compiler/Install-GCC4.8-Ubuntu</id>
+   <id>http://sib9.github.io/Install-GCC4.8-Ubuntu</id>
    <content type="html">&lt;h2 id=&quot;toc_0&quot;&gt;安装&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt-get update
@@ -1529,9 +1529,9 @@ int main()
  
  <entry>
    <title>初始化列表</title>
-   <link href="http://sib9.github.io/document/Initializer-lists"/>
+   <link href="http://sib9.github.io/Initializer-lists.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Initializer-lists</id>
+   <id>http://sib9.github.io/Initializer-lists</id>
    <content type="html">&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&quot;&gt;https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists&lt;/a&gt;，非全部翻译，进行了一定调整和扩充。&lt;/p&gt;
 
 &lt;p&gt;C++03 的初始化列表特性是从 C 语言继承过来的，结构体或者数组可以用大括号包含的参数列表来初始化(按照定义的顺序依次初始化)。这种初始化方式递归的，因此结构体数组或者结构体包含其他结构体也可以这么用。&lt;/p&gt;
@@ -1588,9 +1588,9 @@ private:
  
  <entry>
    <title>外部模板</title>
-   <link href="http://sib9.github.io/document/Extern-Template"/>
+   <link href="http://sib9.github.io/Extern-Template.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Extern-Template</id>
+   <id>http://sib9.github.io/Extern-Template</id>
    <content type="html">&lt;p&gt;在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。&lt;/p&gt;
 
 &lt;p&gt;原 C++ 强制编译器在特定位置开始实例化的语法：&lt;/p&gt;
@@ -1607,9 +1607,9 @@ private:
  
  <entry>
    <title>显式使用或禁用特定的成员函数</title>
-   <link href="http://sib9.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions"/>
+   <link href="http://sib9.github.io/Explicitly-Defaulted-and-Deleted-Special-Member-Functions.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</id>
+   <id>http://sib9.github.io/Explicitly-Defaulted-and-Deleted-Special-Member-Functions</id>
    <content type="html">&lt;p&gt;译自：&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions&quot;&gt;Explicitly defaulted and deleted special member functions&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;在 C++03 中，编译器为类提供了默认的构造函数，拷贝构造函数，赋值运算符(operator=)，析构函数。程序员通过自己定义这些函数来重载他们，C++ 也定义了几个全局运算符(operator=,operator new)可供类来使用，程序员也可以重载它们。&lt;/p&gt;
@@ -1652,9 +1652,9 @@ C++ 允许显式的使用或者删除指定的成员函数。例如，下面声�
  
  <entry>
    <title>显式重载和 Final 操作符</title>
-   <link href="http://sib9.github.io/document/Explicit-Overrides-And-Final"/>
+   <link href="http://sib9.github.io/Explicit-Overrides-And-Final.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Explicit-Overrides-And-Final</id>
+   <id>http://sib9.github.io/Explicit-Overrides-And-Final</id>
    <content type="html">&lt;p&gt;译自: &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final&quot;&gt;Explicit overrides and final&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;在 C++03 中，重载基类的虚函数，不能达到重载的效果。比如：&lt;/p&gt;
@@ -1718,9 +1718,9 @@ struct Derived2 : Base2 {
  
  <entry>
    <title>控制和查询对象布局</title>
-   <link href="http://sib9.github.io/document/Control-and-query-object-alignment"/>
+   <link href="http://sib9.github.io/Control-and-query-object-alignment.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Control-and-query-object-alignment</id>
+   <id>http://sib9.github.io/Control-and-query-object-alignment</id>
    <content type="html">&lt;ul&gt;
 &lt;li&gt;内容为个人理解，不保证正确。&lt;/li&gt;
 &lt;/ul&gt;
@@ -1774,9 +1774,9 @@ struct Derived2 : Base2 {
  
  <entry>
    <title>新的函数声明语法</title>
-   <link href="http://sib9.github.io/document/Alternative-Function-Syntax"/>
+   <link href="http://sib9.github.io/Alternative-Function-Syntax.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
-   <id>http://sib9.github.io/document/Alternative-Function-Syntax</id>
+   <id>http://sib9.github.io/Alternative-Function-Syntax</id>
    <content type="html">&lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax&quot;&gt;Alternative function syntax&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;标准 C 函数声明语法对于 C 语言的特性来说是非常完美的。C++ 是从 C 语言扩展来而的，它保持了 C 的基本语言并且进行了一些必需的扩展。然后，随着 C++ 的语言复杂化，它有了很多的局限。特别是在模板函数的声明。下面的例子在 C++03 中是不允许的：&lt;/p&gt;

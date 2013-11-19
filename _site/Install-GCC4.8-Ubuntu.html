@@ -1,0 +1,151 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Install GCC4.8 In Ubuntu 12.04 &larr; </title>
+   <meta name="author" content="Sib9" />
+
+   <link rel="start" href="/" />
+
+	
+	
+	
+	
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/assets/themes/mark-reid/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/assets/themes/mark-reid/css/screen.css" type="text/css" />
+
+</head>
+<body id="">
+<div id="site">
+  <a href="https://github.com/sib9/cpp1x-study-resource"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+  
+<div id="page">
+	
+  <h1 class="emphnext">Install GCC4.8 In Ubuntu 12.04</h1>
+  <ul class="tag_box inline">
+  
+  
+
+
+  
+    
+  
+
+
+
+  </ul>
+
+  <h2 id="toc_0">安装</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.8
+sudo apt-get install g++-4.8
+</code></pre></div>
+<h2 id="toc_1">测试</h2>
+
+<p>方法一:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">gcc-4.8 -v
+g++-4.8 -v
+</code></pre></div>
+<p>如果安装成功应输出为：gcc version 4.8.1 (Ubuntu 4.8.1-2ubuntu1~12.04) </p>
+
+<p>方法二：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">ls /usr/bin/gcc* -l
+ls /usr/bin/g++* -l
+</code></pre></div>
+<p>我的输出结果为：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">-rwxr-xr-x 1 root root 306200  4月 15 08:27 /usr/bin/gcc-4.6
+-rwxr-xr-x 1 root root 527596  4月 22 04:47 /usr/bin/gcc-4.7
+-rwxr-xr-x 1 root root 716296  6月  5 22:00 /usr/bin/gcc-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-ar-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-ar-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-nm-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-nm-4.8
+-rwxr-xr-x 1 root root  21988  4月 22 04:47 /usr/bin/gcc-ranlib-4.7
+-rwxr-xr-x 1 root root  22000  6月  5 22:00 /usr/bin/gcc-ranlib-4.8
+</code></pre></div>
+<p>Ubuntu 默认 GCC 版本是4.6，我之前曾经装过 4.7，现在装了 4.8，所以你可以看到三个版本。</p>
+
+<h2 id="toc_2">将 4.8 设为默认 GCC 版本</h2>
+
+<p>为了修改默认 GCC 版本，我们需要修改软链接。当然，你也可以不修改，只不过每次使用的时候都需要 gcc-4.8/g++-4.8 带上版本，不方便。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo rm /usr/bin/gcc
+sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
+sudo rm /usr/bin/g++
+sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
+</code></pre></div>
+<p>然后， gcc -v 提示的 GCC 版本就是 4.8.1，非常 Happy。</p>
+
+<h2 id="toc_3">测试 Demo</h2>
+
+<p>安装了可能感觉不够爽，是时候用 gcc4.8 编一把 C++11 了，才不枉废了半天劲。我找了一个简单的 demo :</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Ubuntu 12.04 GCC4.8
+
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+int main()
+{
+    char s[] = &quot;Hello CPP11 World!&quot;;
+    int Uppercase = 0;
+
+    std::for_each(s, s+sizeof(s), [&amp;Uppercase] (char c)
+             {
+                 if (isupper(c))
+                     Uppercase++;
+             });
+
+    std::cout &lt;&lt; Uppercase &lt;&lt; &quot; uppercase letters in: &quot; &lt;&lt; s &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre></div>
+<p>注意：编译的时候加上<code>-std=c++11</code>(不加编译器也会很友善的提醒你，^_^)；</p>
+
+<h2 id="toc_4">参考资料</h2>
+
+<ul>
+<li><a href="http://maykiller.com/2012/ubuntu-install-gcc-4-7-with-set-default/1/">Ubuntu12.04安装GCC4.7并设置C++11</a>，非常感谢这位博主，在我多方尝试后这是一个有效且简单的做法。</li>
+<li>测试Demo来自:<a href="http://coolshell.cn/articles/5265.html">C++11 中值得关注的极大变化(详解)</a></li>
+</ul>
+
+
+  <div class="prev-next">
+  
+    <a href="/Lambda-Function-And-Expressions.html" class="next" title="Lambda 函数和表达式"> Lambda 函数和表达式 &rarr;</a>
+  
+  
+    <a href="/Initializer-lists.html" class="prev" title="初始化列表">&larr; 初始化列表</a>
+  
+  </div>
+  
+</div><!-- End Page -->
+
+
+
+
+  
+</div>
+
+<!--[if IE 6]>
+<script type="text/javascript"> 
+	/*Load jQuery if not already loaded*/ if(typeof jQuery == 'undefined'){ document.write("<script type=\"text/javascript\"   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\"></"+"script>"); var __noconflict = true; } 
+	var IE6UPDATE_OPTIONS = {
+		icons_path: "http://static.ie6update.com/hosted/ie6update/images/"
+	}
+</script>
+<script type="text/javascript" src="http://static.ie6update.com/hosted/ie6update/ie6update.js"></script>
+<![endif]-->
+
+  
+</body>
+</html>
+

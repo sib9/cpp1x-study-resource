@@ -21,7 +21,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,t
 /* @end */
 
 body {
-    font-family: Verdana, "Segoe UI", "Droid Sans Mono", ubuntu, monaco, Sans-Serif;
+    font-family: Verdana, "Segoe UI", "Droid Sans Mono", "DejaVu Sans Mono", monaco, Sans-Serif;
     background-color: whitesmoke;
     background-position: center -18em;
     background-repeat: repeat-x; 
@@ -84,23 +84,23 @@ hr {
 sup { line-height: 1ex; }
 
 #site {
-	max-width: 46em;
-	margin: 1.5em auto 3em auto;
-	line-height:1.5em;
+    max-width: 50em;
+    margin: 1.5em auto 3em auto;
+    line-height:1.5em;
 }
 
 #page, #disqus_thread {
-	background: white;
-	background-image: url(grid.png); 
-	padding: 1.5em 2.5em 1.5em 2.5em;
-        border: 1px solid #ccc;
+    background: white;
+    background-image: url(grid.png);
+    padding: 1.5em 2.5em 1.5em 2.5em;
+    border: 1px solid #ccc;
 }
 
 /* More experimental CSS3 features */
 #page, #disqus_thread {
-	box-shadow: 2px 2px 8px #aaa;
-	-webkit-box-shadow: 2px 2px 8px #aaa;
-	-moz-box-shadow: 2px 2px 8px #aaa;	
+    box-shadow: 2px 2px 8px #aaa;
+    -webkit-box-shadow: 2px 2px 8px #aaa;
+    -moz-box-shadow: 2px 2px 8px #aaa;	
 }
 
 #disqus_thread { padding-top: 0; }
@@ -374,9 +374,10 @@ pre:hover {
         overflow: auto;
 }
 code {
-	font-size: 1em;
-	background-color: #f7f7ff;
-	line-height: 1.4em;
+    font-family: consolas, "DejaVu Sans Mono";
+    font-size: 1em;
+    background-color: #f7f7ff;
+    line-height: 1.4em;
 }
 pre > code {
 	background-color: transparent;
