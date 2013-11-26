@@ -2,17 +2,47 @@
 	
   <h1 class="emphnext">{{ page.title }}</h1>
 
-  {{ content }}
+  <div id="content">
+    {{ content }}
+  </div>
 
-  <div class="prev-next">
-  {% if page.next %}
-    <a href="{{ page.next.url }}" class="next" title="{{ page.next.title }}"> {{ page.next.title }} &rarr;</a>
-  {% endif %}
-  {% if page.previous %}
-    <a href="{{ page.previous.url }}" class="prev" title="{{ page.previous.title }}">&larr; {{ page.previous.title }}</a>
-  {% endif %}
+  <div id="sidebar">
+    <div id="about">
+      <h3>关于网站</h3>
+      <p><a href="/">cpp1x.org</a> 是一个C++新标准的学习性网站，旨在搜集国内外各种C++标准(C++11及以后)资源，供大家参考、学习。</p>
+      <p>网站资源大部分来自互联网，具体引用位置会在文章结尾标注，如果侵犯到您的合法权益，请您给我们发邮件，我们会进行相应的处理。</p>
+      <p>欢迎大家提意见和建议，也希望大家可以投稿给我们。</p>
+      <h3>关于我们</h3>
+      <p><a href="http://sib9.us/">Sib9</a></p>
+      <p>联系方式: us@sib9.us</p>
+      
+    </div>
+    <div id="post_rel">
+      <!-- <p><a href="/">目录(首页)</a></p> -->
+      <!-- {% if page.previous %} -->
+      <!-- <p>上一篇: <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">{{ page.previous.title }}</a></p> -->
+      <!-- {% endif %} -->
+      <!-- {% if page.next %} -->
+      <!-- <p>下一篇: <a href="{{ page.next.url }}" title="{{ page.next.title }}">{{ page.next.title }}</a></p> -->
+      <!-- {% endif %} -->
+      <h3>目录</h3>
+      {% for category in site.categories %} 
+      <h4 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h4>
+      <ul>
+        {% assign pages_list = category[1] %}
+        {% include JB/pages_list %}
+      </ul>
+{% endfor %}
+    </div>
+  </div>
+
+  <div id="statement">
   </div>
   
 </div><!-- End Page -->
 
+<div id="footer">
+  Copyright by <a href="http://sib9.us/">Sib9</a>. Theme based on <a href="http://mark.reid.name/">Mark Reid</a>, Powered by <a href="http://github.com/mojombo/jekyll/">Jekyll.</a>
+</div>
+  
 {% include JB/comments %}

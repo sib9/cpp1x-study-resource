@@ -60,8 +60,8 @@ h1.emphnext {
 h2 {
     font-size: 1.5em;
     margin:0.8em 0 0.8em 0;
-    text-transform:capitalize;
 }
+
 
 h3 {
     font-size: 1.3em;
@@ -92,7 +92,7 @@ sup { line-height: 1ex; }
 #page, #disqus_thread {
     background: white;
     background-image: url(grid.png);
-    padding: 1.5em 2.5em 1.5em 2.5em;
+    padding: 1.5em 2em 1.5em 2em;
     border: 1px solid #ccc;
 }
 
@@ -470,34 +470,19 @@ p.delicious-extended:before { content: ' — '; }
 
 /* @group Footer */
 #footer {
-	margin-top: 0;
-	color: grey;
-	font-size: 87.5%;
-	line-height: 1.3em;
+    margin-top: 10px;
+    color: grey;
+    font-size: 80%;
+    text-align: center;    
 }
-#footer address {
-	position: relative;
-	margin: .5em 0 0 0;
-	text-align: right;
-}
+
 #footer a {
-	font-variant: small-caps;
-	font-style: normal;
-	color: #77d;
-	text-decoration: none;
+    font-variant: small-caps;
+    font-style: normal;
+    color: #77d;
+    text-decoration: none;
 }
-#footer .copyright {
-	position: absolute;
-	left: 0;
-	text-align: left;
-	display: block;
-}
-#footer .engine {
-	position: absolute;
-	text-align: right;
-	display: block;
-	right: 0;
-}
+
 /* @end */
 
 
@@ -563,4 +548,50 @@ img.maruku-png { }
 	background:#57A957;
 	border:1px solid #4C964D;
 	color:#FFF;
+}
+
+#content {
+}
+
+/* sidebar ========================================================== */
+#sidebar {
+    margin: 0;
+    padding: 10px 0 0 0;
+    border-top: 2px solid #ccc;
+}
+
+#about {
+    margin:0;
+    width:304px;
+    padding-right: 10px;
+    float:left;
+}
+
+#sidebar p {
+    margin: 0.5em 0.5em 0.5em 0.5em;
+    font-size: 87.5%;
+}
+
+#sidebar ul li {
+    font-size: 87.5%;
+}
+
+#sidebar h3 {
+    font-size: 140%;
+}
+
+#sidebar h4 {
+    font-size: 120%;
+    margin: 0.5e 0 0.5em 0;
+}
+
+#post_rel {
+    width: 304px;
+    margin: 0px 0px 0px 15px;
+    padding-left: 5px;
+    float:left;
+}
+
+#statement {
+    clear:both;
 }
