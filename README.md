@@ -1,4 +1,4 @@
-# CPP11-STUDY-RESOURCE #
+# CPP1x-STUDY-RESOURCE #
 
 文档主页: [cpp1x.org](http://cpp1x.org)
 
@@ -7,6 +7,8 @@
 期盼已久的 C++ 新标准(C++0x,C++11)于 2011 年 8 月份获得一致通过。时隔近两年，主流的 C++ 编译器(GCC, VS2012, Clang)已经支持了很多 C++ 的新特性。可喜的是，就在笔者在写这份 README.md 的时候，[GCC 4.8.1](http://gcc.gnu.org/gcc-4.8/cxx0x_status.html)文档上声明已实现 C++11 标准的所有主要语言特性。
 
 于是，我们建立了名为 `CPP1x-STUDY-RESOURCE` 的项目。顾名思义，这里将是一些 “学习文档”，不是“专业”的 C++11 教程。旨在搜集国内外各种 C++11 的学习资源，供大家参考、学习。
+
+CPP1X-STUTY-RESOURCE 中的 1x 是为了向后兼容。
 
 ## 加入我们 ##
 
