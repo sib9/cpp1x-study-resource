@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "右尖括号"
-category: "Document"
-tags: []
+layout : post
+title : "右尖括号"
+category : "Document"
 ---
 
 译自：[Right angle bracket](https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket)

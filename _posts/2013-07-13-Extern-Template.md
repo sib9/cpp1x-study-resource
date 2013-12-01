@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "外部模板"
-category: "Document"
-tags: []
+layout : post
+title : "外部模板"
+category : "Document"
 ---
 
 在标准C++中，只要在编译单元内遇到被完整定义的模板，编译器都必须将其实例化(instantiate)。这会大大增加编译时间，特别是模板在许多编译单元内使用相同的参数实例化。

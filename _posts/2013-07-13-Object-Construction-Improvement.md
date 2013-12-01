@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "对象构造能力的提升"
-category: "Document"
-tags: []
+layout : post
+title : "对象构造能力的提升"
+category : "Document"
 ---
 
 译自： [Object construction improvement](https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement)

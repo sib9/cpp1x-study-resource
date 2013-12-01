@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "Install GCC4.8 In Ubuntu 12.04"
-category: "Compiler"
-tags: []
+layout : post
+title : "Install GCC4.8 In Ubuntu 12.04"
+category : "Compiler"
 ---
 
 ## 安装 ##

@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "初始化列表"
-category: "Document"
-tags: []
+layout : post
+title : "初始化列表"
+category : "Document"
 ---
 
 译自：[https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists](https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists)，非全部翻译，进行了一定调整和扩充。

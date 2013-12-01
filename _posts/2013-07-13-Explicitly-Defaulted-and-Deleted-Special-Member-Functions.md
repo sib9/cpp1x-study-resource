@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "显式使用或禁用特定的成员函数"
-category: "Document"
-tags: []
+layout : post
+title : "显式使用或禁用特定的成员函数"
+category : "Document"
 ---
 
 译自：[Explicitly defaulted and deleted special member functions](https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions)

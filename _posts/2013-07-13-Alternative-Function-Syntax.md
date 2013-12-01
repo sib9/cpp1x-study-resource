@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "新的函数声明语法"
-category: "Document"
-tags: []
+layout : post
+title : "新的函数声明语法"
+category : "Document"
 ---
 
 译自 [Alternative function syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax)

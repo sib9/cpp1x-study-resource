@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "类型自动推导"
-category: "Document"
-tags: []
+layout : post
+title : "类型自动推导"
+category : "Document"
 ---
 
 

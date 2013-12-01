@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "强类型枚举"
-category: "Document"
-tags: []
+layout : post
+title : "强类型枚举"
+category : "Document"
 ---
 
 译自： [Better types in C++11 - nullptr, enum classes (strongly typed enumerations) and cstdint](http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html);
