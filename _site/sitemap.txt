@@ -14,6 +14,7 @@ http://sib9.github.io/Thread.html
 http://sib9.github.io/Strong-Type-Enum.html
 http://sib9.github.io/Static-Assert.html
 http://sib9.github.io/Right-Angle-Bracket.html
+http://sib9.github.io/Range-based-For-Loop.html
 http://sib9.github.io/R-value-Ref-And-Move-Construct.html
 http://sib9.github.io/Object-Construction-Improvement.html
 http://sib9.github.io/Null-Pointer-Const.html

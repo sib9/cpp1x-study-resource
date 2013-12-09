@@ -1,0 +1,152 @@
+/* 全局配置 */
+/* IE6 ignores this and uses default size of 16pt */
+
+html>body { font-size: 14px; }
+
+html {
+    font-size: 100%;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Open Sans", "Segoe UI", "ubuntu", Verdana, "Droid Sans Mono", "DejaVu Sans Mono", "NSimSun", Sans-Serif;
+    line-height: 1.5em;
+}
+
+a { color: #0645ad; text-decoration: none; }
+a:visited { color: #0b0080; }
+a:hover { color: #06e; text-decoration: underline; }
+a:active { color: #faa700; }
+
+p { margin: 0 0 1.5em 0; text-align: justify; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #111;
+    line-height: 1em;
+    clear: left;
+}
+
+h1 { font-size: 2.0em; }
+h2 {
+    font-size: 1.6em;
+    padding-bottom: 5px;
+    margin:0.8em 0 0.8em 0;
+}
+h3 {
+    font-size: 1.4em;
+    margin: 0.8em 0 0.8em 0;
+}
+h4 {
+    font-size: 1.2em;
+    margin: 0.8em 0 0.8em 0;
+}
+h5 { font-size: 1.0em; }
+h6 { font-size: 0.8em; }
+
+blockquote {
+    color: #666;
+    margin: 0;
+    padding-left: 1.5em;
+    border-left: 0.4em #eee solid;
+}
+
+hr {
+    border: 1px solid silver;
+    margin: 1em 0;
+    padding: 0;
+}
+
+b, strong { font-weight: bold; }
+
+ul, ol {
+    margin: 1.5em 0;
+    padding-left: 1.5em;
+    line-height: 1.5em;
+}
+
+ul li { list-style-type: square; }
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td { vertical-align: top; }
+
+/* 针对 pre 和 code 的优化 */
+pre, code {
+    font-family: "DejaVu Sans Mono", Consolas, monospace, serif;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    overflow: auto;
+}
+
+pre:hover {
+    border-right: none;
+    overflow: auto;
+}
+
+pre {
+    margin: 1em 0 1.5em 0;
+    padding: 0.5em 1em;
+    white-space: pre;
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* ancient Opera */
+    white-space: -o-pre-wrap;   /* newer Opera */
+    white-space: pre-wrap;      /* Chrome; W3C standard */
+    word-wrap: break-word;      /* IE */
+    box-shadow: 1px 1px 6px #ccc;
+    -webkit-box-shadow: 1px 1px 6px #ccc;
+    -moz-box-shadow: 1px 1px 6px #ccc;
+    font-size: 0.75em;
+    line-height: 1.5em;
+    background: #fffff0;
+    border: 1px solid #ddc;
+}
+pre code {
+    border: 0px !important;
+    padding: 0;
+}
+
+/* 各种 Hackers */
+/* Hacker for codehilite */
+table.codehilitetable {
+    border-collapse: separate;
+    border: 1px solid silver;
+    margin: 14px 0;
+    box-shadow: 1px 1px 6px #ccc;
+    -webkit-box-shadow: 1px 1px 6px #ccc;
+    -moz-box-shadow: 1px 1px 6px #ccc;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.codehilitetable pre {
+    margin: 0;
+    border: 0 none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.codehilitetable td {
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Clear the float problem */
+.clearfix:after {
+    visibility: hidden;
+    clear: both;
+    font-size: 0;
+    content: ".";
+    display: block;
+    height: 0;
+}

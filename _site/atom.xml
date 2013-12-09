@@ -4,7 +4,7 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2013-12-02T00:21:26+08:00</updated>
+ <updated>2013-12-09T23:21:19+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
@@ -798,6 +798,52 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket&quot;&gt;Right angle bracket&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>基于范围的 for 循环</title>
+   <link href="http://sib9.github.io/Range-based-For-Loop.html"/>
+   <updated>2013-07-13T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/Range-based-For-Loop</id>
+   <content type="html">&lt;p&gt;译自 &lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;C++11 扩展一种新的遍历列表的 for 循环语法(range-base for，基于范围的 for 循环)，使得遍历列表非常简单了。可以遍历 C 式的数组、初始化列表(initializer lists)，和定义了 begin()/end() 函数(返回迭代器)的类型。所有的标准库容器都可以使用 range-base for 来遍历：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;std::vector&amp;lt;int&amp;gt; v;
+v.push_back(1);
+v.push_back(2);
+v.push_back(3);
+v.push_back(4);
+v.push_back(5);
+v.push_back(6);
+
+for (int i : v) {
+    std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot; &amp;quot; ;
+}
+std::cout &amp;lt;&amp;lt; std::endl;
+
+for (auto ite : v) {
+    std::cout &amp;lt;&amp;lt; ite &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+}
+std::cout &amp;lt;&amp;lt; std::endl;
+
+
+for (int&amp;amp; i : v) {
+    ++i;
+}
+
+
+for (auto i : v) {
+    std::cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+}
+std::cout &amp;lt;&amp;lt; std::endl;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;toc_0&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-ranged-for-loop.html&quot;&gt;C++11 range-based for loops&lt;/a&gt; 推荐阅读&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop&quot;&gt;Range-based for loop&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>

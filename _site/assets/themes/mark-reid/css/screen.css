@@ -40,45 +40,10 @@ a.pdf:before {
 	margin-right: 1em;
 	content: url(/files/css/icon_pdf.gif); }
 
-h1,h2,h3,h4 { 
-        line-height:1em; 
-        font-size:1.5em; 
-        font-weight: normal; 
-        clear: left;
-}
-h1 {
-    margin-bottom: 1em;
-    font-size: 1.7em;
-}
-
 h1.emphnext {
     border-bottom: 1px solid gray;
     padding-bottom: 7px;
     margin-bottom: 0.5em;
-}
-
-h2 {
-    font-size: 1.5em;
-    margin:0.8em 0 0.8em 0;
-}
-
-
-h3 {
-    font-size: 1.3em;
-    margin: 0.8em 0 0.8em 0;
-}
-
-h4 {
-    font-size:1.2em;
-    margin: 0.8em 0 0.8em 0;
-}
-
-
-hr { 
-	border-top: 1px solid silver;
-	border-bottom: none;
-	padding: 0;
-	margin: 1.46em 0 0 0;
 }
 
 sup { line-height: 1ex; }
@@ -91,7 +56,6 @@ sup { line-height: 1ex; }
 
 #page, #disqus_thread {
     background: white;
-    background-image: url(grid.png);
     padding: 1.5em 2em 1.5em 2em;
     border: 1px solid #ccc;
 }
@@ -144,14 +108,6 @@ sup { line-height: 1ex; }
 	font-size: 0.875em;
 	line-height: 1.714em;
 }
-blockquote {
-	padding: 0 2.8em;
-	margin: 1.714em 0;
-	color: #444;
-	font-size: 0.875em;
-	line-height: 1.714em;
-}
-
 .note {
 	padding-top: 0.5em; 
 	background-color: #fafaff;
@@ -353,37 +309,6 @@ p.excerpt { margin: 0; }
 	top: 1.5em;
 }
 /* @end */
-
-/* @group Code */
-pre {
-	margin: 1em 0 1.5em 0;
-	font-size: 0.75em; /* Hack to make code look same size as body font */  
-	line-height: 1.5em;	
-	color: #111;
-	background: #fffff0;
-	border: 1px solid #ddc;
-	padding: 0.5em 1em;
-        overflow: auto;
-	/* Experimental CSS3 stuff */
-	box-shadow: 1px 1px 6px #ccc;
-	-webkit-box-shadow: 1px 1px 6px #ccc;
-	-moz-box-shadow: 1px 1px 6px #ccc;
-}
-pre:hover {
-	border-right: none;
-        overflow: auto;
-}
-code {
-    font-family: consolas, "DejaVu Sans Mono";
-    font-size: 1em;
-    background-color: #f7f7ff;
-    line-height: 1.4em;
-}
-pre > code {
-	background-color: transparent;
-}
-/* @end */
-
 
 /* @group Disqus */
 #disqus_thread {
