@@ -5,8 +5,8 @@
         <description>CPP1x-STUDY-RESOURCE - Sib9</description>
         <link>http://sib9.github.io</link>
         <link>http://sib9.github.io</link>
-        <lastBuildDate>2013-12-09T23:21:19+08:00</lastBuildDate>
-        <pubDate>2013-12-09T23:21:19+08:00</pubDate>
+        <lastBuildDate>2013-12-11T23:51:13+08:00</lastBuildDate>
+        <pubDate>2013-12-11T23:51:13+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -1782,7 +1782,7 @@ Ret adding_func(const Lhs &amp;amp; lhs, const Rhs &amp;amp; rhs) { return lhs +
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;template &amp;lt;class Lhs, class Rhs&amp;gt;
 decltype(lsh+rhs) adding_func(const Lhs &amp;amp; lhs, const Rhs &amp;amp; rhs) { return lhs + rhs; } // Not legal C++11
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;不合法的原因是 lhs 和 rhs 在函数定义之前出现了，知道编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。&lt;/p&gt;
+&lt;p&gt;不合法的原因是 lhs 和 rhs 在函数定义之前出现了，直到编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。&lt;/p&gt;
 
 &lt;p&gt;为了解决这个问题，C++11 引入了一种新的函数声明语法，即&lt;code&gt;尾部返回值(trailing-return-type)&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;template &amp;lt;class Lhs, class Rhs&amp;gt;

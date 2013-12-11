@@ -48,7 +48,7 @@ Ret adding_func(const Lhs &amp; lhs, const Rhs &amp; rhs) { return lhs + rhs; } 
 <div class="highlight"><pre><code class="text language-text" data-lang="text">template &lt;class Lhs, class Rhs&gt;
 decltype(lsh+rhs) adding_func(const Lhs &amp; lhs, const Rhs &amp; rhs) { return lhs + rhs; } // Not legal C++11
 </code></pre></div>
-<p>不合法的原因是 lhs 和 rhs 在函数定义之前出现了，知道编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。</p>
+<p>不合法的原因是 lhs 和 rhs 在函数定义之前出现了，直到编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。</p>
 
 <p>为了解决这个问题，C++11 引入了一种新的函数声明语法，即<code>尾部返回值(trailing-return-type)</code>:</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">template &lt;class Lhs, class Rhs&gt;
@@ -79,7 +79,7 @@ auto SomeStruct::func_name(int x, int y) -&gt; int {
       <h3>关于网站</h3>
       <p><a href="/">cpp1x.org</a> 是一个C++新标准的学习性网站，旨在搜集国内外各种C++标准(C++11及以后)资源，供大家参考、学习。</p>
       <p>网站资源大部分来自互联网，具体引用位置会在文章结尾标注，如果侵犯到您的合法权益，请您给我们发邮件，我们会进行相应的处理。</p>
-      <p>欢迎大家提意见和建议，也希望大家可以投稿给我们。</p>
+      <p>欢迎大家在<a href="https://github.com/sib9/cpp1x-study-resource">github</a>上pull request或者通过issue讨论。</p>
       <h3>关于我们</h3>
       <p><a href="http://sib9.us/">Sib9</a></p>
       <p>联系方式: us@sib9.us</p>
@@ -93,7 +93,7 @@ auto SomeStruct::func_name(int x, int y) -&gt; int {
       <!--  -->
       <h3>目录</h3>
        
-      <h4 id="document-ref">document</h4>
+      <h4 id="language-ref">language</h4>
       <ul>
         
         
@@ -168,14 +168,6 @@ auto SomeStruct::func_name(int x, int y) -&gt; int {
       
       	
       	<li><a href="/Right-Angle-Bracket.html">右尖括号</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/Range-based-For-Loop.html">基于范围的 for 循环</a></li>
       	
       
     
@@ -292,6 +284,26 @@ auto SomeStruct::func_name(int x, int y) -&gt; int {
       
       	
       	<li><a href="/Install-GCC4.8-Ubuntu.html">Install GCC4.8 In Ubuntu 12.04</a></li>
+      	
+      
+    
+  
+
+
+
+      </ul>
+ 
+      <h4 id="document-ref">document</h4>
+      <ul>
+        
+        
+
+
+  
+    
+      
+      	
+      	<li><a href="/Range-based-For-Loop.html">基于范围的 for 循环</a></li>
       	
       
     
