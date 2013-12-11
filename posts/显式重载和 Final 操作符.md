@@ -1,4 +1,4 @@
-Explicit-Overrides-And-Final|Document|2013-07-13
+Explicit-Overrides-And-Final|Language|2013-07-13
 
 译自: [Explicit overrides and final](https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final)
 

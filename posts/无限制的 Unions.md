@@ -1,4 +1,4 @@
-Unrestricted-Unions|Document|2013-07-13
+Unrestricted-Unions|Language|2013-07-13
 
 译自：[Unrestricted unions](https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket)
 

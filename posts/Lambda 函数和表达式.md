@@ -1,4 +1,4 @@
-Lambda-Function-And-Expressions|Document|2013-07-13
+Lambda-Function-And-Expressions|Language|2013-07-13
 
 C++11 支持匿名函数，文档中称为 `Lambda函数`，lambda 表达式格式如下：
 

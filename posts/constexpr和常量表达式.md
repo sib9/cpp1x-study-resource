@@ -1,4 +1,4 @@
-constexpr-and-const-expression|Document|2013-11-04
+constexpr-and-const-expression|Language|2013-11-04
 
 常量表达式(const expression) 是指值不会改变并且在编译过程就能得到计算结果的表达式。
 
