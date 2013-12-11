@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "类型别名"
-category : "Document"
+category : "Language"
 ---
 
 有两种方法可用于定义类型别名，第一种方法是使用`typedef`关键字，这个C++03就已经支持了。第二种方式是使用C++11新的声明方式`using`关键字。方法很简单，比如：

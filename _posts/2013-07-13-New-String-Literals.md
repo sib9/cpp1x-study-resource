@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "新的字符串常量"
-category : "Document"
+category : "Language"
 ---
 
 译自： [New string literals](https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals)

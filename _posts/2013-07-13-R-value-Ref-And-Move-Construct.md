@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "Right value reference and move construct"
-category : "Document"
+category : "Language"
 ---
 
 这篇文章是我从[Move semantics and rvalue references in C++11](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)翻译而来的。值得一提的是，不是全文/原文逐字逐句的翻译，加了一些我个人的理解，并进行了一定的精简。

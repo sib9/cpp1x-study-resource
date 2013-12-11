@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "控制和查询对象布局"
-category : "Document"
+category : "Language"
 ---
 
 + 内容为个人理解，不保证正确。

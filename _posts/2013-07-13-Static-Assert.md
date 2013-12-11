@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "静态断言"
-category : "Document"
+category : "Language"
 ---
 
 C++03 提供了方法去测试断言：使用宏和预处理指令 `#error` 。然而，这并不适合模板：宏测试断言是在运行时确定的，预处理指令是在是在预处理期，它们都发生在模板实例化之前。

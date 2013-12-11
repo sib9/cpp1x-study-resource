@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "统一的初始化方式"
-category : "Document"
+category : "Language"
 ---
 
 1. 本文来自：[C++11 FAQ中文版：统一初始化的语法和语义](http://www.chenlq.net/books/cpp11-faq/c-0-x-faq-chinese-version-unified-initialization-syntax-and-semantics.html)

@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "新的函数声明语法"
-category : "Document"
+category : "Language"
 ---
 
 译自 [Alternative function syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax)
@@ -17,7 +17,7 @@ category : "Document"
     template <class Lhs, class Rhs>
     decltype(lsh+rhs) adding_func(const Lhs & lhs, const Rhs & rhs) { return lhs + rhs; } // Not legal C++11
 
-不合法的原因是 lhs 和 rhs 在函数定义之前出现了，知道编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。
+不合法的原因是 lhs 和 rhs 在函数定义之前出现了，直到编译器解析到函数原型的后半部分， lhs 和 rhs 才是有意义的。
 
 为了解决这个问题，C++11 引入了一种新的函数声明语法，即`尾部返回值(trailing-return-type)`:
 

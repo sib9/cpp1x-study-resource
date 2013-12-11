@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "无限制的 Unions"
-category : "Document"
+category : "Language"
 ---
 
 译自：[Unrestricted unions](https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket)

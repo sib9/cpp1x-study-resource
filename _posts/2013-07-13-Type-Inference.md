@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "类型自动推导"
-category : "Document"
+category : "Language"
 ---
 
 

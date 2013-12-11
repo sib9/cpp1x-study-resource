@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "constexpr和常量表达式"
-category : "Document"
+category : "Language"
 ---
 
 常量表达式(const expression) 是指值不会改变并且在编译过程就能得到计算结果的表达式。

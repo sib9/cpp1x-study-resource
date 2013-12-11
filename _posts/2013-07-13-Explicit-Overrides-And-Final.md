@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "显式重载和 Final 操作符"
-category : "Document"
+category : "Language"
 ---
 
 译自: [Explicit overrides and final](https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final)
