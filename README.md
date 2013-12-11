@@ -1,6 +1,7 @@
 # CPP1x-STUDY-RESOURCE #
 
 项目主页: [cpp1x.org](http://cpp1x.org)
+
 备注: `CPP1X-STUTY-RESOURCE` 中的 `1x` 是为了兼容以后的 C++ 新标准。
 
 ## 简介 ##
