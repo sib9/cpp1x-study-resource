@@ -1,8 +1,7 @@
 ---
-layout: post
-title: "基于范围的 for 循环"
-category: "Language"
-tags: []
+layout : post
+title : "基于范围的for循环"
+category : "Language"
 ---
 
 译自 [Range-based for loop](https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop)
