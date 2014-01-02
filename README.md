@@ -10,6 +10,13 @@
 
 于是，我们建立了名为 `CPP1x-STUDY-RESOURCE` 的项目，用来搜集国内外各种 C++ 新标准的学习资源，供大家参考学习。，这里将是一些 “学习文档”，不是“专业”的教程。
 
+## 目录结构 ##
+
++ Language
++ Compiler
++ Book recommend
++ STL: 基本上简单介绍C++11的新加入部分，不会深入。这块的了解查文档是更好的选择。
+
 ## 加入我们 ##
 
 你可以使用 `git clone https://github.com/sib9/cpp1x-study-resource.git` 克隆到你本地，非常欢迎广大 C++ 爱好者提交请求(Pull Requests)或者通过 issue 探讨。
