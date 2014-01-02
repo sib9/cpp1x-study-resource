@@ -6,15 +6,15 @@ category : "STL"
 
 C++98只支持一个智能指针[auto_ptr](http://www.cplusplus.com/reference/memory/auto_ptr/?kw=auto_ptr),然而auto_ptr实在是太简陋了(赋值导致的指针转移，一直为人诟病)。
 
-C++11废弃了auto\_ptr，引入了两种智能指针:
+C++11废弃了`auto_ptr`，引入了两种智能指针:
 
-1. shared\_ptr
+1. `shared_ptr`
 
-共享拥有对象的所有权，使用引用技术来实现。具体可看: [http://www.cplusplus.com/reference/memory/shared_ptr/](http://www.cplusplus.com/reference/memory/shared_ptr/)。
+	共享拥有对象的所有权，使用引用技术来实现。具体可看: [http://www.cplusplus.com/reference/memory/shared_ptr/](http://www.cplusplus.com/reference/memory/shared_ptr/)。
 
-2. unique_ptr
+2. `unique_ptr`
 
-唯一拥有对象的所有权，auto\_ptr的替代品，但是修复了auto\_ptr的缺陷，指针对象以赋值的方式转让。详细可看: [http://www.cplusplus.com/reference/memory/unique_ptr/](http://www.cplusplus.com/reference/memory/unique_ptr)。
+	唯一拥有对象的所有权，auto\_ptr的替代品，但是修复了auto\_ptr的缺陷，指针对象以赋值的方式转让。详细可看: [http://www.cplusplus.com/reference/memory/unique_ptr/](http://www.cplusplus.com/reference/memory/unique_ptr)。
 
 C++11允许为智能指针设置一个删除器，当设定一个删除器时，智能指针析构会用指定的删除器取代默认的delete操作。如果你使用指针指针管理的资源不是用new分配的，记得一定要为这个智能指针设定一个删除器。
 
@@ -22,11 +22,9 @@ C++11允许为智能指针设置一个删除器，当设定一个删除器时，
 
 我们知道不可以为auto_ptr传入一个动态数组，否则会导致未定义的行为(new[]->delete)。在C++11中的这两个智能指针都可以传入一个动态数组，不过略有不同。
 
-对于 share\_ptr，传入一个动态数组，你需要同时为它指定一个删除器。如: `shared_ptr<int> sp(new int[1024], [](int *p) {delete[] p;});` 可以看出，我们写一个lambda表达式，用 delete[] 去释放一个数组。
++ 对于`share_ptr`，传入一个动态数组，你需要同时为它指定一个删除器。如: `shared_ptr<int> sp(new int[1024], [](int *p) {delete[] p;});` 可以看出，我们写一个lambda表达式，用 delete[] 去释放一个数组。
++ 对于`unique_ptr`就没这么麻烦了，你可以直接使用`[]`用来标识你要传入一个动态数组。如: `unique_ptr<int[]> sp(new int[1024]);`。
 
-对于 unique\_ptr 就没这么麻烦了，你可以直接使用`[]`用来标识你要传入一个动态数组。如: `unique_ptr<int[]> sp(new int[1024]);`。
-
-可以看到上面的讲解比较粗糙，对于C++11扩展库 cpp1x.org 不会为大家讲解太多，最多提供一些资源链接和一些个人使用经验。cpp1x.org 只是告诉大家有这么个东西，而具体查文档要比看这篇文章要强多了。
 
 ## 扩展资料 ##
 
