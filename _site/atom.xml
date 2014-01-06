@@ -4,13 +4,172 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2013-12-11T23:51:13+08:00</updated>
+ <updated>2014-01-06T22:30:13+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
    <email>us@sib9.us</email>
  </author>
 
+ 
+ <entry>
+   <title>智能指针</title>
+   <link href="http://sib9.github.io/smart-pointer.html"/>
+   <updated>2013-12-29T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/smart-pointer</id>
+   <content type="html">&lt;p&gt;C++98只支持一个智能指针&lt;a href=&quot;http://www.cplusplus.com/reference/memory/auto_ptr/?kw=auto_ptr&quot;&gt;auto_ptr&lt;/a&gt;,然而auto_ptr实在是太简陋了(赋值导致的指针转移，一直为人诟病)。&lt;/p&gt;
+
+&lt;p&gt;C++11废弃了&lt;code&gt;auto_ptr&lt;/code&gt;，引入了两种智能指针:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;shared_ptr&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;共享拥有对象的所有权，使用引用技术来实现。具体可看: &lt;a href=&quot;http://www.cplusplus.com/reference/memory/shared_ptr/&quot;&gt;http://www.cplusplus.com/reference/memory/shared_ptr/&lt;/a&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;unique_ptr&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;唯一拥有对象的所有权，auto_ptr的替代品，但是修复了auto_ptr的缺陷，指针对象以赋值的方式转让。详细可看: &lt;a href=&quot;http://www.cplusplus.com/reference/memory/unique_ptr&quot;&gt;http://www.cplusplus.com/reference/memory/unique_ptr/&lt;/a&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;C++11允许为智能指针设置一个删除器，当设定一个删除器时，智能指针析构会用指定的删除器取代默认的delete操作。如果你使用指针指针管理的资源不是用new分配的，记得一定要为这个智能指针设定一个删除器。&lt;/p&gt;
+
+&lt;p&gt;其实C++11还存在一种&amp;quot;弱&amp;quot;智能指针，叫&lt;a href=&quot;http://www.cplusplus.com/reference/memory/weak_ptr&quot;&gt;weak_ptr&lt;/a&gt;。它不能控制所指对象的生存期，指向由 shared_ptr 管理的对象(不会改变引用计数)，主要用途是解决智能指针循环引用导致的内存泄漏。&lt;/p&gt;
+
+&lt;p&gt;我们知道不可以为auto_ptr传入一个动态数组，否则会导致未定义的行为(new[]-&amp;gt;delete)。在C++11中的这两个智能指针都可以传入一个动态数组，不过略有不同。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对于&lt;code&gt;share_ptr&lt;/code&gt;，传入一个动态数组，你需要同时为它指定一个删除器。如: &lt;code&gt;shared_ptr&amp;lt;int&amp;gt; sp(new int[1024], [](int *p) {delete[] p;});&lt;/code&gt; 可以看出，我们写一个lambda表达式，用 delete[] 去释放一个数组。&lt;/li&gt;
+&lt;li&gt;对于&lt;code&gt;unique_ptr&lt;/code&gt;就没这么麻烦了，你可以直接使用&lt;code&gt;[]&lt;/code&gt;用来标识你要传入一个动态数组。如: &lt;code&gt;unique_ptr&amp;lt;int[]&amp;gt; sp(new int[1024]);&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;扩展资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Smart_pointer#C.2B.2B_smart_pointers&quot;&gt;C++ smart pointers wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/12030650/when-is-stdweak-ptr-useful&quot;&gt;When is std::weak_ptr useful?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[译]C++阅读列表</title>
+   <link href="http://sib9.github.io/cpp-reading-list.html"/>
+   <updated>2013-12-15T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/cpp-reading-list</id>
+   <content type="html">&lt;p&gt;原文链接: &lt;a href=&quot;http://www.drdobbs.com/cpp/c-reading-list/240155654?pgno=1&quot;&gt;C++ Reading List&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;1. &lt;a href=&quot;http://www.amazon.com/dp/0321563840&quot;&gt;C++ Programming Language, 4th Edition&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/CPP_Programming_Languages_01_full.jpg&quot; alt=&quot;C++ Programming Language&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者: &lt;a href=&quot;http://www.stroustrup.com/&quot;&gt;Bjarne Stroustrup&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这本书堪称C++语言的“圣经”，表达了语言本身以及它的特性，由 C++ 之父 Stroustrup 完成。很多读者可能把 ANSI C++ 文档作为更权威的信息来源，但是它只是对于已经了解这门语言的人一个简洁的参考资源。这本书恰好相反，友好的(详尽的)解释了新特性，以及一些使用建议和应该避免的做法，让读者让容易理解一些特性。就此而言，这本书可以作为一本参考教程。&lt;/p&gt;
+
+&lt;p&gt;这本书没有使用等宽字体，垂直不对齐影响了美观。尽管如此，代码排版比以前的版本好多了。第二个问题是这本书没有完全的涵盖 C++ 语言，第 4 版有 1328 页,原版大约 1000 页。Stroustrup 多介绍了一些库，这些数字表明 C++ 变得更加的复杂。These concerns notwithstanding, I don&amp;#39;t see how serious C++ programmers looking to use the new features of the language can proceed without this work.&lt;/p&gt;
+
+&lt;p&gt;极力推荐这本书！&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_1&quot;&gt;2. &lt;a href=&quot;http://www.amazon.com/Primer-5th-Edition-Stanley-Lippman/product-reviews/0321714113&quot;&gt;C++ Primer, 5th Edition&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/CPP_Primer_02_full.jpg&quot; alt=&quot;C++ Primer, 5th Edition&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者: tanley Lippman, Josée Lajoie, Barbara Moo&lt;/p&gt;
+
+&lt;p&gt;多年以来，C++ Primer 都被作为 C++ 指定教程来，第五版使用 C++11 全部重写，900 页密集的页面描述了 C++ 语言的方方面面。这还是保守说法，它的内容已经远远的超过 primer 这个词可以表达的范畴。没有一节告诉你可以“快速的学习这门语言”，而且坚持不懈的用文字覆盖了语言的每一个方面和 C++ 程序员可能会遇到的问题。有没有怀疑过假如我们让析构函数作为 C++11 中提到的&amp;quot;deleted function&amp;quot;会怎么样呢? 我想过！这本书详细的回答了这个问题。&lt;/p&gt;
+
+&lt;p&gt;这本书只覆盖语言本身，通过讨论库和在附录中介绍了库中的头文件和算法的梗概(如果想详细的了解C++库的话，我建议看 the C++ Standard Library: A Tutorial and Reference，也就是我们下一个讨论的话题)。对比这两本书，Stroustrup 的 C++ Programming Language, 4th Ed. 是这本书的竞争对手，Stroustrup 的书主要是一个参考手册，反之，这本书更偏向应用。讨论内容形如如果你错误的使用特性会导致那些问题，包括了更多的代码，相比而言，比 Stroustrup 的书有更多的指导性。&lt;/p&gt;
+
+&lt;p&gt;我怀疑这本书早期是为了有语言基础的人写的。我不建议把这本书作为入门级书籍(学生或者第一次接触这门语言的人)。但是对于 C++ 开发人员，想去使用 C++11 新特性的人来说的话，这本书是绝佳选择。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_2&quot;&gt;3. &lt;a href=&quot;http://www.amazon.com/dp/0321623215&quot;&gt;The C++ Standard Library, 2nd Edition&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/CPP_StandardLibrary_03_full.jpg&quot; alt=&quot;The C++ Standard Library, 2nd Edition&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者: Nicolai Josuttis&lt;/p&gt;
+
+&lt;p&gt;这是 C++ 标准库经典的教程和参考手册第二版，专门为了C++11而作。不像许多书籍一样覆盖所有的库和API，它不是以解释如何进行函数调用而出名的。它把标准库(大部分STL)划分成子块，然后解释基本组件的设计。只详细讲解了一部分API，最后对其他的API进行概述。章节中会解释设计思想、内部实现、应用以及对不同的选择进行对比。&lt;/p&gt;
+
+&lt;p&gt;那些讨论有说服力、清晰而且非常丰富。例如，在 STL 函数对象和 lambda 用 12 页仅仅解释函数对象是什么和为什么你要用它们。之后作者又解释了预定义函数对象(用另外的12页)。这些都为后面的讨论奠定了基础: lambda 之旅。因此，它的所有讲解超过了1000页。有些解释也非常的精简，完整的代码强调关键的部分，你可以看到精确的看到一个函数怎样使用或者如何实现的。&lt;/p&gt;
+
+&lt;p&gt;这本书的第一版被很多C++程序员当成经典，第二版作为第一版的升级版，必定延续经典，推荐给你们。&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_3&quot;&gt;4. &lt;a href=&quot;http://www.amazon.com/dp/1933988770&quot;&gt;C++ Concurrency in Action&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/CPP_ConcurrencyInAction_04_full.jpg&quot; alt=&quot;C++ Concurrency in Action&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者: Anthony Williams&lt;/p&gt;
+
+&lt;p&gt;This book is a deep dive into concurrency using C++11 features. It&amp;#39;s written by the primary developer and maintainer of the Boost Thread library, which is the basis for much of the language&amp;#39;s new threading support. In sum, it&amp;#39;s written by a highly qualified author.&lt;/p&gt;
+
+&lt;p&gt;It starts off with the basics, assuming the reader has good (even very good) command of the language, but is new to writing parallel code. It steps through the problems posed by concurrency, the solutions and limitations of mutual exclusion, and how they&amp;#39;re implemented in C++11. It then moves through the C++ memory model and atomic types. Finally, it digs into the design of lock-based and lock-free data structures. It&amp;#39;s the best treatment I&amp;#39;ve seen of these topics since Herb Sutter discussed them in our pages.&lt;/p&gt;
+
+&lt;p&gt;The book thoughtfully covers topics of real importance that are frequently overlooked in other treatments; namely, designing code for multithreading and debugging threaded applications. Of these, both treatments are too short in my view. A large part of the book is reference material (almost 130 pages on the C++ threading library alone). And another appendix is a full message-framework all laid out in code with explanations throughout. There&amp;#39;s no doubt the author has done his homework.&lt;/p&gt;
+
+&lt;p&gt;I have a few small complaints, but they are truly small. The first is that you must have in-depth knowledge of C++, good-enough-to-skate-by won&amp;#39;t be enough for this book. Second, the author consigns thread pools to the final chapters under the rubric of &amp;quot;Advanced Threading.&amp;quot; In my opinion, pools mark the point at which concurrency gets really interesting; but here, it&amp;#39;s where the author stops. Predictably, given this orientation, he does not ever address the Actor model, which gets a single passing mention in the index. It&amp;#39;s as if this approach did not exist at all, even though it&amp;#39;s integral to several languages — just not, in Williams&amp;#39; view, C++.&lt;/p&gt;
+
+&lt;p&gt;Overall, these complaints reflect my preferences, rather than any flaws that invalidate the book. Williams&amp;#39; work is an excellent treatment and likely to be the defining title in this area for a long time to come.  &lt;/p&gt;
+
+&lt;p&gt;If you want a closer look at content from this book, we recently published an excerpt from it, in a popular article: &amp;quot;Waiting for One-Off Events with Futures.&amp;quot;&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_4&quot;&gt;5.&lt;a href=&quot;http://www.amazon.com/Secure-Coding-2nd-Software-Engineering/dp/0321822137&quot;&gt;Secure Coding in C and C++, 2nd Edition&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/Secure_Code_CPP_05_full.jpg&quot; alt=&quot;Secure Coding in C and C++, 2nd Edition&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者:  Robert Seacord&lt;/p&gt;
+
+&lt;p&gt;This is the definitive work on writing secure code in C/C++. This new edition, which nearly doubles the size of the original 2005 work, illustrates how much we&amp;#39;ve learned in the interim about attacks on code. In fact, in reading through this book, one feels almost overwhelmed by the variety and imagination of attacks today. However, as the author capably explains, security is more than just the implementation of counter-techniques, but  weaves security throughout the implementation. Only through such a consistent mindset, he argues, can the damage wrought by future attack methods be contained.&lt;/p&gt;
+
+&lt;p&gt;The book details numerous kinds of hacks and what can be done to prevent them or make them so difficult as to discourage the hacker. The explanations are remarkably well written and the code is clear. However, it requires a more-advanced formation than most books on programming: It needs the reader to have a fairly good idea of how C and C++ programs execute and what is happening at the machine level. Because the required information is not provided in the text, it&amp;#39;s not possible to get the true value from the suggestions without having done this homework first.&lt;/p&gt;
+
+&lt;p&gt;For developers who can follow along and understand the inner workings of program execution, this book is not only an excellent guide, but a revelation. For example, Seacord&amp;#39;s discussions of how attacks are enabled by doubly freeing an allocated chunk of memory highlights a feature of this simple coding error that might be completely overlooked if you were not a security expert. The explanation is illuminating.&lt;/p&gt;
+
+&lt;p&gt;The hands-on nature of this volume is exemplified by frequent recommendations of tools to use to verify code and lock down access mechanisms that crackers like to exploit. This is an excellent volume that will very definitely make you a more aware, and certainly better, programmer.&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_5&quot;&gt;6. &lt;a href=&quot;http://www.amazon.com/dp/3642346871&quot;&gt;Real-Time C++&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://image.cpp1x.org/Real_Time_CPP_06_full.jpg&quot; alt=&quot;Real-Time C++&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;作者: Chris Kormanyos&lt;/p&gt;
+
+&lt;p&gt;This is a gentle introduction to using C++11 in real-time projects. The author presents several basic projects and shows how he used C++11 to code them. He starts with a product that targets an Atmel AVR microcontroller, which he programs using the GCC toolchain, explaining along the way: the design, implementation in hardware and code, and finally how to flash and execute the program. It turns on LEDs under various circumstances. He then moves on to more-ambitious projects, such as writing low-level hardware drivers in C++. In the final chapters, he examines extending the standard C++ library and the STL for embedded purposes.&lt;/p&gt;
+
+&lt;p&gt;The book is approachable and the code fairly clean. It shows that C++11 is a reasonable choice for embedded work. Overall, this is a good tutorial for C++ developers who want to get their feet wet in embedded programming, but due to the choice of sample projects, it probably won&amp;#39;t appeal to programmers already active in that line of work.&lt;/p&gt;
+
+&lt;p&gt;笔者注:&lt;/p&gt;
+
+&lt;p&gt;只翻译了前三本书的简介，后面的没有翻译。笔者对并发、安全、Real-Time了解不多，不敢随便翻译(了解相关技术的同学，可以帮忙翻译)。说一下自己的看法：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;C++ Programming Language 和 C++ Primer 这两本书选一本看就行了，对于入门，我推荐前者。有C++基础，我推荐后者。我和这篇文章作者的观点相同，C++ Primer 真的不适合作为入门书籍，门槛高，让人望而却步。&lt;/p&gt;
+
+&lt;p&gt;The C++ Standard Library 这本书看过人的都知道，是非常好的一本工具书籍，目前第二版没有中文版。
+后面这三本书不适合初学者，看了简介以后，个人最想看 C++ Concurrency in Action。&lt;/p&gt;
+
+&lt;p&gt;C++11 增加了很多新的特性和标准库，但是不用看太多的书籍。仅 C++ Primer, 5th Edition 和 The C++ Standard Library, 2nd Edition 这两本书足够。&lt;/p&gt;
+
+&lt;p&gt;C++ 的最大问题在于它的繁杂，给程序员很多奇淫的机会，其实这本身对学 C++ 的人没有太多的好处。语言毕竟最终都是要面向应用的，执迷于技巧容易本末倒置，忽略了真正关注的东西。把 C++ 当成工具对待(从这个角度看C++11，它的确比以前强大了太多)。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;这篇文章原本是答应 &lt;a href=&quot;http://blog.jobbole.com/&quot;&gt;博乐在线&lt;/a&gt; 要翻译的，结果因为当时没时间就没有翻译。昨天翻译才发现自己确实没有能力全部翻译，就成了现在的半成品，也就不再投稿给 博乐在线 了，抱歉。&lt;/em&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>主流编译器支持情况</title>
+   <link href="http://sib9.github.io/compiler-support.html"/>
+   <updated>2013-12-15T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/compiler-support</id>
+   <content type="html">&lt;p&gt;主流编译对C++11的支持情况，欢迎补充:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GCC: &lt;a href=&quot;http://gcc.gnu.org/projects/cxx0x.html&quot;&gt;C++0x/C++11 Support in GCC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VS2010: &lt;a href=&quot;http://blogs.msdn.com/b/vcblog/archive/2010/04/06/c-0x-core-language-features-in-vc10-the-table.aspx&quot;&gt;C++0x Core Language Features In VC10: The Table&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VS2012: &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/hh567368(v=vs.110).aspx&quot;&gt;C++11 Features (Modern C++)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VS2013: &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/hh567368(v=vs.120).aspx&quot;&gt;Support For C++11 Features (Modern C++)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Clang: &lt;a href=&quot;http://clang.llvm.org/cxx_status.html&quot;&gt;C++14, C++11 and C++98 Support in Clang&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>类型别名</title>
@@ -803,7 +962,7 @@ std::vector&amp;lt;SomeType&amp;lt;(1&amp;gt;2)&amp;gt;&amp;gt; x1; // Interpret
  </entry>
  
  <entry>
-   <title>基于范围的 for 循环</title>
+   <title>基于范围的for循环</title>
    <link href="http://sib9.github.io/Range-based-For-Loop.html"/>
    <updated>2013-07-13T00:00:00+08:00</updated>
    <id>http://sib9.github.io/Range-based-For-Loop</id>

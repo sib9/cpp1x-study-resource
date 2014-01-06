@@ -1,10 +1,13 @@
 
-http://sib9.github.io/atom.xml
-http://sib9.github.io/sitemap.txt
 http://sib9.github.io/rss.xml
+http://sib9.github.io/sitemap.txt
 http://sib9.github.io/404.html
+http://sib9.github.io/atom.xml
 http://sib9.github.io/index.html
 
+http://sib9.github.io/smart-pointer.html
+http://sib9.github.io/cpp-reading-list.html
+http://sib9.github.io/compiler-support.html
 http://sib9.github.io/type-alias.html
 http://sib9.github.io/constexpr-and-const-expression.html
 http://sib9.github.io/Unrestricted-Unions.html

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>显式重载和 Final 操作符</title>
+   <title>主流编译器支持情况</title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -35,66 +35,17 @@
   
 <div id="page">
 	
-  <h1 class="emphnext">显式重载和 Final 操作符</h1>
+  <h1 class="emphnext">主流编译器支持情况</h1>
 
   <div id="content">
-    <p>译自: <a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final">Explicit overrides and final</a></p>
-
-<p>在 C++03 中，重载基类的虚函数，不能达到重载的效果。比如：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct Base {
-    virtual void some_func(float a)
-        {
-            std::cout &lt;&lt; &quot;Base: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-
-struct Derived : Base {
-    virtual void some_func(int a)
-        {
-            std::cout &lt;&lt; &quot;Derived: &quot;  &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-</code></pre></div>
-<p>当用基类指针指向派生类对象时，调用<code>some_func</code>并不调用派生类的 <code>some_func</code>(也就是上面说的不能达到重载的效果，但是编译器并没有报错)。这是因为它们有不同的函数签名(signature)，它们是两个不同的虚函数。常常会因为修改了基类的函数参数，却没有同步派生类的函数参数，引发很多问题(多态)。</p>
-
-<p>C++11 提供显式重载语法来解决这个问题：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct NewBase {
-    virtual void some_func(float a)
-        {
-            std::cout &lt;&lt; &quot;NewBase: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-
-struct NewDerived : NewBase {
-    virtual void some_func(int a) override  // ill-formed - doesn&#39;t override a base class method
-        {
-            std::cout &lt;&lt; &quot;NewDerived: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-</code></pre></div>
-<p>显示的使用<code>override</code>告诉编译器检查基类(们)去检查是否有虚函数有确定的签名，如果没有的话，编译器会报错。(译者住：这样的话，相当与把问题放大了，让用户明确自己的使用)。</p>
-
-<p>C++11 也提供了阻止派生类重载基类函数的方法，是用<code>final</code>来实现的：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct Base1 final{};
-
-struct Derived : Base final {};  // ill-formed because the class Base1 has been marked final
-
-struct Base2 {
-    virtual void f() final;
-};
-
-struct Derived2 : Base2 {
-    virtual void f(); // ill-formed because the class Base1 has been marked final
-};
-</code></pre></div>
-<p><code>Base1</code>是<code>final</code>类，<code>virtual void f() final</code>是<code>final</code>函数，显示告诉编译器该类/虚函数是不能用来派生/重载的，</p>
-
-<p>注意，不管是<code>override</code>还是<code>final</code>都不是语言的关键字，它们是技术上的标志符(<code>technically identifiers</code>)；只有在指定的上下文中才有特定的含义。在其他情况下，它们都是无意义的标志符。</p>
-
-<h2 id="toc_0">扩展资料</h2>
+    <p>主流编译对C++11的支持情况，欢迎补充:</p>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final">Explicit overrides and final</a></li>
+<li>GCC: <a href="http://gcc.gnu.org/projects/cxx0x.html">C++0x/C++11 Support in GCC</a></li>
+<li>VS2010: <a href="http://blogs.msdn.com/b/vcblog/archive/2010/04/06/c-0x-core-language-features-in-vc10-the-table.aspx">C++0x Core Language Features In VC10: The Table</a></li>
+<li>VS2012: <a href="http://msdn.microsoft.com/en-us/library/hh567368(v=vs.110).aspx">C++11 Features (Modern C++)</a></li>
+<li>VS2013: <a href="http://msdn.microsoft.com/en-us/library/hh567368(v=vs.120).aspx">Support For C++11 Features (Modern C++)</a></li>
+<li>Clang: <a href="http://clang.llvm.org/cxx_status.html">C++14, C++11 and C++98 Support in Clang</a></li>
 </ul>
 
   </div>
@@ -113,10 +64,10 @@ struct Derived2 : Base2 {
     <div id="post_rel">
       <!-- <p><a href="/">目录(首页)</a></p> -->
       <!--  -->
-      <!-- <p>上一篇: <a href="/Control-and-query-object-alignment.html" title="控制和查询对象布局">控制和查询对象布局</a></p> -->
+      <!-- <p>上一篇: <a href="/type-alias.html" title="类型别名">类型别名</a></p> -->
       <!--  -->
       <!--  -->
-      <!-- <p>下一篇: <a href="/Explicitly-Defaulted-and-Deleted-Special-Member-Functions.html" title="显式使用或禁用特定的成员函数">显式使用或禁用特定的成员函数</a></p> -->
+      <!-- <p>下一篇: <a href="/cpp-reading-list.html" title="[译]C++阅读列表">[译]C++阅读列表</a></p> -->
       <!--  -->
       <h3>目录</h3>
        
@@ -282,7 +233,7 @@ struct Derived2 : Base2 {
     
       
       	
-      	<li class="active"><a href="/Explicit-Overrides-And-Final.html" class="active">显式重载和 Final 操作符</a></li>
+      	<li><a href="/Explicit-Overrides-And-Final.html">显式重载和 Final 操作符</a></li>
       	
       
     
@@ -318,7 +269,7 @@ struct Derived2 : Base2 {
     
       
       	
-      	<li><a href="/compiler-support.html">主流编译器支持情况</a></li>
+      	<li class="active"><a href="/compiler-support.html" class="active">主流编译器支持情况</a></li>
       	
       
     

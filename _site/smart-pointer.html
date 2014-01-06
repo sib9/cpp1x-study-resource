@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>显式重载和 Final 操作符</title>
+   <title>智能指针</title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -35,66 +35,38 @@
   
 <div id="page">
 	
-  <h1 class="emphnext">显式重载和 Final 操作符</h1>
+  <h1 class="emphnext">智能指针</h1>
 
   <div id="content">
-    <p>译自: <a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final">Explicit overrides and final</a></p>
+    <p>C++98只支持一个智能指针<a href="http://www.cplusplus.com/reference/memory/auto_ptr/?kw=auto_ptr">auto_ptr</a>,然而auto_ptr实在是太简陋了(赋值导致的指针转移，一直为人诟病)。</p>
 
-<p>在 C++03 中，重载基类的虚函数，不能达到重载的效果。比如：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct Base {
-    virtual void some_func(float a)
-        {
-            std::cout &lt;&lt; &quot;Base: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
+<p>C++11废弃了<code>auto_ptr</code>，引入了两种智能指针:</p>
 
-struct Derived : Base {
-    virtual void some_func(int a)
-        {
-            std::cout &lt;&lt; &quot;Derived: &quot;  &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-</code></pre></div>
-<p>当用基类指针指向派生类对象时，调用<code>some_func</code>并不调用派生类的 <code>some_func</code>(也就是上面说的不能达到重载的效果，但是编译器并没有报错)。这是因为它们有不同的函数签名(signature)，它们是两个不同的虚函数。常常会因为修改了基类的函数参数，却没有同步派生类的函数参数，引发很多问题(多态)。</p>
+<ol>
+<li><p><code>shared_ptr</code></p>
 
-<p>C++11 提供显式重载语法来解决这个问题：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct NewBase {
-    virtual void some_func(float a)
-        {
-            std::cout &lt;&lt; &quot;NewBase: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
+<p>共享拥有对象的所有权，使用引用技术来实现。具体可看: <a href="http://www.cplusplus.com/reference/memory/shared_ptr/">http://www.cplusplus.com/reference/memory/shared_ptr/</a>。</p></li>
+<li><p><code>unique_ptr</code></p>
 
-struct NewDerived : NewBase {
-    virtual void some_func(int a) override  // ill-formed - doesn&#39;t override a base class method
-        {
-            std::cout &lt;&lt; &quot;NewDerived: &quot; &lt;&lt; a &lt;&lt; std::endl;
-        }
-};
-</code></pre></div>
-<p>显示的使用<code>override</code>告诉编译器检查基类(们)去检查是否有虚函数有确定的签名，如果没有的话，编译器会报错。(译者住：这样的话，相当与把问题放大了，让用户明确自己的使用)。</p>
+<p>唯一拥有对象的所有权，auto_ptr的替代品，但是修复了auto_ptr的缺陷，指针对象以赋值的方式转让。详细可看: <a href="http://www.cplusplus.com/reference/memory/unique_ptr">http://www.cplusplus.com/reference/memory/unique_ptr/</a>。</p></li>
+</ol>
 
-<p>C++11 也提供了阻止派生类重载基类函数的方法，是用<code>final</code>来实现的：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">struct Base1 final{};
+<p>C++11允许为智能指针设置一个删除器，当设定一个删除器时，智能指针析构会用指定的删除器取代默认的delete操作。如果你使用指针指针管理的资源不是用new分配的，记得一定要为这个智能指针设定一个删除器。</p>
 
-struct Derived : Base final {};  // ill-formed because the class Base1 has been marked final
+<p>其实C++11还存在一种&quot;弱&quot;智能指针，叫<a href="http://www.cplusplus.com/reference/memory/weak_ptr">weak_ptr</a>。它不能控制所指对象的生存期，指向由 shared_ptr 管理的对象(不会改变引用计数)，主要用途是解决智能指针循环引用导致的内存泄漏。</p>
 
-struct Base2 {
-    virtual void f() final;
-};
+<p>我们知道不可以为auto_ptr传入一个动态数组，否则会导致未定义的行为(new[]-&gt;delete)。在C++11中的这两个智能指针都可以传入一个动态数组，不过略有不同。</p>
 
-struct Derived2 : Base2 {
-    virtual void f(); // ill-formed because the class Base1 has been marked final
-};
-</code></pre></div>
-<p><code>Base1</code>是<code>final</code>类，<code>virtual void f() final</code>是<code>final</code>函数，显示告诉编译器该类/虚函数是不能用来派生/重载的，</p>
-
-<p>注意，不管是<code>override</code>还是<code>final</code>都不是语言的关键字，它们是技术上的标志符(<code>technically identifiers</code>)；只有在指定的上下文中才有特定的含义。在其他情况下，它们都是无意义的标志符。</p>
+<ul>
+<li>对于<code>share_ptr</code>，传入一个动态数组，你需要同时为它指定一个删除器。如: <code>shared_ptr&lt;int&gt; sp(new int[1024], [](int *p) {delete[] p;});</code> 可以看出，我们写一个lambda表达式，用 delete[] 去释放一个数组。</li>
+<li>对于<code>unique_ptr</code>就没这么麻烦了，你可以直接使用<code>[]</code>用来标识你要传入一个动态数组。如: <code>unique_ptr&lt;int[]&gt; sp(new int[1024]);</code>。</li>
+</ul>
 
 <h2 id="toc_0">扩展资料</h2>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final">Explicit overrides and final</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Smart_pointer#C.2B.2B_smart_pointers">C++ smart pointers wikipedia</a></li>
+<li><a href="http://stackoverflow.com/questions/12030650/when-is-stdweak-ptr-useful">When is std::weak_ptr useful?</a></li>
 </ul>
 
   </div>
@@ -113,10 +85,8 @@ struct Derived2 : Base2 {
     <div id="post_rel">
       <!-- <p><a href="/">目录(首页)</a></p> -->
       <!--  -->
-      <!-- <p>上一篇: <a href="/Control-and-query-object-alignment.html" title="控制和查询对象布局">控制和查询对象布局</a></p> -->
+      <!-- <p>上一篇: <a href="/cpp-reading-list.html" title="[译]C++阅读列表">[译]C++阅读列表</a></p> -->
       <!--  -->
-      <!--  -->
-      <!-- <p>下一篇: <a href="/Explicitly-Defaulted-and-Deleted-Special-Member-Functions.html" title="显式使用或禁用特定的成员函数">显式使用或禁用特定的成员函数</a></p> -->
       <!--  -->
       <h3>目录</h3>
        
@@ -282,7 +252,7 @@ struct Derived2 : Base2 {
     
       
       	
-      	<li class="active"><a href="/Explicit-Overrides-And-Final.html" class="active">显式重载和 Final 操作符</a></li>
+      	<li><a href="/Explicit-Overrides-And-Final.html">显式重载和 Final 操作符</a></li>
       	
       
     
@@ -366,7 +336,7 @@ struct Derived2 : Base2 {
     
       
       	
-      	<li><a href="/smart-pointer.html">智能指针</a></li>
+      	<li class="active"><a href="/smart-pointer.html" class="active">智能指针</a></li>
       	
       
     
