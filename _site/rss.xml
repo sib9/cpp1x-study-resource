@@ -5,10 +5,21 @@
         <description>CPP1x-STUDY-RESOURCE - Sib9</description>
         <link>http://sib9.github.io</link>
         <link>http://sib9.github.io</link>
-        <lastBuildDate>2014-01-09T22:12:38+08:00</lastBuildDate>
-        <pubDate>2014-01-09T22:12:38+08:00</pubDate>
+        <lastBuildDate>2014-01-14T23:03:28+08:00</lastBuildDate>
+        <pubDate>2014-01-14T23:03:28+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>[Bjarne Stroustrup]C++本质</title>
+                <description>&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XNjExNTg1Nzg4/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
+
+&lt;p&gt;ppt下载地址: &lt;a href=&quot;http://vdisk.weibo.com/s/G-kaugh7dbcL&quot;&gt;http://vdisk.weibo.com/s/G-kaugh7dbcL&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp.html</link>
+                <guid>http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp</guid>
+                <pubDate>2014-01-14T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>智能指针</title>

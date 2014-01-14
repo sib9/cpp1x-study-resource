@@ -4,13 +4,24 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2014-01-09T22:12:38+08:00</updated>
+ <updated>2014-01-14T23:03:28+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
    <email>us@sib9.us</email>
  </author>
 
+ 
+ <entry>
+   <title>[Bjarne Stroustrup]C++本质</title>
+   <link href="http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp.html"/>
+   <updated>2014-01-14T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp</id>
+   <content type="html">&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XNjExNTg1Nzg4/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
+
+&lt;p&gt;ppt下载地址: &lt;a href=&quot;http://vdisk.weibo.com/s/G-kaugh7dbcL&quot;&gt;http://vdisk.weibo.com/s/G-kaugh7dbcL&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>智能指针</title>

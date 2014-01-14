@@ -5,6 +5,7 @@ http://sib9.github.io/404.html
 http://sib9.github.io/atom.xml
 http://sib9.github.io/index.html
 
+http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp.html
 http://sib9.github.io/smart-pointer.html
 http://sib9.github.io/cpp-reading-list.html
 http://sib9.github.io/compiler-support.html
