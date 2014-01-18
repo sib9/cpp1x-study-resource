@@ -21,7 +21,7 @@ category : "Language"
         return new_value;
     }
 
-`double\_values` 中 new\_value 的构造是必须的，原则上来说，有两次拷贝：一次是返回 new\_value 时，会产生一个临时对象，另外一次是在调用 double\_value 时产生的，比如 `v = double_values(v);`，第一次拷贝由编译器进行一定的优化，而第二次调用 `vector` 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。
+`double_values` 中 `new_value` 的构造是必须的，原则上来说，有两次拷贝：一次是返回 `new_value` 时，会产生一个临时对象，另外一次是在调用 `double_value` 时产生的，比如 `v = double_values(v);`，第一次拷贝由编译器进行一定的优化，而第二次调用 `vector` 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。
 
 ## 解决方法 ##
 
@@ -29,11 +29,12 @@ category : "Language"
 
 在 C++11 中，提供了 move constructor 和 move assignment 来解决这种问题。move语义可以减少很多不必须要的临时对象拷贝操作，并且保证从临时对象中拿到的资源是安全的。
 
-move 语义的实现依赖于`(右值引用)rvalue-reference`。好吧，我们先来说说右值引用。
+move 语义的实现依赖于`(右值引用)rvalue-reference`。在介绍右值引用之前，先简单介绍一下左值和右值的概念：
 
-### 右值引用  ###
++ Things that are declared as rvalue reference can be lvalues or rvalues. The distinguishing criterion is: if it has a name, then it is an lvalue. Otherwise, it is an rvalue.
++ An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues, An expression is an rvalue if it results in a temporary object
 
-简单来讲，左值：`An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues`，右值: `An expression is an rvalue if it results in a temporary object`。我看过一些资料，大体上可以去这么去理解。细节部分还是挺多的，如果关心的话可以去看`资料`中的[http://www.caole.net/diary/lvalue.html](http://www.caole.net/diary/lvalue.html)，讲的挺不错的。
+### 右值引用 ###
 
 右值引用会和一个临时对象绑定。比如，在 C++11 之前，如果你有一个临时对象，你可以用`regular`或者`lvalue reference` 去绑定它，但是仅仅是在`const`的情况下：
 
@@ -258,8 +259,6 @@ move 语义的实现依赖于`(右值引用)rvalue-reference`。好吧，我们�
 
 总结：左值和右值引用是左值表达式。不同之处在于左值引用一个左值的常量引用，而右值只是一个右值的引用。有点像指针和它所指对象的区别。指向的是右值，但是，我们用右值自身的时候，它就是一个左值。
 
-ps: 这段的翻译实在是有些揪心，我自己都看不下去了。针对这个问题，我的理解是：“右值生命周期很短，并且对于一个右值我们只能使用一次，如果使用了多次，会拷贝生成一个本地对象，也就是我们实际用的不再是临时对象了。这个时候我们使用的是本地对象，和临时对象扯不上什么关系了，所以调用的是 copy constructor 而不是 move constructor”。可能作者理解的更深一些吧，把我看的都有些凌乱了。
-
 #### std::move ####
 
 解决上面问题的办法就是使用 `std::move`，在 `<utility>` 中，`std::move` 是这样解释的：`ok, honest to God I know I have an lvalue, but I want it to be an rvalue.`，`std::move` 本身没有做任何移动的操作；它只是把一个左值转换成右值，因此，你可以在我们的 `move constructor` 中调用它来实现转换。我们代码可能会这样去实现：
@@ -290,7 +289,7 @@ ps: 这段的翻译实在是有些揪心，我自己都看不下去了。针对�
 
 #### std::move 的工作机制 ####
 
-你可能想过，怎么样去写一个像 `std::move` 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是[类型转换](http://www.cprogramming.com/tutorial/lesson11.html)。`std::move`做了很多的调用操作，但是它的核心操作仅仅是使用 static\_cast 转换成右值引用。也就是说，实际上你不需要使用 `move` —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 static\_cast 替代 move 是非常危险的。你应该尽可能的使用 std::move 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。
+你可能想过，怎么样去写一个像 `std::move` 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是[类型转换](http://www.cprogramming.com/tutorial/lesson11.html)。`std::move`做了很多的调用操作，但是它的核心操作仅仅是使用 `static_cast` 转换成右值引用。也就是说，实际上你不需要使用 `move` —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 `static_cast` 替代 move 是非常危险的。你应该尽可能的使用 `std::move` 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。
 
 ### 显式的返回一个右值引用 ###
 
@@ -350,3 +349,9 @@ v    printAddress(getInt());
 + [Move semantics and rvalue references in C++11](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)
 + [typecasting](http://www.cprogramming.com/tutorial/lesson11.html)
 + [static_cast](http://www.cprogramming.com/reference/typecasting/staticcast.html)
+
+
+## 贡献者 ##
+
++ JerryZhang
++ Chengjie Qi

@@ -54,7 +54,7 @@
     return new_value;
 }
 </code></pre></div>
-<p><code>double\_values</code> 中 new_value 的构造是必须的，原则上来说，有两次拷贝：一次是返回 new_value 时，会产生一个临时对象，另外一次是在调用 double_value 时产生的，比如 <code>v = double_values(v);</code>，第一次拷贝由编译器进行一定的优化，而第二次调用 <code>vector</code> 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。</p>
+<p><code>double_values</code> 中 <code>new_value</code> 的构造是必须的，原则上来说，有两次拷贝：一次是返回 <code>new_value</code> 时，会产生一个临时对象，另外一次是在调用 <code>double_value</code> 时产生的，比如 <code>v = double_values(v);</code>，第一次拷贝由编译器进行一定的优化，而第二次调用 <code>vector</code> 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。</p>
 
 <h2 id="toc_1">解决方法</h2>
 
@@ -62,11 +62,14 @@
 
 <p>在 C++11 中，提供了 move constructor 和 move assignment 来解决这种问题。move语义可以减少很多不必须要的临时对象拷贝操作，并且保证从临时对象中拿到的资源是安全的。</p>
 
-<p>move 语义的实现依赖于<code>(右值引用)rvalue-reference</code>。好吧，我们先来说说右值引用。</p>
+<p>move 语义的实现依赖于<code>(右值引用)rvalue-reference</code>。在介绍右值引用之前，先简单介绍一下左值和右值的概念：</p>
+
+<ul>
+<li>Things that are declared as rvalue reference can be lvalues or rvalues. The distinguishing criterion is: if it has a name, then it is an lvalue. Otherwise, it is an rvalue.</li>
+<li>An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues, An expression is an rvalue if it results in a temporary object</li>
+</ul>
 
 <h3 id="toc_2">右值引用</h3>
-
-<p>简单来讲，左值：<code>An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues</code>，右值: <code>An expression is an rvalue if it results in a temporary object</code>。我看过一些资料，大体上可以去这么去理解。细节部分还是挺多的，如果关心的话可以去看<code>资料</code>中的<a href="http://www.caole.net/diary/lvalue.html">http://www.caole.net/diary/lvalue.html</a>，讲的挺不错的。</p>
 
 <p>右值引用会和一个临时对象绑定。比如，在 C++11 之前，如果你有一个临时对象，你可以用<code>regular</code>或者<code>lvalue reference</code> 去绑定它，但是仅仅是在<code>const</code>的情况下：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">const string &amp; name = get_name(); // ok
@@ -283,8 +286,6 @@ ArrayWrapper(ArrayWrapper &amp;&amp; other)
 </code></pre></div>
 <p>总结：左值和右值引用是左值表达式。不同之处在于左值引用一个左值的常量引用，而右值只是一个右值的引用。有点像指针和它所指对象的区别。指向的是右值，但是，我们用右值自身的时候，它就是一个左值。</p>
 
-<p>ps: 这段的翻译实在是有些揪心，我自己都看不下去了。针对这个问题，我的理解是：“右值生命周期很短，并且对于一个右值我们只能使用一次，如果使用了多次，会拷贝生成一个本地对象，也就是我们实际用的不再是临时对象了。这个时候我们使用的是本地对象，和临时对象扯不上什么关系了，所以调用的是 copy constructor 而不是 move constructor”。可能作者理解的更深一些吧，把我看的都有些凌乱了。</p>
-
 <h4 id="toc_4">std::move</h4>
 
 <p>解决上面问题的办法就是使用 <code>std::move</code>，在 <code>&lt;utility&gt;</code> 中，<code>std::move</code> 是这样解释的：<code>ok, honest to God I know I have an lvalue, but I want it to be an rvalue.</code>，<code>std::move</code> 本身没有做任何移动的操作；它只是把一个左值转换成右值，因此，你可以在我们的 <code>move constructor</code> 中调用它来实现转换。我们代码可能会这样去实现：</p>
@@ -313,7 +314,7 @@ ArrayWrapper(ArrayWrapper&amp;&amp; other)
 
 <h4 id="toc_7">std::move 的工作机制</h4>
 
-<p>你可能想过，怎么样去写一个像 <code>std::move</code> 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是<a href="http://www.cprogramming.com/tutorial/lesson11.html">类型转换</a>。<code>std::move</code>做了很多的调用操作，但是它的核心操作仅仅是使用 static_cast 转换成右值引用。也就是说，实际上你不需要使用 <code>move</code> —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 static_cast 替代 move 是非常危险的。你应该尽可能的使用 std::move 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。</p>
+<p>你可能想过，怎么样去写一个像 <code>std::move</code> 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是<a href="http://www.cprogramming.com/tutorial/lesson11.html">类型转换</a>。<code>std::move</code>做了很多的调用操作，但是它的核心操作仅仅是使用 <code>static_cast</code> 转换成右值引用。也就是说，实际上你不需要使用 <code>move</code> —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 <code>static_cast</code> 替代 move 是非常危险的。你应该尽可能的使用 <code>std::move</code> 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。</p>
 
 <h3 id="toc_8">显式的返回一个右值引用</h3>
 
@@ -371,6 +372,13 @@ printAddress(x);
 <li><a href="http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html">Move semantics and rvalue references in C++11</a></li>
 <li><a href="http://www.cprogramming.com/tutorial/lesson11.html">typecasting</a></li>
 <li><a href="http://www.cprogramming.com/reference/typecasting/staticcast.html">static_cast</a></li>
+</ul>
+
+<h2 id="toc_12">贡献者</h2>
+
+<ul>
+<li>JerryZhang</li>
+<li>Chengjie Qi</li>
 </ul>
 
   </div>

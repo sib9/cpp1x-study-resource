@@ -4,7 +4,7 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2014-01-14T23:03:28+08:00</updated>
+ <updated>2014-01-19T00:22:29+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
@@ -19,7 +19,7 @@
    <id>http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp</id>
    <content type="html">&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XNjExNTg1Nzg4/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
 
-&lt;p&gt;ppt下载地址: &lt;a href=&quot;http://vdisk.weibo.com/s/G-kaugh7dbcL&quot;&gt;http://vdisk.weibo.com/s/G-kaugh7dbcL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ppt 下载地址: &lt;a href=&quot;http://vdisk.weibo.com/s/G-kaugh7dbcL&quot;&gt;http://vdisk.weibo.com/s/G-kaugh7dbcL&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -1039,7 +1039,7 @@ std::cout &amp;lt;&amp;lt; std::endl;
     return new_value;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;double\_values&lt;/code&gt; 中 new_value 的构造是必须的，原则上来说，有两次拷贝：一次是返回 new_value 时，会产生一个临时对象，另外一次是在调用 double_value 时产生的，比如 &lt;code&gt;v = double_values(v);&lt;/code&gt;，第一次拷贝由编译器进行一定的优化，而第二次调用 &lt;code&gt;vector&lt;/code&gt; 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;double_values&lt;/code&gt; 中 &lt;code&gt;new_value&lt;/code&gt; 的构造是必须的，原则上来说，有两次拷贝：一次是返回 &lt;code&gt;new_value&lt;/code&gt; 时，会产生一个临时对象，另外一次是在调用 &lt;code&gt;double_value&lt;/code&gt; 时产生的，比如 &lt;code&gt;v = double_values(v);&lt;/code&gt;，第一次拷贝由编译器进行一定的优化，而第二次调用 &lt;code&gt;vector&lt;/code&gt; 的赋值运算符，需要复制所有的数据，也就是需要新的内存，既而迭代拷贝数据，之后临时对象进行析构。&lt;/p&gt;
 
 &lt;h2 id=&quot;toc_1&quot;&gt;解决方法&lt;/h2&gt;
 
@@ -1047,11 +1047,14 @@ std::cout &amp;lt;&amp;lt; std::endl;
 
 &lt;p&gt;在 C++11 中，提供了 move constructor 和 move assignment 来解决这种问题。move语义可以减少很多不必须要的临时对象拷贝操作，并且保证从临时对象中拿到的资源是安全的。&lt;/p&gt;
 
-&lt;p&gt;move 语义的实现依赖于&lt;code&gt;(右值引用)rvalue-reference&lt;/code&gt;。好吧，我们先来说说右值引用。&lt;/p&gt;
+&lt;p&gt;move 语义的实现依赖于&lt;code&gt;(右值引用)rvalue-reference&lt;/code&gt;。在介绍右值引用之前，先简单介绍一下左值和右值的概念：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Things that are declared as rvalue reference can be lvalues or rvalues. The distinguishing criterion is: if it has a name, then it is an lvalue. Otherwise, it is an rvalue.&lt;/li&gt;
+&lt;li&gt;An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues, An expression is an rvalue if it results in a temporary object&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;toc_2&quot;&gt;右值引用&lt;/h3&gt;
-
-&lt;p&gt;简单来讲，左值：&lt;code&gt;An lvalue is an expression whose address can be taken, a locator value--essentially, an lvalue provides a (semi)permanent piece of memory. You can make assignments to lvalues&lt;/code&gt;，右值: &lt;code&gt;An expression is an rvalue if it results in a temporary object&lt;/code&gt;。我看过一些资料，大体上可以去这么去理解。细节部分还是挺多的，如果关心的话可以去看&lt;code&gt;资料&lt;/code&gt;中的&lt;a href=&quot;http://www.caole.net/diary/lvalue.html&quot;&gt;http://www.caole.net/diary/lvalue.html&lt;/a&gt;，讲的挺不错的。&lt;/p&gt;
 
 &lt;p&gt;右值引用会和一个临时对象绑定。比如，在 C++11 之前，如果你有一个临时对象，你可以用&lt;code&gt;regular&lt;/code&gt;或者&lt;code&gt;lvalue reference&lt;/code&gt; 去绑定它，但是仅仅是在&lt;code&gt;const&lt;/code&gt;的情况下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;const string &amp;amp; name = get_name(); // ok
@@ -1268,8 +1271,6 @@ ArrayWrapper(ArrayWrapper &amp;amp;&amp;amp; other)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;总结：左值和右值引用是左值表达式。不同之处在于左值引用一个左值的常量引用，而右值只是一个右值的引用。有点像指针和它所指对象的区别。指向的是右值，但是，我们用右值自身的时候，它就是一个左值。&lt;/p&gt;
 
-&lt;p&gt;ps: 这段的翻译实在是有些揪心，我自己都看不下去了。针对这个问题，我的理解是：“右值生命周期很短，并且对于一个右值我们只能使用一次，如果使用了多次，会拷贝生成一个本地对象，也就是我们实际用的不再是临时对象了。这个时候我们使用的是本地对象，和临时对象扯不上什么关系了，所以调用的是 copy constructor 而不是 move constructor”。可能作者理解的更深一些吧，把我看的都有些凌乱了。&lt;/p&gt;
-
 &lt;h4 id=&quot;toc_4&quot;&gt;std::move&lt;/h4&gt;
 
 &lt;p&gt;解决上面问题的办法就是使用 &lt;code&gt;std::move&lt;/code&gt;，在 &lt;code&gt;&amp;lt;utility&amp;gt;&lt;/code&gt; 中，&lt;code&gt;std::move&lt;/code&gt; 是这样解释的：&lt;code&gt;ok, honest to God I know I have an lvalue, but I want it to be an rvalue.&lt;/code&gt;，&lt;code&gt;std::move&lt;/code&gt; 本身没有做任何移动的操作；它只是把一个左值转换成右值，因此，你可以在我们的 &lt;code&gt;move constructor&lt;/code&gt; 中调用它来实现转换。我们代码可能会这样去实现：&lt;/p&gt;
@@ -1298,7 +1299,7 @@ ArrayWrapper(ArrayWrapper&amp;amp;&amp;amp; other)
 
 &lt;h4 id=&quot;toc_7&quot;&gt;std::move 的工作机制&lt;/h4&gt;
 
-&lt;p&gt;你可能想过，怎么样去写一个像 &lt;code&gt;std::move&lt;/code&gt; 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是&lt;a href=&quot;http://www.cprogramming.com/tutorial/lesson11.html&quot;&gt;类型转换&lt;/a&gt;。&lt;code&gt;std::move&lt;/code&gt;做了很多的调用操作，但是它的核心操作仅仅是使用 static_cast 转换成右值引用。也就是说，实际上你不需要使用 &lt;code&gt;move&lt;/code&gt; —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 static_cast 替代 move 是非常危险的。你应该尽可能的使用 std::move 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。&lt;/p&gt;
+&lt;p&gt;你可能想过，怎么样去写一个像 &lt;code&gt;std::move&lt;/code&gt; 这样的函数呢？你怎么才能实现把左值引用转换成右值引用呢？可能你已经想到了，是&lt;a href=&quot;http://www.cprogramming.com/tutorial/lesson11.html&quot;&gt;类型转换&lt;/a&gt;。&lt;code&gt;std::move&lt;/code&gt;做了很多的调用操作，但是它的核心操作仅仅是使用 &lt;code&gt;static_cast&lt;/code&gt; 转换成右值引用。也就是说，实际上你不需要使用 &lt;code&gt;move&lt;/code&gt; —— 你还是要用的，尽管这里面的操作很清晰。事实是这个转换是必要的，这是一个好的习惯！意味着你的转换不会出问题，如果用 &lt;code&gt;static_cast&lt;/code&gt; 替代 move 是非常危险的。你应该尽可能的使用 &lt;code&gt;std::move&lt;/code&gt; 去把一个左值转换成右值，确保右值永远不会绑定到自己的左值上。&lt;/p&gt;
 
 &lt;h3 id=&quot;toc_8&quot;&gt;显式的返回一个右值引用&lt;/h3&gt;
 
@@ -1356,6 +1357,13 @@ printAddress(x);
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html&quot;&gt;Move semantics and rvalue references in C++11&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/tutorial/lesson11.html&quot;&gt;typecasting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/reference/typecasting/staticcast.html&quot;&gt;static_cast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;toc_12&quot;&gt;贡献者&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JerryZhang&lt;/li&gt;
+&lt;li&gt;Chengjie Qi&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
