@@ -1,9 +1,9 @@
 
+http://sib9.github.io/rss.xml
+http://sib9.github.io/sitemap.txt
+http://sib9.github.io/404.html
 http://sib9.github.io/atom.xml
 http://sib9.github.io/index.html
-http://sib9.github.io/rss.xml
-http://sib9.github.io/404.html
-http://sib9.github.io/sitemap.txt
 
 http://sib9.github.io/Bjarne-Stroustrup-the-essence-of-cpp.html
 http://sib9.github.io/smart-pointer.html
@@ -32,3 +32,4 @@ http://sib9.github.io/Explicitly-Defaulted-and-Deleted-Special-Member-Functions.
 http://sib9.github.io/Explicit-Overrides-And-Final.html
 http://sib9.github.io/Control-and-query-object-alignment.html
 http://sib9.github.io/Alternative-Function-Syntax.html
+http://sib9.github.io/cpp11-open-source-projs.html

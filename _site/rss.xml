@@ -5,8 +5,8 @@
         <description>CPP1x-STUDY-RESOURCE - Sib9</description>
         <link>http://sib9.github.io</link>
         <link>http://sib9.github.io</link>
-        <lastBuildDate>2014-01-19T00:22:29+08:00</lastBuildDate>
-        <pubDate>2014-01-19T00:22:29+08:00</pubDate>
+        <lastBuildDate>2014-02-07T23:09:44+08:00</lastBuildDate>
+        <pubDate>2014-02-07T23:09:44+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -1987,6 +1987,23 @@ auto SomeStruct::func_name(int x, int y) -&amp;gt; int {
                 <link>http://sib9.github.io/Alternative-Function-Syntax.html</link>
                 <guid>http://sib9.github.io/Alternative-Function-Syntax</guid>
                 <pubDate>2013-07-13T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>C++11开源项目汇总</title>
+                <description>&lt;p&gt;以下排名不分先后:&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;&lt;a href=&quot;https://github.com/facebook/folly&quot;&gt;facebook/folly&lt;/a&gt;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Folly (acronymed loosely after Facebook Open Source Library) is a library of C++11 components designed with practicality and efficiency in mind. It complements (as opposed to competing against) offerings such as Boost and of course std. In fact, we embark on defining our own component only when something we need is either not available, or does not meet the needed performance profile. -- &lt;a href=&quot;https://github.com/facebook/folly/blob/master/folly/docs/Overview.md&quot;&gt;Overview&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;欢迎不充～&lt;/p&gt;
+</description>
+                <link>http://sib9.github.io/cpp11-open-source-projs.html</link>
+                <guid>http://sib9.github.io/cpp11-open-source-projs</guid>
+                <pubDate>2013-02-07T00:00:00+08:00</pubDate>
         </item>
 
 

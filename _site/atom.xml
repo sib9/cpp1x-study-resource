@@ -4,7 +4,7 @@
  <title>CPP1x-STUDY-RESOURCE</title>
  <link href="http://sib9.github.io/" rel="self"/>
  <link href="http://sib9.github.io"/>
- <updated>2014-01-19T00:22:29+08:00</updated>
+ <updated>2014-02-07T23:09:44+08:00</updated>
  <id>http://sib9.github.io</id>
  <author>
    <name>Sib9</name>
@@ -1988,6 +1988,23 @@ auto SomeStruct::func_name(int x, int y) -&amp;gt; int {
 &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax&quot;&gt;Alternative function syntax&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html&quot;&gt;Improved Type Inference in C++11: auto, decltype, and the new function declaration syntax&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++11开源项目汇总</title>
+   <link href="http://sib9.github.io/cpp11-open-source-projs.html"/>
+   <updated>2013-02-07T00:00:00+08:00</updated>
+   <id>http://sib9.github.io/cpp11-open-source-projs</id>
+   <content type="html">&lt;p&gt;以下排名不分先后:&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_0&quot;&gt;&lt;a href=&quot;https://github.com/facebook/folly&quot;&gt;facebook/folly&lt;/a&gt;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Folly (acronymed loosely after Facebook Open Source Library) is a library of C++11 components designed with practicality and efficiency in mind. It complements (as opposed to competing against) offerings such as Boost and of course std. In fact, we embark on defining our own component only when something we need is either not available, or does not meet the needed performance profile. -- &lt;a href=&quot;https://github.com/facebook/folly/blob/master/folly/docs/Overview.md&quot;&gt;Overview&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;欢迎不充～&lt;/p&gt;
 </content>
  </entry>
  

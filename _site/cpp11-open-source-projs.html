@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>基于范围的for循环</title>
+   <title>C++11开源项目汇总</title>
    <meta name="author" content="Sib9" />
 
    <link rel="start" href="/" />
@@ -35,47 +35,18 @@
   
 <div id="page">
 	
-  <h1 class="emphnext">基于范围的for循环</h1>
+  <h1 class="emphnext">C++11开源项目汇总</h1>
 
   <div id="content">
-    <p>译自 <a href="https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop">Range-based for loop</a></p>
+    <p>以下排名不分先后:</p>
 
-<p>C++11 扩展一种新的遍历列表的 for 循环语法(range-base for，基于范围的 for 循环)，使得遍历列表非常简单了。可以遍历 C 式的数组、初始化列表(initializer lists)，和定义了 begin()/end() 函数(返回迭代器)的类型。所有的标准库容器都可以使用 range-base for 来遍历：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">std::vector&lt;int&gt; v;
-v.push_back(1);
-v.push_back(2);
-v.push_back(3);
-v.push_back(4);
-v.push_back(5);
-v.push_back(6);
+<h2 id="toc_0"><a href="https://github.com/facebook/folly">facebook/folly</a></h2>
 
-for (int i : v) {
-    std::cout &lt;&lt; i &lt;&lt; &quot; &quot; ;
-}
-std::cout &lt;&lt; std::endl;
+<blockquote>
+<p>Folly (acronymed loosely after Facebook Open Source Library) is a library of C++11 components designed with practicality and efficiency in mind. It complements (as opposed to competing against) offerings such as Boost and of course std. In fact, we embark on defining our own component only when something we need is either not available, or does not meet the needed performance profile. -- <a href="https://github.com/facebook/folly/blob/master/folly/docs/Overview.md">Overview</a></p>
+</blockquote>
 
-for (auto ite : v) {
-    std::cout &lt;&lt; ite &lt;&lt; &quot; &quot;;
-}
-std::cout &lt;&lt; std::endl;
-
-
-for (int&amp; i : v) {
-    ++i;
-}
-
-
-for (auto i : v) {
-    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;
-}
-std::cout &lt;&lt; std::endl;
-</code></pre></div>
-<h2 id="toc_0">扩展资料</h2>
-
-<ul>
-<li><a href="http://www.cprogramming.com/c++11/c++11-ranged-for-loop.html">C++11 range-based for loops</a> 推荐阅读</li>
-<li><a href="https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop">Range-based for loop</a></li>
-</ul>
+<p>欢迎不充～</p>
 
   </div>
 
@@ -93,10 +64,8 @@ std::cout &lt;&lt; std::endl;
     <div id="post_rel">
       <!-- <p><a href="/">目录(首页)</a></p> -->
       <!--  -->
-      <!-- <p>上一篇: <a href="/R-value-Ref-And-Move-Construct.html" title="Right value reference and move construct">Right value reference and move construct</a></p> -->
       <!--  -->
-      <!--  -->
-      <!-- <p>下一篇: <a href="/Right-Angle-Bracket.html" title="右尖括号">右尖括号</a></p> -->
+      <!-- <p>下一篇: <a href="/Alternative-Function-Syntax.html" title="新的函数声明语法">新的函数声明语法</a></p> -->
       <!--  -->
       <h3>目录</h3>
        
@@ -118,7 +87,7 @@ std::cout &lt;&lt; std::endl;
     
       
       	
-      	<li><a href="/cpp11-open-source-projs.html">C++11开源项目汇总</a></li>
+      	<li class="active"><a href="/cpp11-open-source-projs.html" class="active">C++11开源项目汇总</a></li>
       	
       
     
@@ -210,7 +179,7 @@ std::cout &lt;&lt; std::endl;
     
       
       	
-      	<li class="active"><a href="/Range-based-For-Loop.html" class="active">基于范围的for循环</a></li>
+      	<li><a href="/Range-based-For-Loop.html">基于范围的for循环</a></li>
       	
       
     
