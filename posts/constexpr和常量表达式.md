@@ -11,6 +11,12 @@ C++11 新标准规定，允许将变量声明为constexpr类型以便由编译�
     constexpr sz = size();  // 只有当size是一个constexpr函数时
                             // 才是一条正确的语句
 
+## constexpr 与 数组 ##
+c++11 允许声明大小为constexpr的数组。
+    
+    constexpr sz = size();
+    int data[sz] = {1,2,3}; //if sz == 3
+
 ## 指针和 constexpr ##
 
 在 constexpr 声明中如果定义了一个指针，constexpr 仅对指针有效，与指针所指的对象无关。
