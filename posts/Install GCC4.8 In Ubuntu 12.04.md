@@ -60,7 +60,7 @@ Ubuntu 默认 GCC 版本是4.6，我之前曾经装过 4.7，现在装了 4.8，
         char s[] = "Hello CPP11 World!";
         int Uppercase = 0;
     
-        std::for_each(s, s+sizeof(s), [&Uppercase] (char c)
+        std::for_each(s, s+sizeof(s)/sizeof(char), [&Uppercase] (char c)
                  {
                      if (isupper(c))
                          Uppercase++;
