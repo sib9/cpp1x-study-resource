@@ -21,7 +21,7 @@ c++11 允许声明大小为constexpr的数组。
 
 在 constexpr 声明中如果定义了一个指针，constexpr 仅对指针有效，与指针所指的对象无关。
 
-    const int *p = nullptr;    // p 是一个指向整行常量的指针
+    const int *p = nullptr;    // p 是一个指向整数常量的指针
     constexpr int *q = nullptr; // q 是一个指向整数的常量指针
 
 p 是可变的，p指向的对象是不可变的。q是不可变的，q指向的对象是可变的。
