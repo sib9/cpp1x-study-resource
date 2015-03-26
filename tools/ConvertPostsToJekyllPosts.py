@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 
@@ -28,6 +29,7 @@ def split_header_and_content(file_path):
     return header, content
         
 def parse_header(header):
+    print header
     header_fields = header.split('|')
 
     url = header_fields[0]
@@ -68,6 +70,7 @@ def generate_complete_yaml_file(file_full_path, yaml_header, content):
 
     
 def convert_one_to_yaml(old_name, old_path, new_dir):
+    print old_name, old_path
     title = get_yaml_title(old_name)
     header, content = split_header_and_content(old_path)
     url, category, date = parse_header(header)

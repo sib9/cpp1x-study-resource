@@ -1,4 +1,8 @@
-improved-sizeof|Language|2014-03-15
+---
+layout : post
+title : "增强的sizeof"
+category : "Language"
+---
 
 ## 增强的sizeof ##
 
